@@ -1,0 +1,63 @@
+services:
+  # Base de datos PostgreSQL
+  postgres:
+    image: postgres:15-alpine
+    container_name: inmedt-postgres-dev
+    environment:
+      POSTGRES_DB: inmedt_ecommerce
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data_dev:/var/lib/postgresql/data
+    networks:
+      - inmedt-dev-network
+
+  # Backend Spring Boot (desarrollo)
+  backend:
+    build: .
+    container_name: inmedt-backend-dev
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/inmedt_ecommerce
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: password
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_SHOW_SQL: "true"
+      JWT_SECRET: miClaveSecretaSuperSeguraParaJWT2024
+      JWT_EXPIRATION: 86400000
+    ports:
+      - "8081:8080"
+    depends_on:
+      - postgres
+    networks:
+      - inmedt-dev-network
+    volumes:
+      - ./src:/app/src
+      - ./target:/app/target
+    command: ["mvn", "spring-boot:run"]
+
+  # Frontend React (desarrollo)
+  frontend:
+    build: ./frontend
+    container_name: inmedt-frontend-dev
+    environment:
+      REACT_APP_API_URL: http://localhost:8081
+      CHOKIDAR_USEPOLLING: "true"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - inmedt-dev-network
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    command: ["npm", "start"]
+
+volumes:
+  postgres_data_dev:
+
+networks:
+  inmedt-dev-network:
+    driver: bridge

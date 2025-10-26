@@ -1,0 +1,58 @@
+services:
+  # Base de datos PostgreSQL
+  postgres:
+    image: postgres:15-alpine
+    container_name: inmedt-postgres
+    environment:
+      POSTGRES_DB: inmedt_ecommerce
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - inmedt-network
+
+  # Backend Spring Boot
+  backend:
+    build: .
+    container_name: inmedt-backend
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/inmedt_ecommerce
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: password
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      JWT_SECRET: miClaveSecretaSuperSeguraParaJWT2024
+      JWT_EXPIRATION: 86400000
+    ports:
+      - "8081:8080"
+    depends_on:
+      - postgres
+    networks:
+      - inmedt-network
+    volumes:
+      - ./src:/app/src
+
+  # Frontend React
+  frontend:
+    build: ./frontend
+    container_name: inmedt-frontend
+    environment:
+      REACT_APP_API_URL: http://localhost:8081
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - inmedt-network
+    volumes:
+      - ./frontend/src:/app/src
+      - ./frontend/public:/app/public
+
+volumes:
+  postgres_data:
+
+networks:
+  inmedt-network:
+    driver: bridge
