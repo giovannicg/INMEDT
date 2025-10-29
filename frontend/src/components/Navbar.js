@@ -14,7 +14,8 @@ import {
   Person,
   ExitToApp,
   Login,
-  AdminPanelSettings
+  AdminPanelSettings,
+  Category
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -25,6 +26,10 @@ const Navbar = () => {
   const { user, logout } = useAuth();
   const { getCartItemsCount } = useCart();
   const [anchorEl, setAnchorEl] = React.useState(null);
+
+  // Debug: Log user info
+  console.log('🔍 Navbar - Usuario actual:', user);
+  console.log('🔍 Navbar - Rol del usuario:', user?.role);
 
   const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -86,11 +91,23 @@ const Navbar = () => {
               <MenuItem onClick={() => { navigate('/pedidos'); handleMenuClose(); }}>
                 Mis Pedidos
               </MenuItem>
+              <MenuItem onClick={() => { navigate('/direcciones'); handleMenuClose(); }}>
+                Mis Direcciones
+              </MenuItem>
+              <MenuItem onClick={() => { navigate('/favoritos'); handleMenuClose(); }}>
+                Mis Favoritos
+              </MenuItem>
               {user.role === 'ROLE_ADMIN' && (
-                <MenuItem onClick={() => { navigate('/admin'); handleMenuClose(); }}>
-                  <AdminPanelSettings sx={{ mr: 1 }} />
-                  Administración
-                </MenuItem>
+                <>
+                  <MenuItem onClick={() => { navigate('/admin'); handleMenuClose(); }}>
+                    <AdminPanelSettings sx={{ mr: 1 }} />
+                    Administración
+                  </MenuItem>
+                  <MenuItem onClick={() => { navigate('/admin/categorias'); handleMenuClose(); }}>
+                    <Category sx={{ mr: 1 }} />
+                    Categorías
+                  </MenuItem>
+                </>
               )}
               <MenuItem onClick={handleLogout}>
                 <ExitToApp sx={{ mr: 1 }} />

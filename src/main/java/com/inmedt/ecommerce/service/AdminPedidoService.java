@@ -1,6 +1,7 @@
 package com.inmedt.ecommerce.service;
 
 import com.inmedt.ecommerce.dto.PedidoResponse;
+import com.inmedt.ecommerce.dto.UpdatePedidoInfoRequest;
 import com.inmedt.ecommerce.model.Pedido;
 import com.inmedt.ecommerce.repository.PedidoRepository;
 import com.inmedt.ecommerce.repository.PedidoItemRepository;
@@ -102,13 +103,15 @@ public class AdminPedidoService {
         pedidoRepository.delete(pedido);
     }
     
-    public PedidoResponse updatePedidoInfo(Long id, String direccionEnvio, String telefonoContacto, String notas) {
+    public PedidoResponse updatePedidoInfo(Long id, UpdatePedidoInfoRequest request) {
         Pedido pedido = pedidoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Pedido no encontrado"));
         
-        pedido.setDireccionEnvio(direccionEnvio);
-        pedido.setTelefonoContacto(telefonoContacto);
-        pedido.setNotas(notas);
+        pedido.setDireccionEnvio(request.getDireccionEnvio());
+        pedido.setTelefonoContacto(request.getTelefonoContacto());
+        pedido.setNotas(request.getNotas());
+        pedido.setCiudad(request.getCiudad());
+        pedido.setSector(request.getSector());
         pedido.setUpdatedAt(LocalDateTime.now());
         
         Pedido savedPedido = pedidoRepository.save(pedido);

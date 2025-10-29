@@ -37,6 +37,14 @@ public class Pedido {
     @Column(name = "telefono_contacto")
     private String telefonoContacto;
     
+    @Size(max = 100)
+    @Column(name = "ciudad")
+    private String ciudad;
+    
+    @Size(max = 100)
+    @Column(name = "sector")
+    private String sector;
+    
     @Size(max = 500)
     @Column(name = "notas")
     private String notas;
@@ -82,6 +90,12 @@ public class Pedido {
     
     public String getTelefonoContacto() { return telefonoContacto; }
     public void setTelefonoContacto(String telefonoContacto) { this.telefonoContacto = telefonoContacto; }
+    
+    public String getCiudad() { return ciudad; }
+    public void setCiudad(String ciudad) { this.ciudad = ciudad; }
+    
+    public String getSector() { return sector; }
+    public void setSector(String sector) { this.sector = sector; }
     
     public String getNotas() { return notas; }
     public void setNotas(String notas) { this.notas = notas; }

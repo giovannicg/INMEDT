@@ -24,11 +24,12 @@ import {
   ShoppingCart,
   Inventory,
   TrendingUp,
-  Visibility
+  Visibility,
+  Category
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import axios from 'axios';
+import axios from '../config/axios';
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
@@ -37,7 +38,8 @@ const AdminDashboard = () => {
     totalUsers: 0,
     totalProducts: 0,
     totalOrders: 0,
-    totalRevenue: 0
+    totalRevenue: 0,
+    totalCategories: 0
   });
   const [recentOrders, setRecentOrders] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -55,10 +57,11 @@ const AdminDashboard = () => {
       setLoading(true);
       
       // Obtener estadísticas
-      const [usersRes, productsRes, ordersRes] = await Promise.all([
-        axios.get('/api/admin/usuarios/all'),
-        axios.get('/api/admin/productos?size=1000'),
-        axios.get('/api/admin/pedidos/all')
+      const [usersRes, productsRes, ordersRes, categoriasRes] = await Promise.all([
+        axios.get('/admin/usuarios/all'),
+        axios.get('/admin/productos?size=1000'),
+        axios.get('/admin/pedidos/all'),
+        axios.get('/admin/categorias/count')
       ]);
 
       const totalUsers = usersRes.data.length;
@@ -66,12 +69,14 @@ const AdminDashboard = () => {
       const orders = ordersRes.data;
       const totalOrders = orders.length;
       const totalRevenue = orders.reduce((sum, order) => sum + parseFloat(order.total), 0);
+      const totalCategories = categoriasRes.data;
 
       setStats({
         totalUsers,
         totalProducts,
         totalOrders,
-        totalRevenue
+        totalRevenue,
+        totalCategories
       });
 
       // Obtener pedidos recientes
@@ -156,6 +161,25 @@ const AdminDashboard = () => {
             <CardActions>
               <Button size="small" onClick={() => navigate('/admin/productos')}>
                 Ver todos
+              </Button>
+            </CardActions>
+          </Card>
+        </Grid>
+
+        <Grid item xs={12} sm={6} md={3}>
+          <Card>
+            <CardContent>
+              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                <Category color="primary" sx={{ mr: 2 }} />
+                <Box>
+                  <Typography variant="h4">{stats.totalCategories}</Typography>
+                  <Typography color="text.secondary">Categorías</Typography>
+                </Box>
+              </Box>
+            </CardContent>
+            <CardActions>
+              <Button size="small" onClick={() => navigate('/admin/categorias')}>
+                Ver todas
               </Button>
             </CardActions>
           </Card>
@@ -256,7 +280,7 @@ const AdminDashboard = () => {
                 {recentOrders.map((order) => (
                   <TableRow key={order.id}>
                     <TableCell>{order.numeroPedido}</TableCell>
-                    <TableCell>{order.user?.nombre || 'N/A'}</TableCell>
+                    <TableCell>{order.userNombre || 'N/A'}</TableCell>
                     <TableCell>${order.total.toFixed(2)}</TableCell>
                     <TableCell>
                       <Chip

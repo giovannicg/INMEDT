@@ -38,7 +38,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { toast } from 'react-toastify';
-import axios from 'axios';
+import axios from '../config/axios';
 
 const AdminPedidos = () => {
   const navigate = useNavigate();
@@ -53,7 +53,9 @@ const AdminPedidos = () => {
     estado: '',
     direccionEnvio: '',
     telefonoContacto: '',
-    notas: ''
+    notas: '',
+    ciudad: '',
+    sector: ''
   });
   const [estadisticas, setEstadisticas] = useState({
     total: 0,
@@ -62,19 +64,10 @@ const AdminPedidos = () => {
     entregados: 0
   });
 
-  useEffect(() => {
-    if (!user || user.role !== 'ROLE_ADMIN') {
-      navigate('/');
-      return;
-    }
-    fetchPedidos();
-    fetchEstadisticas();
-  }, [user, navigate, page, fetchPedidos, fetchEstadisticas]);
-
   const fetchPedidos = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`/api/admin/pedidos?page=${page}&size=10`);
+      const response = await axios.get(`/admin/pedidos?page=${page}&size=10`);
       setPedidos(response.data.content);
       setTotalPages(response.data.totalPages);
     } catch (error) {
@@ -88,10 +81,10 @@ const AdminPedidos = () => {
   const fetchEstadisticas = async () => {
     try {
       const [totalRes, pendientesRes, confirmadosRes, entregadosRes] = await Promise.all([
-        axios.get('/api/admin/pedidos/all'),
-        axios.get('/api/admin/pedidos/estado/PENDIENTE'),
-        axios.get('/api/admin/pedidos/estado/CONFIRMADO'),
-        axios.get('/api/admin/pedidos/estado/ENTREGADO')
+        axios.get('/admin/pedidos/all'),
+        axios.get('/admin/pedidos/estado/PENDIENTE'),
+        axios.get('/admin/pedidos/estado/CONFIRMADO'),
+        axios.get('/admin/pedidos/estado/ENTREGADO')
       ]);
 
       setEstadisticas({
@@ -105,13 +98,24 @@ const AdminPedidos = () => {
     }
   };
 
+  useEffect(() => {
+    if (!user || user.role !== 'ROLE_ADMIN') {
+      navigate('/');
+      return;
+    }
+    fetchPedidos();
+    fetchEstadisticas();
+  }, [user, navigate, page]);
+
   const handleOpenDialog = (pedido) => {
     setEditingPedido(pedido);
     setFormData({
       estado: pedido.estado,
       direccionEnvio: pedido.direccionEnvio,
       telefonoContacto: pedido.telefonoContacto || '',
-      notas: pedido.notas || ''
+      notas: pedido.notas || '',
+      ciudad: pedido.ciudad || '',
+      sector: pedido.sector || ''
     });
     setOpenDialog(true);
   };
@@ -123,13 +127,15 @@ const AdminPedidos = () => {
       estado: '',
       direccionEnvio: '',
       telefonoContacto: '',
-      notas: ''
+      notas: '',
+      ciudad: '',
+      sector: ''
     });
   };
 
   const handleUpdateEstado = async () => {
     try {
-      await axios.put(`/api/admin/pedidos/${editingPedido.id}/estado?estado=${formData.estado}`);
+      await axios.put(`/admin/pedidos/${editingPedido.id}/estado?estado=${formData.estado}`);
       toast.success('Estado actualizado exitosamente');
       handleCloseDialog();
       fetchPedidos();
@@ -141,10 +147,12 @@ const AdminPedidos = () => {
 
   const handleUpdateInfo = async () => {
     try {
-      await axios.put(`/api/admin/pedidos/${editingPedido.id}/info`, {
+      await axios.put(`/admin/pedidos/${editingPedido.id}/info`, {
         direccionEnvio: formData.direccionEnvio,
         telefonoContacto: formData.telefonoContacto,
-        notas: formData.notas
+        notas: formData.notas,
+        ciudad: formData.ciudad,
+        sector: formData.sector
       });
       toast.success('Información actualizada exitosamente');
       handleCloseDialog();
@@ -257,7 +265,7 @@ const AdminPedidos = () => {
                 {pedidos.map((pedido) => (
                   <TableRow key={pedido.id}>
                     <TableCell>{pedido.numeroPedido}</TableCell>
-                    <TableCell>{pedido.user?.nombre || 'N/A'}</TableCell>
+                    <TableCell>{pedido.userNombre || 'N/A'}</TableCell>
                     <TableCell>${pedido.total.toFixed(2)}</TableCell>
                     <TableCell>
                       <Chip
@@ -334,6 +342,24 @@ const AdminPedidos = () => {
                 label="Teléfono de Contacto"
                 value={formData.telefonoContacto}
                 onChange={(e) => setFormData({ ...formData, telefonoContacto: e.target.value })}
+                margin="normal"
+              />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <TextField
+                fullWidth
+                label="Ciudad"
+                value={formData.ciudad || ''}
+                onChange={(e) => setFormData({ ...formData, ciudad: e.target.value })}
+                margin="normal"
+              />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <TextField
+                fullWidth
+                label="Sector"
+                value={formData.sector || ''}
+                onChange={(e) => setFormData({ ...formData, sector: e.target.value })}
                 margin="normal"
               />
             </Grid>

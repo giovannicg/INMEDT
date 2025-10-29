@@ -5,7 +5,9 @@ public class CategoriaResponse {
     private Long id;
     private String nombre;
     private String descripcion;
+    private Boolean activa;
     private Integer cantidadProductos;
+    private Integer productosCount;
     
     // Constructores
     public CategoriaResponse() {}
@@ -33,6 +35,12 @@ public class CategoriaResponse {
     public String getDescripcion() { return descripcion; }
     public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
     
+    public Boolean getActiva() { return activa; }
+    public void setActiva(Boolean activa) { this.activa = activa; }
+    
     public Integer getCantidadProductos() { return cantidadProductos; }
     public void setCantidadProductos(Integer cantidadProductos) { this.cantidadProductos = cantidadProductos; }
+    
+    public Integer getProductosCount() { return productosCount; }
+    public void setProductosCount(Integer productosCount) { this.productosCount = productosCount; }
 }

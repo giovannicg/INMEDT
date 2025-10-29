@@ -12,18 +12,23 @@ import {
   Alert,
   CircularProgress,
   Divider,
+  IconButton,
+  Tooltip
 } from '@mui/material';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
+import { useFavoritos } from '../context/FavoritosContext';
 import { toast } from 'react-toastify';
-import axios from 'axios';
+import axios from '../config/axios';
+import { Favorite as FavoriteIcon, FavoriteBorder as FavoriteBorderIcon } from '@mui/icons-material';
 
 const ProductoDetalle = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { user } = useAuth();
   const { addToCart } = useCart();
+  const { toggleFavorito, isFavorito } = useFavoritos();
   const [producto, setProducto] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectedVariante, setSelectedVariante] = useState(null);
@@ -31,14 +36,10 @@ const ProductoDetalle = () => {
   const [cantidad, setCantidad] = useState(1);
   const [addingToCart, setAddingToCart] = useState(false);
 
-  useEffect(() => {
-    fetchProducto();
-  }, [id, fetchProducto]);
-
   const fetchProducto = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`/api/productos/${id}`);
+      const response = await axios.get(`/productos/${id}`);
       setProducto(response.data);
       
       // Seleccionar primera variante y primera unidad por defecto
@@ -58,17 +59,25 @@ const ProductoDetalle = () => {
     }
   };
 
+  useEffect(() => {
+    fetchProducto();
+  }, [id]);
+
   const handleVarianteChange = (variante) => {
+    console.log('🔄 Variante seleccionada:', variante);
     setSelectedVariante(variante);
     if (variante.unidadesVenta && variante.unidadesVenta.length > 0) {
       setSelectedUnidad(variante.unidadesVenta[0]);
+      console.log('🔄 Primera unidad auto-seleccionada:', variante.unidadesVenta[0]);
     } else {
       setSelectedUnidad(null);
     }
   };
 
-  const handleUnidadChange = (unidad) => {
+  const handleUnidadChange = (unidad, event) => {
+    event.stopPropagation(); // Evitar que se propague al Card de la variante
     setSelectedUnidad(unidad);
+    console.log('🔄 Unidad seleccionada:', unidad);
   };
 
   const handleAddToCart = async () => {
@@ -104,6 +113,16 @@ const ProductoDetalle = () => {
     }
   };
 
+  const handleToggleFavorito = async () => {
+    if (!user) {
+      toast.error('Debes iniciar sesión para gestionar favoritos');
+      navigate('/login');
+      return;
+    }
+
+    await toggleFavorito(producto.id);
+  };
+
   if (loading) {
     return (
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
@@ -128,9 +147,20 @@ const ProductoDetalle = () => {
         <Grid item xs={12} md={8}>
           <Card>
             <CardContent>
-              <Typography variant="h4" component="h1" gutterBottom>
-                {producto.nombre}
-              </Typography>
+              <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 2 }}>
+                <Typography variant="h4" component="h1">
+                  {producto.nombre}
+                </Typography>
+                <Tooltip title={isFavorito(producto.id) ? "Remover de favoritos" : "Agregar a favoritos"}>
+                  <IconButton
+                    onClick={handleToggleFavorito}
+                    color={isFavorito(producto.id) ? "error" : "default"}
+                    size="large"
+                  >
+                    {isFavorito(producto.id) ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+                  </IconButton>
+                </Tooltip>
+              </Box>
               
               <Box sx={{ mb: 2 }}>
                 <Chip label={producto.categoriaNombre} color="primary" sx={{ mr: 1 }} />
@@ -185,7 +215,7 @@ const ProductoDetalle = () => {
                                       borderColor: selectedUnidad?.id === unidad.id ? 'primary.main' : 'grey.300',
                                       backgroundColor: selectedUnidad?.id === unidad.id ? 'primary.50' : 'white'
                                     }}
-                                    onClick={() => handleUnidadChange(unidad)}
+                                    onClick={(event) => handleUnidadChange(unidad, event)}
                                   >
                                     <CardContent sx={{ p: 2 }}>
                                       <Typography variant="subtitle2" gutterBottom>

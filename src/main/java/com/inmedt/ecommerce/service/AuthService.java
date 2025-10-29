@@ -88,4 +88,17 @@ public class AuthService {
             user.getRole().name()
         );
     }
+    
+    public AuthResponse getCurrentUser(String email) {
+        User user = userRepository.findByEmail(email)
+            .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        
+        return new AuthResponse(
+            null, // No necesitamos generar un nuevo token
+            user.getId(),
+            user.getNombre(),
+            user.getEmail(),
+            user.getRole().name()
+        );
+    }
 }

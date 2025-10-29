@@ -26,7 +26,7 @@ services:
       JWT_SECRET: miClaveSecretaSuperSeguraParaJWT2024
       JWT_EXPIRATION: 86400000
     ports:
-      - "8081:8080"
+      - "8085:8080"
     depends_on:
       - postgres
     networks:
@@ -39,7 +39,7 @@ services:
     build: ./frontend
     container_name: inmedt-frontend
     environment:
-      REACT_APP_API_URL: http://localhost:8081
+      REACT_APP_API_URL: http://backend:8080
     ports:
       - "3000:3000"
     depends_on:

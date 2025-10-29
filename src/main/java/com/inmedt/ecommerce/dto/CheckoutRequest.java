@@ -12,15 +12,25 @@ public class CheckoutRequest {
     @Size(max = 20, message = "El teléfono no puede exceder 20 caracteres")
     private String telefonoContacto;
     
+    @NotBlank(message = "La ciudad es obligatoria")
+    @Size(max = 100, message = "La ciudad no puede exceder 100 caracteres")
+    private String ciudad;
+    
+    @NotBlank(message = "El sector es obligatorio")
+    @Size(max = 100, message = "El sector no puede exceder 100 caracteres")
+    private String sector;
+    
     @Size(max = 500, message = "Las notas no pueden exceder 500 caracteres")
     private String notas;
     
     // Constructores
     public CheckoutRequest() {}
     
-    public CheckoutRequest(String direccionEnvio, String telefonoContacto, String notas) {
+    public CheckoutRequest(String direccionEnvio, String telefonoContacto, String ciudad, String sector, String notas) {
         this.direccionEnvio = direccionEnvio;
         this.telefonoContacto = telefonoContacto;
+        this.ciudad = ciudad;
+        this.sector = sector;
         this.notas = notas;
     }
     
@@ -30,6 +40,12 @@ public class CheckoutRequest {
     
     public String getTelefonoContacto() { return telefonoContacto; }
     public void setTelefonoContacto(String telefonoContacto) { this.telefonoContacto = telefonoContacto; }
+    
+    public String getCiudad() { return ciudad; }
+    public void setCiudad(String ciudad) { this.ciudad = ciudad; }
+    
+    public String getSector() { return sector; }
+    public void setSector(String sector) { this.sector = sector; }
     
     public String getNotas() { return notas; }
     public void setNotas(String notas) { this.notas = notas; }

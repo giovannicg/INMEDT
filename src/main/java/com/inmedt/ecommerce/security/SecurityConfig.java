@@ -59,9 +59,12 @@ public class SecurityConfig {
                 .requestMatchers("/productos/**").permitAll()
                 .requestMatchers("/categorias/**").permitAll()
                 .requestMatchers("/unidades-venta/**").permitAll()
+                .requestMatchers("/setup/**").permitAll() // Endpoint temporal para setup inicial
                 // Endpoints que requieren autenticación
                 .requestMatchers("/carrito/**").authenticated()
                 .requestMatchers("/pedidos/**").authenticated()
+                .requestMatchers("/direcciones/**").authenticated()
+                .requestMatchers("/favoritos/**").authenticated()
                 .requestMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
             )

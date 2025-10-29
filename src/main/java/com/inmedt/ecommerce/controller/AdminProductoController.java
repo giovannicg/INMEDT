@@ -134,7 +134,7 @@ public class AdminProductoController {
     }
     
     @PutMapping("/variantes/{id}")
-    public ResponseEntity<?> updateVariante(@PathVariable Long id, @Valid @RequestBody VarianteRequest request) {
+    public ResponseEntity<?> updateVariante(@PathVariable Long id, @Valid @RequestBody VarianteUpdateRequest request) {
         try {
             ProductoResponse.VarianteResponse variante = adminProductoService.updateVariante(id, request);
             return ResponseEntity.ok(variante);
@@ -171,7 +171,7 @@ public class AdminProductoController {
     }
     
     @PutMapping("/unidades/{id}")
-    public ResponseEntity<?> updateUnidadVenta(@PathVariable Long id, @Valid @RequestBody UnidadVentaRequest request) {
+    public ResponseEntity<?> updateUnidadVenta(@PathVariable Long id, @Valid @RequestBody UnidadVentaUpdateRequest request) {
         try {
             ProductoResponse.UnidadVentaResponse unidad = adminProductoService.updateUnidadVenta(id, request);
             return ResponseEntity.ok(unidad);

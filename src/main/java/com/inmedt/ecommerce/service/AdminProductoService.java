@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -116,7 +117,7 @@ public class AdminProductoService {
     
     // Gestión de Variantes
     public List<ProductoResponse.VarianteResponse> getVariantesByProducto(Long productoId) {
-        List<VarianteProducto> variantes = varianteProductoRepository.findByActivaTrueAndProductoId(productoId);
+        List<VarianteProducto> variantes = varianteProductoRepository.findByProductoId(productoId);
         return variantes.stream()
                 .map(this::convertToVarianteResponse)
                 .collect(Collectors.toList());
@@ -136,7 +137,7 @@ public class AdminProductoService {
         return convertToVarianteResponse(savedVariante);
     }
     
-    public ProductoResponse.VarianteResponse updateVariante(Long id, VarianteRequest request) {
+    public ProductoResponse.VarianteResponse updateVariante(Long id, VarianteUpdateRequest request) {
         VarianteProducto variante = varianteProductoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Variante no encontrada"));
         
@@ -156,7 +157,7 @@ public class AdminProductoService {
     
     // Gestión de Unidades de Venta
     public List<ProductoResponse.UnidadVentaResponse> getUnidadesByVariante(Long varianteId) {
-        List<UnidadDeVenta> unidades = unidadDeVentaRepository.findByActivaTrueAndVarianteId(varianteId);
+        List<UnidadDeVenta> unidades = unidadDeVentaRepository.findByVarianteId(varianteId);
         return unidades.stream()
                 .map(this::convertToUnidadVentaResponse)
                 .collect(Collectors.toList());
@@ -178,9 +179,14 @@ public class AdminProductoService {
         return convertToUnidadVentaResponse(savedUnidad);
     }
     
-    public ProductoResponse.UnidadVentaResponse updateUnidadVenta(Long id, UnidadVentaRequest request) {
+    public ProductoResponse.UnidadVentaResponse updateUnidadVenta(Long id, UnidadVentaUpdateRequest request) {
         UnidadDeVenta unidad = unidadDeVentaRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Unidad de venta no encontrada"));
+        
+        // Verificar que el SKU no esté en uso por otra unidad
+        if (!unidad.getSku().equals(request.getSku()) && unidadDeVentaRepository.existsBySku(request.getSku())) {
+            throw new RuntimeException("SKU ya existe");
+        }
         
         unidad.setSku(request.getSku());
         unidad.setDescripcion(request.getDescripcion());
@@ -207,10 +213,12 @@ public class AdminProductoService {
             producto.getMarca(),
             producto.getCategoria().getNombre()
         );
-        
-        List<ProductoResponse.VarianteResponse> variantes = producto.getVariantes().stream()
-                .map(this::convertToVarianteResponse)
-                .collect(Collectors.toList());
+        response.setActivo(producto.getActivo());
+        List<ProductoResponse.VarianteResponse> variantes = producto.getVariantes() != null 
+                ? producto.getVariantes().stream()
+                    .map(this::convertToVarianteResponse)
+                    .collect(Collectors.toList())
+                : new ArrayList<>();
         
         response.setVariantes(variantes);
         return response;
@@ -229,12 +237,15 @@ public class AdminProductoService {
         ProductoResponse.VarianteResponse response = new ProductoResponse.VarianteResponse(
             variante.getId(),
             variante.getNombre(),
-            variante.getDescripcion()
+            variante.getDescripcion(),
+            variante.getActiva()
         );
         
-        List<ProductoResponse.UnidadVentaResponse> unidadesVenta = variante.getUnidadesVenta().stream()
-                .map(this::convertToUnidadVentaResponse)
-                .collect(Collectors.toList());
+        List<ProductoResponse.UnidadVentaResponse> unidadesVenta = variante.getUnidadesVenta() != null
+                ? variante.getUnidadesVenta().stream()
+                    .map(this::convertToUnidadVentaResponse)
+                    .collect(Collectors.toList())
+                : new ArrayList<>();
         
         response.setUnidadesVenta(unidadesVenta);
         return response;
@@ -246,7 +257,8 @@ public class AdminProductoService {
             unidad.getSku(),
             unidad.getDescripcion(),
             unidad.getPrecio(),
-            unidad.getStock()
+            unidad.getStock(),
+            unidad.getActiva()
         );
     }
 }

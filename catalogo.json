@@ -1,0 +1,3358 @@
+{
+  "catalogo": {
+    "nombreEmpresa": "InMED.T",
+    "lema": "Nuestros insumos médicos, tu tranquilidad.",
+    "informacionContacto": {
+      "telefono": "(+593) 960603639",
+      "email": "INMED.T@OUTLOOK.COM.AR",
+      "facebook": "https://www.facebook.com/INMEDT?mibextid=ZbWKWL"
+    },
+    "categorias": [
+      {
+        "nombre": "Guantes",
+        "productos": [
+          {
+            "nombre": "Guantes de Examinación Látex",
+            "descripcion": "Guantes fabricados con látex de caucho de la mejor calidad, son ambidiestros, de color blanco y no estériles. 100% Látex Natural hipoalergénico. Están ligeramente polveados.",
+            "marca": "SUPER MAX",
+            "subcategoria": "Guantes de Látex Examinación",
+            "variantes": [
+              {
+                "nombre": "X-Small",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100 Unidades",
+                    "precio": 3.30,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  },
+                  {
+                    "descripcion": "Carton x 10 Cajitas",
+                    "precio": 33.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "Small",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100 Unidades",
+                    "precio": 3.30,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  },
+                  {
+                    "descripcion": "Carton x 10 Cajitas",
+                    "precio": 33.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "Medium",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100 Unidades",
+                    "precio": 3.30,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  },
+                  {
+                    "descripcion": "Carton x 10 Cajitas",
+                    "precio": 33.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "Large",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100 Unidades",
+                    "precio": 3.30,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  },
+                  {
+                    "descripcion": "Carton x 10 Cajitas",
+                    "precio": 33.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "Guantes de Examinación Látex Sin Talco",
+            "descripcion": "Guantes 100% de Látex de Caucho Natural. Ambidiestros, de color blanco y sin talco. No estériles.",
+            "marca": "SUPERGLOVE",
+            "subcategoria": "Guantes de Látex Examinación",
+            "variantes": [
+              {
+                "nombre": "Small",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100 Unidades",
+                    "precio": 3.30,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  },
+                  {
+                    "descripcion": "Carton x 10 Cajitas",
+                    "precio": 33.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "Medium",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100 Unidades",
+                    "precio": 3.30,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  },
+                  {
+                    "descripcion": "Carton x 10 Cajitas",
+                    "precio": 33.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "Large",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100 Unidades",
+                    "precio": 3.30,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  },
+                  {
+                    "descripcion": "Carton x 10 Cajitas",
+                    "precio": 33.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "Guantes de Examinación Nitrilo Texturado Celeste",
+            "descripcion": "Guantes de Examinación de Nitrilo Azul Texturados fabricados 100% Nitrilo, libre de látex y sin talco. Son ambidiestros, de color azul. No contienen Proteína NRL (Látex de Caucho Natural).",
+            "marca": "SUPERMAX",
+            "subcategoria": "Guantes de Nitrilo Examinación",
+            "variantes": [
+              {
+                "nombre": "X-Small",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100 Unidades",
+                    "precio": 3.80,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  },
+                  {
+                    "descripcion": "Carton x 10 Cajitas",
+                    "precio": 38.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "Small",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100 Unidades",
+                    "precio": 3.80,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  },
+                  {
+                    "descripcion": "Carton x 10 Cajitas",
+                    "precio": 38.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "Medium",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100 Unidades",
+                    "precio": 3.80,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  },
+                  {
+                    "descripcion": "Carton x 10 Cajitas",
+                    "precio": 38.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "Large",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100 Unidades",
+                    "precio": 3.80,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  },
+                  {
+                    "descripcion": "Carton x 10 Cajitas",
+                    "precio": 38.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "Guantes de Examinación Nitrilo Quimio BLUE",
+            "descripcion": "Guantes de Examinación de Nitrilo High-Newton fabricados 100% Nitrilo, libre de látex y sin talco. No contiene Proteína NRL (Látex de Caucho Natural). Son ambidiestros, de color azul-morado.",
+            "marca": "SUPERMAX",
+            "subcategoria": "Guantes de Nitrilo Examinación",
+            "variantes": [
+              {
+                "nombre": "X-Small",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100 Unidades",
+                    "precio": 4.20,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  },
+                  {
+                    "descripcion": "Carton x 10 Cajitas",
+                    "precio": 42.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "Small",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100 Unidades",
+                    "precio": 4.20,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  },
+                  {
+                    "descripcion": "Carton x 10 Cajitas",
+                    "precio": 42.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "Medium",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100 Unidades",
+                    "precio": 4.20,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  },
+                  {
+                    "descripcion": "Carton x 10 Cajitas",
+                    "precio": 42.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "Large",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100 Unidades",
+                    "precio": 4.20,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  },
+                  {
+                    "descripcion": "Carton x 10 Cajitas",
+                    "precio": 42.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "Guantes de Examinación Nitrilo Rosado",
+            "descripcion": "Guantes de Examinación de Nitrilo Rosado Texturados fabricados 100% Nitrilo, libre de látex y sin talco. No contienen Proteína NRL (Látex de Caucho Natural). Son ambidiestros, de color Rosado.",
+            "marca": "SUPERMAX",
+            "subcategoria": "Guantes de Nitrilo Examinación",
+            "variantes": [
+              {
+                "nombre": "X-Small",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100 Unidades",
+                    "precio": 3.80,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  },
+                  {
+                    "descripcion": "Carton x 10 Cajitas",
+                    "precio": 38.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "Small",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100 Unidades",
+                    "precio": 3.80,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  },
+                  {
+                    "descripcion": "Carton x 10 Cajitas",
+                    "precio": 38.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "Medium",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100 Unidades",
+                    "precio": 3.80,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  },
+                  {
+                    "descripcion": "Carton x 10 Cajitas",
+                    "precio": 38.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "Large",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100 Unidades",
+                    "precio": 3.80,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  },
+                  {
+                    "descripcion": "Carton x 10 Cajitas",
+                    "precio": 38.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "Guantes de Examinación Nitrilo Negros",
+            "descripcion": "Guantes de Examinación de Nitrilo Negro fabricados con 100% Nitrilo, libres de látex y sin talco. No contiene Proteína NRL (Látex de Caucho Natural). Calidad High Newton con textura de mayor grosor que disminuye el riesgo de roturas y tiene alta resistencia frente a la presencia de Químicos. Son ambidiestros, de color negro, texturados en los dedos para mejor manipulación.",
+            "marca": "SUPERMAX",
+            "subcategoria": "Guantes de Nitrilo Examinación",
+            "variantes": [
+              {
+                "nombre": "X-Small",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100 Unidades",
+                    "precio": 5.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  },
+                  {
+                    "descripcion": "Carton x 10 Cajitas",
+                    "precio": 50.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "Small",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100 Unidades",
+                    "precio": 5.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  },
+                  {
+                    "descripcion": "Carton x 10 Cajitas",
+                    "precio": 50.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "Medium",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100 Unidades",
+                    "precio": 5.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  },
+                  {
+                    "descripcion": "Carton x 10 Cajitas",
+                    "precio": 50.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "Large",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100 Unidades",
+                    "precio": 5.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  },
+                  {
+                    "descripcion": "Carton x 10 Cajitas",
+                    "precio": 50.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "Guantes Quirúrgicos Estériles",
+            "descripcion": "100% Látex Natural hipoalergénico de gran adaptabilidad al tacto. Su diseño presenta una terminación con superficie lisa, son empolvados con polvo bioabsorvible y esterilizado por Radiación Gamma. Son ambidiestros, color blanco y de caña larga. Empacados en papel de grado médico.",
+            "marca": "PERMAX",
+            "subcategoria": "Guantes Quirúrgicos Estériles",
+            "variantes": [
+              {
+                "nombre": "N°: 6.0",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 50 pares",
+                    "precio": 15.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "N°: 6.5",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 50 pares",
+                    "precio": 15.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "N°: 7.0",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 50 pares",
+                    "precio": 15.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "N°: 7.5",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 50 pares",
+                    "precio": 15.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "N°: 8.0",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 50 pares",
+                    "precio": 15.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "Guantes Quirúrgicos Texturados, Estériles",
+            "descripcion": "Guantes Quirúrgicos, Micro-texturados, ligeramente polveados, estériles. Impregnados con polvo bio-absorbible. Color blanco y de caña larga. Alta Resistencia frente a la presencia de Químicos. Empacados en papel de grado médico.",
+            "marca": null,
+            "subcategoria": "Guantes Quirúrgicos Estériles",
+            "variantes": [
+              {
+                "nombre": "Nº 6.0",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 50 pares",
+                    "precio": 15.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "Nº 6.5",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 50 pares",
+                    "precio": 15.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "Nº 7.0",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 50 pares",
+                    "precio": 15.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "Nº 7.5",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 50 pares",
+                    "precio": 15.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "Nº 8.0",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 50 pares",
+                    "precio": 15.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "Nº 8.5",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 50 pares",
+                    "precio": 15.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "Guantes Quirúrgicos Texturados Estériles, Libres de Talco",
+            "descripcion": "Guantes Quirúrgicos Libres de Talco, Micro-texturados, estériles. Fabricados con látex de caucho natural hipoalergénico de la más alta calidad y de gran adaptabilidad al tacto. Color blanco y de caña larga. Alta Resistencia frente a la presencia de Químicos.",
+            "marca": null,
+            "subcategoria": "Guantes Quirúrgicos Estériles",
+            "variantes": [
+              {
+                "nombre": "N° 6.0",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 50 pares",
+                    "precio": 15.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "N° 6.5",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 50 pares",
+                    "precio": 15.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "N° 7.0",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 50 pares",
+                    "precio": 15.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "N° 7.5",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 50 pares",
+                    "precio": 15.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "N° 8.0",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 50 pares",
+                    "precio": 15.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "N° 8.5",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 50 pares",
+                    "precio": 15.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nombre": "Resucitadores",
+        "productos": [
+          {
+            "nombre": "Ambú Resucitador Manual con Válvula PEEP",
+            "descripcion": "Resucitador manual descartable con válvula PEEP, bolsa de reservorio, tubo de oxígeno y mascarilla. Compresión uniforme. Bolsa de reservorio de polietileno, mascarilla PVC con conector de diámetro 22 mmID y tubería de oxígeno PVC de 2m.",
+            "marca": "HSINER",
+            "subcategoria": "Ambú",
+            "variantes": [
+              {
+                "nombre": "Adulto",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 16.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "Pediátrico",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 16.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "Neonatal",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 16.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "Ambú Resucitador Reusable Con Válvula PEEP Silicón PC",
+            "descripcion": "Resucitador manual Reusable con válvula PEEP, bolsa de reservorio, tubo de oxígeno y mascarilla. Autoclavable. Accesorios de Policarbonato (PC). Bolsa de reservorio PC-Silicón, mascarilla Silicón con conector de diámetro 22 mmID Y tubería de oxígeno PVC de 2m. Válvula Limitadora de Presión con Pop-Off y Válvula Peep PC.",
+            "marca": "HSINER",
+            "subcategoria": "Ambú",
+            "variantes": [
+              {
+                "nombre": "Adulto",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 16.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "Pediátrico",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 16.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nombre": "Agujas y Jeringas",
+        "productos": [
+          {
+            "nombre": "Aguja Hipodérmica",
+            "descripcion": null,
+            "marca": "NIPRO",
+            "subcategoria": "Agujas Hipodérmicas",
+            "variantes": [
+              {
+                "nombre": "18G x 1-1/2",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100 Unidades",
+                    "precio": 4.50,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "18G x 1-1/4",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100 Unidades",
+                    "precio": 4.50,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "18G x 1",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100 Unidades",
+                    "precio": 4.50,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "20G x 1-1/2",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100 Unidades",
+                    "precio": 4.50,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "20G x 1-1/4",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100 Unidades",
+                    "precio": 4.50,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "20G x 1",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100 Unidades",
+                    "precio": 4.50,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "21G x 1 1/2",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100 Unidades",
+                    "precio": 4.50,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "21G x 1",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100 Unidades",
+                    "precio": 4.50,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "22G x 1",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100 Unidades",
+                    "precio": 4.50,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "23G x 1/2",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100 Unidades",
+                    "precio": 4.50,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "23G x 1 1/4",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100 Unidades",
+                    "precio": 4.50,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "23G x 1",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100 Unidades",
+                    "precio": 4.50,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "24G x 1",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100 Unidades",
+                    "precio": 4.50,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "25G x 1",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100 Unidades",
+                    "precio": 4.50,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "25G x 5/8",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100 Unidades",
+                    "precio": 4.50,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "27G x 1/2",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100 Unidades",
+                    "precio": 4.50,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "30G x 1/2",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100 Unidades",
+                    "precio": 4.50,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "Jeringa Tuberculina 1CC C/A",
+            "descripcion": null,
+            "marca": "NIPRO",
+            "subcategoria": "Jeringas",
+            "variantes": [
+              {
+                "nombre": "25G x 5/8",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100",
+                    "precio": 6.50,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "26G x 1/2",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100",
+                    "precio": 6.50,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "27G x 1/2",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100",
+                    "precio": 6.50,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "Jeringa Insulina",
+            "descripcion": null,
+            "marca": "NIPRO",
+            "subcategoria": "Jeringas",
+            "variantes": [
+              {
+                "nombre": "0.3 ML 31G X 6 MM",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100",
+                    "precio": 8.50,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "Jeringa 3CC C/A",
+            "descripcion": null,
+            "marca": "NIPRO",
+            "subcategoria": "Jeringas",
+            "variantes": [
+              {
+                "nombre": "21G x 1 1/2",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100",
+                    "precio": 6.50,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "22G x 1 1/4",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100",
+                    "precio": 6.50,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "23G x 1",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100",
+                    "precio": 6.50,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "23G x 1 1/2",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100",
+                    "precio": 6.50,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "Jeringa 5CC C/A",
+            "descripcion": null,
+            "marca": "NIPRO",
+            "subcategoria": "Jeringas",
+            "variantes": [
+              {
+                "nombre": "21G x 1 1/2",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100",
+                    "precio": 7.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "22G x 1 1/4",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100",
+                    "precio": 7.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "22G x 1 1/2",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100",
+                    "precio": 7.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "Jeringa 10CC C/A",
+            "descripcion": null,
+            "marca": "NIPRO",
+            "subcategoria": "Jeringas",
+            "variantes": [
+              {
+                "nombre": "21G x 1 1/2",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100",
+                    "precio": 9.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "Jeringa 20CC",
+            "descripcion": null,
+            "marca": "NIPRO",
+            "subcategoria": "Jeringas",
+            "variantes": [
+              {
+                "nombre": "20CC",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 30",
+                    "precio": 9.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "Jeringa 50 CC",
+            "descripcion": null,
+            "marca": "NIPRO",
+            "subcategoria": "Jeringas",
+            "variantes": [
+              {
+                "nombre": "50CC",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 30",
+                    "precio": 14.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nombre": "Catéteres",
+        "productos": [
+          {
+            "nombre": "Catéter Intravenoso Periférico",
+            "descripcion": null,
+            "marca": "NIPRO",
+            "subcategoria": "Catéteres",
+            "variantes": [
+              {
+                "nombre": "14G x 2",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 50",
+                    "precio": 22.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "16G x 1 1/4",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 50",
+                    "precio": 22.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "18G x 1 1/4",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 50",
+                    "precio": 22.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "20G x 1 1/4",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 50",
+                    "precio": 22.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "20G x 1",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 50",
+                    "precio": 22.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "22G x 1",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 50",
+                    "precio": 22.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "24G x 3/4",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 50",
+                    "precio": 22.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nombre": "Algodón",
+        "productos": [
+          {
+            "nombre": "Algodón Hidrófilo 450g",
+            "descripcion": "ALGODÓN ROLLO DE 450G, SECCIONADO EN 4 PARTES. 100% ALGODÓN VIRGEN (NO REPROCESADO). CELULOSA NATURAL CULTIVADA NO PROVENIENTE DE LA TALA DE ÁRBOLES. CON PERÓXIDO DE HIDRÓGENO (H2O2), SEGÚN NORMA ISO. HASTA 36 MESES NO SE ENCUENTRA ALTERACIÓN MICROBIOLÓGICA.",
+            "marca": "Sana",
+            "subcategoria": "Algodón",
+            "variantes": [
+              {
+                "nombre": "Rollo 450g",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Rollo 450g",
+                    "precio": 6.50,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "Algodón Hidrófilo Torundas Dentales",
+            "descripcion": "PRODUCTO ELABORADO CON FIBRAS DE PURO ALGODÓN ABSORBENTE, RECUBIERTO CON CMC USP APROBADO. ASEPTICO: NO PROVOCA REACCIONES ALERGICAS NI IRRITA, AUSENCIA DE MICROORGANISMOS PATOGENOS.",
+            "marca": "Sana",
+            "subcategoria": "Algodón",
+            "variantes": [
+              {
+                "nombre": "1000 Rollitos 32mm x 10mm",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Paquete 1000 unidades",
+                    "precio": 6.50,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nombre": "Antisépticos y Desinfección",
+        "productos": [
+          {
+            "nombre": "Germidal Life 1000 ML",
+            "descripcion": "CONCENTRADA DE GLUCONATO DE CLORHEXIDINA Y CETRIMIDA. PROPIEDADES ANTISÉPTICAS Y DESINFECTANTES. ANTIMICROBIANO. LIMPIEZA Y ANTISEPSIA DE PIEL INTACTA O LESIONADA, ESPECIALMENTE HERIDAS OPERATORIAS, TRAUMATISMOS, QUEMADURAS, OBSTETRICIA, GINECOLOGÍA Y UROLOGÍA.",
+            "marca": "Germidal",
+            "subcategoria": "Antisépticos",
+            "variantes": [
+              {
+                "nombre": "1000 ML",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Botella 1000 ML",
+                    "precio": 15.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "Alcohol Antiséptico",
+            "descripcion": "TIENE ACCIÓN BACTERICIDA PERO POCO EFECTO RESIDUAL. DESNATURALIZA LAS PROTEÍNAS DE LOS MICRORGANISMOS. ANTISÉPTICO DE LA PIEL. USO CUTÁNEO. SOLO PARA USO EXTERNO. BACTERISIDA DE 70 Y 96%.",
+            "marca": null,
+            "subcategoria": "Alcoholes",
+            "variantes": [
+              {
+                "nombre": "1 Galón",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "1 Galón",
+                    "precio": 7.50,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "Alcohol Yodado",
+            "descripcion": "ANTISÉPTICO DE USO TÓPICO DE AMPLIO ESPECTRO DE ACTIVIDAD. DESINFECTANTE DE LA PIEL DE USO GENERAL. USO CUTÁNEO.",
+            "marca": "LINUS",
+            "subcategoria": "Alcoholes",
+            "variantes": [
+              {
+                "nombre": "1 Galón",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "1 Galón",
+                    "precio": 14.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "Agua Oxigenada",
+            "descripcion": "EL PERÓXIDO DE HIDRÓGENO (CONOCIDO TAMBIÉN COMO AGUA OXIGENADA) ES UN LÍQUIDO INCOLORO A TEMPERATURA AMBIENTE CON SABOR AMARGO. ANTISÉPTICO. CADA 100 ML CONTIENE: PERÓXIDO DE HIDRÓGENO 50%, EXCIPIENTES C.S.P. 100,00 ML",
+            "marca": "LINUS / PRIMS",
+            "subcategoria": "Soluciones Antisépticas",
+            "variantes": [
+              {
+                "nombre": "1 Galón",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "1 Galón",
+                    "precio": 6.50,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "Jabón Líquido de Manos Frutos Rojos",
+            "descripcion": "LIMPIA Y PROTEGE TUS MANOS EFECTIVAMENTE CONTRA BACTERIAS. CONTIENE PROPIEDADES HUMECTANTES E HIDRATANTES DE LA GLICERINA Y EL PANTENOL, PARA DEJAR TUS MANOS SUAVES Y CON UN AGRADABLE AROMA A FRUTOS ROJOS.",
+            "marca": null,
+            "subcategoria": "Jabones",
+            "variantes": [
+              {
+                "nombre": "1 Galón",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "1 Galón",
+                    "precio": 6.50,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "Gel Ultrasonido",
+            "descripcion": null,
+            "marca": "AQUAJELLY / ALX / ULTRAPONIC",
+            "subcategoria": "Geles",
+            "variantes": [
+              {
+                "nombre": "GEL ULTRASONIDO (AQUAJELLY) GALON QF",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "1 Galón",
+                    "precio": 12.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "GEL ULTRASONIDO GALON ALX",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "1 Galón",
+                    "precio": 12.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "GEL ULTRASONIDO GALON ULTRAPONIC 4L",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "1 Galón",
+                    "precio": 12.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "Glutaraldehído 2% Glutadina",
+            "descripcion": "DESINFECTANTE DE ALTO NIVEL PARA RESIDUOS DE SANGRE Y MATERIA ORGANICA. ΝΟ ΜΑNCHA. NO OXIDA.",
+            "marca": "GLUTADINA",
+            "subcategoria": "Desinfectantes de Alto Nivel",
+            "variantes": [
+              {
+                "nombre": "1 Galón",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "1 Galón",
+                    "precio": 30.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "Povidyn Solución Tópica",
+            "descripcion": "ANTISEPTICO BACTERICIDA, FUNGICIDA, ESPORICIDA, VIRICIDA. EL ANTISEPTICO N° 1. USO CLINICO HOSPITALARIO. YODO POVIDONA.",
+            "marca": "Povidyn",
+            "subcategoria": "Soluciones Antisépticas",
+            "variantes": [
+              {
+                "nombre": "Frasco Con 120 mL",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Frasco 120 mL",
+                    "precio": 1.23,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nombre": "Suturas",
+        "productos": [
+          {
+            "nombre": "Suturas Nylon Monofilamento",
+            "descripcion": "Sutura No Absorbible Estéril.",
+            "marca": "Vital Sutures",
+            "subcategoria": "No Absorbibles",
+            "variantes": [
+              {
+                "nombre": "NYLON N° O",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 1.30,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  },
+                  {
+                    "descripcion": "Caja x 36 Unidades",
+                    "precio": 45.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "NYLON N° 1/0",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 1.30,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  },
+                  {
+                    "descripcion": "Caja x 36 Unidades",
+                    "precio": 45.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "NYLON N° 2-0 A/C 3/8 24MM",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 1.30,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  },
+                  {
+                    "descripcion": "Caja x 36 Unidades",
+                    "precio": 45.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "NYLON N° 2-0 A/CURVA",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 1.30,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  },
+                  {
+                    "descripcion": "Caja x 36 Unidades",
+                    "precio": 45.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "NYLON N° 2-0 AGUJA RECTA",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 1.30,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  },
+                  {
+                    "descripcion": "Caja x 36 Unidades",
+                    "precio": 45.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "NYLON N° 3-0 A/C 3/8 24MM",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 1.30,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  },
+                  {
+                    "descripcion": "Caja x 36 Unidades",
+                    "precio": 45.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "NYLON N° 3-0 A/ RECTA",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 1.30,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  },
+                  {
+                    "descripcion": "Caja x 36 Unidades",
+                    "precio": 45.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "NYLON N° 4-0 A/CURVA",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 1.30,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  },
+                  {
+                    "descripcion": "Caja x 36 Unidades",
+                    "precio": 45.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "NYLON N° 5-0 A/CURVA",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 1.30,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  },
+                  {
+                    "descripcion": "Caja x 36 Unidades",
+                    "precio": 45.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "Suturas Vicryl (Polyglactin)",
+            "descripcion": "Sutura Absorbible Estéril.",
+            "marca": "Vital Sutures",
+            "subcategoria": "Absorbibles",
+            "variantes": [
+              {
+                "nombre": "VICRYL N° 0 MR35",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 1.72,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  },
+                  {
+                    "descripcion": "Caja x 36 Unidades",
+                    "precio": 62.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "VICRYL N° 1",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 1.72,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  },
+                  {
+                    "descripcion": "Caja x 36 Unidades",
+                    "precio": 62.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "VICRYL N° 2-0 MR 26 1/2 26MM",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 1.72,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  },
+                  {
+                    "descripcion": "Caja x 36 Unidades",
+                    "precio": 62.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "VICRYL N° 2-0 MR35",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 1.72,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  },
+                  {
+                    "descripcion": "Caja x 36 Unidades",
+                    "precio": 62.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "VICRYL N° 3-0 MR26",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 1.72,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  },
+                  {
+                    "descripcion": "Caja x 36 Unidades",
+                    "precio": 62.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "VICRYL N° 3-0 MR37",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 1.72,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  },
+                  {
+                    "descripcion": "Caja x 36 Unidades",
+                    "precio": 62.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "VICRYL N° 4-0 MR17",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 1.72,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  },
+                  {
+                    "descripcion": "Caja x 36 Unidades",
+                    "precio": 62.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "VICRYL N° 4-0 MR26",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 1.72,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  },
+                  {
+                    "descripcion": "Caja x 36 Unidades",
+                    "precio": 62.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "VICRYL N° 5/0 MR10",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 1.72,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  },
+                  {
+                    "descripcion": "Caja x 36 Unidades",
+                    "precio": 62.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "Suturas Vicryl (Polyglactin 910)",
+            "descripcion": "Sutura Absorbible Estéril. ANTIBACTERIAL WITH TRICLOSAN.",
+            "marca": "ETHICON (JHONSON)",
+            "subcategoria": "Absorbibles",
+            "variantes": [
+              {
+                "nombre": "VICRYL 0 CTI",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 36 Unidades",
+                    "precio": 200.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "VICRYL O SH",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 36 Unidades",
+                    "precio": 200.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "VICRYL O UR5",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 36 Unidades",
+                    "precio": 200.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "VICRYL 1 CTI",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 36 Unidades",
+                    "precio": 200.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "VICRYL 2/0 CTI",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 36 Unidades",
+                    "precio": 200.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "VICRYL 2/0 SH",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 36 Unidades",
+                    "precio": 200.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "VICRYL 3/0 CT 1",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 36 Unidades",
+                    "precio": 200.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "VICRYL 3/o RB-1",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 36 Unidades",
+                    "precio": 200.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "VICRYL 3/0 SC 20",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 36 Unidades",
+                    "precio": 200.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "VICRYL 3/0 SH",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 36 Unidades",
+                    "precio": 200.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "VICRYL 4/o RBI",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 36 Unidades",
+                    "precio": 200.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "VICRYL 4/o SC 20",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 36 Unidades",
+                    "precio": 200.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "VICRYL 4/o SH",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 36 Unidades",
+                    "precio": 200.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "VICRYL 5/0 RBI",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 36 Unidades",
+                    "precio": 200.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "VICRYL 5/0 SH",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 36 Unidades",
+                    "precio": 200.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "Suturas DAFILON",
+            "descripcion": "Sutura No Absorbible.",
+            "marca": "BRAUN",
+            "subcategoria": "No Absorbibles",
+            "variantes": [
+              {
+                "nombre": "DAFILON N° 2/O DS24 A/C",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 1.90,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  },
+                  {
+                    "descripcion": "Caja x 36 Unidades",
+                    "precio": 69.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "DAFILON N° 2/O GS-60 A/R",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 1.90,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  },
+                  {
+                    "descripcion": "Caja x 36 Unidades",
+                    "precio": 69.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "DAFILON N° 3/o A/C",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 1.90,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  },
+                  {
+                    "descripcion": "Caja x 36 Unidades",
+                    "precio": 69.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "DAFILON N° 3/O GS60 A/R",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 1.90,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  },
+                  {
+                    "descripcion": "Caja x 36 Unidades",
+                    "precio": 69.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "DAFILON N° 3/o DS24 A/C",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 1.90,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  },
+                  {
+                    "descripcion": "Caja x 36 Unidades",
+                    "precio": 69.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "DAFILON N° 4/0 A/C",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 1.90,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  },
+                  {
+                    "descripcion": "Caja x 36 Unidades",
+                    "precio": 69.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "DAFILON N° 5/0 A/C DS16",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 1.90,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  },
+                  {
+                    "descripcion": "Caja x 36 Unidades",
+                    "precio": 69.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "DAFILON N° 5/0 A/R",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 1.90,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  },
+                  {
+                    "descripcion": "Caja x 36 Unidades",
+                    "precio": 69.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nombre": "Esparadrapos",
+        "productos": [
+          {
+            "nombre": "Esparadrapo Leukoplast Duro-Tela Adhesiva Impermeable",
+            "descripcion": "ESPARADRAPO HOSPITALARIO IMPERMEABLE. Tela adhesiva impermeable.",
+            "marca": "Leukoplast",
+            "subcategoria": "Esparadrapos",
+            "variantes": [
+              {
+                "nombre": "30cm x 9,14 m",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Rollo",
+                    "precio": 27.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "Esparadrapo Micropore Leukopor Suave",
+            "descripcion": "Cinta microporosa. Permeable al aire. Amigable con la piel. Usado como material auxiliar en procesos de curación y otros, ideal para asegurar o fijar gasas, apósitos y vendajes. Tiene buen poder adhesivo inicial y permanente, es flexible, de facil rasgado. Hipoalergénico. Piel sensible.",
+            "marca": "Leukopor",
+            "subcategoria": "Esparadrapos",
+            "variantes": [
+              {
+                "nombre": "2,5 cm x 9,14 m (1\"x10 yds)",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 1.83,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nombre": "Insumos Varios",
+        "productos": [
+          {
+            "nombre": "Bajalenguas",
+            "descripcion": null,
+            "marca": "Caricia",
+            "subcategoria": "Examinación",
+            "variantes": [
+              {
+                "nombre": "Paquete x 500 Unidades",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Paquete x 500",
+                    "precio": 6.50,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "Gel de Manos Antibacterial",
+            "descripcion": null,
+            "marca": null,
+            "subcategoria": "Desinfección",
+            "variantes": [
+              {
+                "nombre": "Frasco 500 ML",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Frasco 500 ML",
+                    "precio": 1.75,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "Tubos de Muestra",
+            "descripcion": null,
+            "marca": "MERIOC",
+            "subcategoria": "Recolección de Muestras",
+            "variantes": [
+              {
+                "nombre": "Tubo con citrato de sodio (Tapa celeste)",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Paquete x 100 Unidades",
+                    "precio": 15.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "Tubo simple (Tapa roja)",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Paquete x 100 Unidades",
+                    "precio": 15.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "Tubo simple (Tapa blanca)",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Paquete x 100 Unidades",
+                    "precio": 15.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "Tubo clot activador (Tapa roja)",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Paquete x 100 Unidades",
+                    "precio": 15.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "Tubo con gel y clot activador",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Paquete x 100 Unidades",
+                    "precio": 15.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "Tubo con heparina de litio",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Paquete x 100 Unidades",
+                    "precio": 15.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "Tubo con edta K2",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Paquete x 100 Unidades",
+                    "precio": 15.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "Tubo con heparina de litio y gel",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Paquete x 100 Unidades",
+                    "precio": 15.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "Tubo con Fluoruro de Sodio + Edta K2",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Paquete x 100 Unidades",
+                    "precio": 15.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "Llave de Tres Vías",
+            "descripcion": "Llave de 3 vías es un sistema de conexión de plástico rígido especificado para cualquier tipo de catéter, se utiliza para el control de flujo para varias vías sin necesidad de pinchar al paciente o desconectar el equipo de venoclisis, bureta.",
+            "marca": null,
+            "subcategoria": "Equipos de Infusión",
+            "variantes": [
+              {
+                "nombre": "Estándar",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 0.45,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "Tubo Endotraqueal",
+            "descripcion": null,
+            "marca": null,
+            "subcategoria": "Manejo de Vía Aérea",
+            "variantes": [
+              {
+                "nombre": "N° 2,0 S/B",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 1.16,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "N° 2,5 S/B",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 1.16,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "N° 3,0 S/B",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 1.16,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "N° 4,0 S/B",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 1.16,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "N° 4.5 C/B",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 1.94,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "N° 5 C/B",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 1.94,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "N° 5,5 C/B",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 1.94,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "N° 6 C/B",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 1.94,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "N° 6.5 C/B",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 1.94,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "N° 7 C/B",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 1.94,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "N° 7,5 C/B",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 1.94,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "N° 8 C/B",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 1.94,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "Mascarillas Descartables",
+            "descripcion": null,
+            "marca": "SUMBOW",
+            "subcategoria": "Protección",
+            "variantes": [
+              {
+                "nombre": "Mascarilla Descartable S/Valvula Aire N95",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja",
+                    "precio": 3.25,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "Mascarillas Desechables, C/T",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja",
+                    "precio": 2.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "Gasa Hospitalaria",
+            "descripcion": null,
+            "marca": "Sana",
+            "subcategoria": "Gasas",
+            "variantes": [
+              {
+                "nombre": "Estándar",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 37.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "Gasa No Tejida Estéril",
+            "descripcion": "Gauze Swab. 3\" x 3\" (7.6 cm x 7.6 cm).",
+            "marca": null,
+            "subcategoria": "Gasas",
+            "variantes": [
+              {
+                "nombre": "3\" x 3\"",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "50 Packs (5 Units per Pack)",
+                    "precio": 6.50,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "Hojas de Bisturí",
+            "descripcion": null,
+            "marca": "FORTUNE MEDICAL",
+            "subcategoria": "Instrumental",
+            "variantes": [
+              {
+                "nombre": "N° 10",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100 PCS",
+                    "precio": 10.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "N° 11",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100 PCS",
+                    "precio": 10.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "N° 12",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100 PCS",
+                    "precio": 10.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "N° 15",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100 PCS",
+                    "precio": 10.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "N° 20",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100 PCS",
+                    "precio": 10.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "N° 21",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100 PCS",
+                    "precio": 10.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "N° 22",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100 PCS",
+                    "precio": 10.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "N° 23",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100 PCS",
+                    "precio": 10.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "N° 24",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 100 PCS",
+                    "precio": 10.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "Equipo de Venoclisis",
+            "descripcion": "Incluye conector en 'Y', regulador de flujo roller, conector luer lock.",
+            "marca": "NIPRO / FORTUNE",
+            "subcategoria": "Equipos de Infusión",
+            "variantes": [
+              {
+                "nombre": "NIPRO",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 0.35,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  },
+                  {
+                    "descripcion": "Caja x 100 Unidades",
+                    "precio": 35.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "170 MM FORTUNE",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 0.38,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  },
+                  {
+                    "descripcion": "Caja x 100 Unidades",
+                    "precio": 38.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "Eyectores de Saliva",
+            "descripcion": "Succionar el exceso de saliva presente en la boca del paciente mientras es tratado en los procesos odontológicos.",
+            "marca": "PROTECT",
+            "subcategoria": "Dental",
+            "variantes": [
+              {
+                "nombre": "Estándar",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Paquete (100 pcs)",
+                    "precio": 4.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "Curitas Impermeables Surtidas",
+            "descripcion": "curitas de tela elástica surtidas, respirable y flexible, con formas especiales para nudillos, articulaciones y punta de los dedos.",
+            "marca": "CureBand",
+            "subcategoria": "Curación",
+            "variantes": [
+              {
+                "nombre": "Surtidas",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 30 Unidades",
+                    "precio": 2.50,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "Roxicaína Lidocaína 2%",
+            "descripcion": "ANESTÉSICO LOCAL. SE UTILIZA PARA TRATAR EL DOLOR Y OTROS TRASTORNOS EN LA CAVIDAD ORAL. BLOQUEA LAS SEÑALES DE LAS TERMINACIONES NERVIOSAS DE LA PIEL PARA ALIVIAR EL DOLOR.",
+            "marca": "Roxicaína",
+            "subcategoria": "Anestésicos",
+            "variantes": [
+              {
+                "nombre": "Estándar",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 4.80,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "Lidocaína 2% E-80 con Epinefrina 1:80.000",
+            "descripcion": "Solución Inyectable. FORMULA POR CARPULE: Lidocaína Clorhidrato 0.036 g, Epinefrina Base 0.0000225 g.",
+            "marca": "New Stetic S.A.",
+            "subcategoria": "Anestésicos",
+            "variantes": [
+              {
+                "nombre": "50 Cárpules de Vidrio",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 50 Cárpules",
+                    "precio": 20.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nombre": "Ropa Descartable",
+        "productos": [
+          {
+            "nombre": "Sábana Descartable",
+            "descripcion": "PROTEGE LA CAMILLA DE FLUIDOS Y BACTERIAS. ESTÁ CONFECCIONADA CON TELA REPELENTE. ANTIESTÁTICA Y ELÁSTICO EN SUS EXTREMOS PARA MEJOR SUJECIÓN. TECNOLOGÍA 100% POLIPROPILENO. PRESENTACION NO ESTERIL.",
+            "marca": "DHISVE",
+            "subcategoria": "Sábanas",
+            "variantes": [
+              {
+                "nombre": "Talla Estándar",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 15.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "Sábana Descartable",
+            "descripcion": "PROTEGE LA CAMILLA DE FLUIDOS Y BACTERIAS. ESTÁ CONFECCIONADA CON TELA REPELENTE. ANTIESTÁTICA Y ELÁSTICO EN SUS EXTREMOS PARA MEJOR SUJECIÓN. TECNOLOGÍA 100% POLIPROPILENO.",
+            "marca": "Sin Marca",
+            "subcategoria": "Sábanas",
+            "variantes": [
+              {
+                "nombre": "Talla Estándar",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 12.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "Campos Quirúrgicos (Dental Bib)",
+            "descripcion": "CAMPO DE INCISIÓN ANTIMICROBIANO. IMPERMEABLE: IMPIDE EL PASO DE LÍQUIDOS. SUPERFICIE ANTIMICROBIANA ESTÉRIL. UNA SUPERFICIE OPERATORIO ESTÉRIL Y ACTÚA COMO UNA BARRERA QUE AISLA LA INCISIÓN DE LA FLORA CUTÁNEA POTENCIALMENTE CONTAMINANTE. 2ply paper + 1ply film.",
+            "marca": "EUPHORIA",
+            "subcategoria": "Campos Quirúrgicos",
+            "variantes": [
+              {
+                "nombre": "TAMAÑO DEL CAMPO: 33X45 CM",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Paquete",
+                    "precio": 21.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "Campos Baberos",
+            "descripcion": "CAMPO DE INCISIÓN ANTIMICROBIANO. IMPERMEABLE: IMPIDE EL PASO DE LÍQUIDOS. CONFECCIONADO CON PELÍCULA DE PLÁSTICO QUE IMPIDE FUGAS, PROTEGIENDO AL PACIENTE.",
+            "marca": null,
+            "subcategoria": "Campos Quirúrgicos",
+            "variantes": [
+              {
+                "nombre": "45X42 CM",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Paquete 100 Unidades",
+                    "precio": 16.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "Batas de Cirujano con Puño de Elástico",
+            "descripcion": "TELA NO TEJIDA SMS 45GR. (100% POLIPROPILENO). 120 CM LARGO X 154 CM ANCHO. LARGO DE MANGA 65 CM, PUÑO CON ELÁSTICO, APERTURA POSTERIOR CON CINTAS DE AMARRE Y RIBETE REDONDO EN EL CUELLO, DESCARTABLE, NO ESTÉRIL.",
+            "marca": null,
+            "subcategoria": "Batas",
+            "variantes": [
+              {
+                "nombre": "Medium",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 1.20,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "Large",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 1.20,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "Batas de Cirujano con Puño de Algodón",
+            "descripcion": "TELA NO TEJIDA (100% POLIPROPILENO). ESTÉRIL / NO ESTÉRIL. BARRERA ANTIMICROΒΙΑΝΑ. EXCELENTE RESISTENCIA AL PASO DE LÍQUIDOS.",
+            "marca": null,
+            "subcategoria": "Batas",
+            "variantes": [
+              {
+                "nombre": "Medium",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 1.20,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "Large",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 1.20,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "Zapatones Descartable C/Antislip 40GR",
+            "descripcion": "ANTIDESLIZANTE EN ZIGZAG. TELA NO TEJIDA SMS 40 GR / PP 40 GR. STANDARD 38 CM DE LARGO. PRIMARIO - FUNDA X 100 UNIDADES.",
+            "marca": null,
+            "subcategoria": "Zapatones",
+            "variantes": [
+              {
+                "nombre": "Estándar",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Paquete (Funda x 100 Unidades)",
+                    "precio": 9.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "Zapatones con Banda Antideslizante",
+            "descripcion": "BOTAS CON ANTIDESLIZANTE IDEALES PARA PROCEDIMIENTOS O ACTIVIDADES DONDE SE REQUIERA PROTECCIÓN CONFIABLE CONTRA FLUIDOS Y LÍQUIDO. STANDARD.",
+            "marca": null,
+            "subcategoria": "Zapatones",
+            "variantes": [
+              {
+                "nombre": "Estándar",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Paquete",
+                    "precio": 12.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "Gorros para Enfermera Tipo Gusanito",
+            "descripcion": null,
+            "marca": null,
+            "subcategoria": "Gorros",
+            "variantes": [
+              {
+                "nombre": "Celeste",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Paquete",
+                    "precio": 6.50,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "Blanco",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Paquete",
+                    "precio": 6.50,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nombre": "Soluciones",
+        "productos": [
+          {
+            "nombre": "Agua Destilada",
+            "descripcion": "OBTENIDA MEDIANTE EL PROCESO DE DESTILACIÓN (EVAPORACIÓN, Y POSTERIOR RECOLECCIÓN DEL AGUA CONDENSADA). MATERIALES DE ACERO INOXIDABLES. LIMPIA DE ELECTROLITOS, SALES MINERALES, MICROORGANISMOS Y OTRAS SUSTANCIAS CONTAMINANTES (EN SU COMPOSICIÓN ENTRAN SOLAMENTE EL OXÍGENO Y EL HIDRÓGENO). LÍQUIDO INCOLORO, SIN OLOR, INSÍPIDO.",
+            "marca": "NuscAgua",
+            "subcategoria": "Agua Destilada",
+            "variantes": [
+              {
+                "nombre": "1 Galón",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "1 Galón",
+                    "precio": 2.75,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "Suero Fisiológico",
+            "descripcion": "A SOLUCIÓN DE CLORURO DE SODIO AL 0,9% Ο SOLUCIÓN SALINA NORMAL, CONOCIDA COMO SUERO FISIOLÓGICO O SOLUCIÓN FISIOLÓGICA, ES UNA DISOLUCIÓN ACUOSA DE SAL EN AGUA, HASTA CIERTO GRADO COMPATIBLE CON LOS ORGANISMOS VIVOS DEBIDO A SUS CARACTERÍSTICAS DEFINIDAS DE OSMOTICIDAD, PH Y FUERZA IÓNICA.",
+            "marca": null,
+            "subcategoria": "Suero Fisiológico",
+            "variantes": [
+              {
+                "nombre": "1 Galón",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "1 Galón",
+                    "precio": 5.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nombre": "Vendas",
+        "productos": [
+          {
+            "nombre": "Vendas de Gasa",
+            "descripcion": null,
+            "marca": "Caricia",
+            "subcategoria": "Vendas de Gasa",
+            "variantes": [
+              {
+                "nombre": "2\"",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 0.45,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "3\"",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 0.45,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "4\"",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 0.50,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "6\"",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 0.50,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "8\"",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 0.55,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "Vendas Elásticas",
+            "descripcion": null,
+            "marca": "Caricia",
+            "subcategoria": "Vendas Elásticas",
+            "variantes": [
+              {
+                "nombre": "2\"",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 0.45,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "3\"",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 0.55,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "4\"",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 0.55,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "6\"",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 0.65,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "8\"",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 0.70,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "Vendas de Yeso",
+            "descripcion": "Largo de 2.7 metros.",
+            "marca": "FORTUNE",
+            "subcategoria": "Vendas de Yeso",
+            "variantes": [
+              {
+                "nombre": "4\"",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 0.55,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "6\"",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 0.75,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "8\"",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 0.85,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "Vendas de Watta",
+            "descripcion": null,
+            "marca": null,
+            "subcategoria": "Vendas de Watta",
+            "variantes": [
+              {
+                "nombre": "4\"",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 0.50,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "6\"",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 0.75,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "8\"",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 0.95,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "Vendas Elásticas Autoadhesivas",
+            "descripcion": null,
+            "marca": null,
+            "subcategoria": "Vendas Autoadhesivas",
+            "variantes": [
+              {
+                "nombre": "10cm x 4.5m",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 3.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "15cm x 4.5m",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 3.20,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nombre": "Insumos Ginecológicos",
+        "productos": [
+          {
+            "nombre": "Espéculos Ginecológicos",
+            "descripcion": "FABRICADO DE PLÁSTICO DE POLIESTIRENO TRANSPARENTE DE ALTA RESISTENCIA. TRANSPARENTE QUE OFRECE UNA MEJOR VISIBILIDAD AL MÉDICO. EL ÁNGULO DE LA APERTURA DE LA VALVA ES DE 60° Y DE GRAN DIÁMETRO OVAL. AL SER DE PLÁSTICO Y DE UN SOLO USO EVITA UNA CONTAMINACIÓN CRUZADA.",
+            "marca": null,
+            "subcategoria": "Espéculos",
+            "variantes": [
+              {
+                "nombre": "Talla M",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 0.45,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "Super \"Kit\" Ginecológico",
+            "descripcion": "ESTERIL. Contiene: ESPÁTULA DE AYRE PLÁSTICA, CEPILLO ENDOCERVICAL, PORTA OBJETO, PORTA PLACA, ESPECULO VAGINAL, GUANTES DE EXAMINACIÓN.",
+            "marca": "Caricia",
+            "subcategoria": "Kits",
+            "variantes": [
+              {
+                "nombre": "Kit",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 1.75,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nombre": "Esterilización",
+        "productos": [
+          {
+            "nombre": "Fundas de Esterilización Autoadhesivas",
+            "descripcion": "FUNDAS AUTOSELLABLES DE GRAN RESISTENCIA PARA LA ESTERILIZACIÓN EN PLÁSTICO TRANSPARENTE PARA MEJOR VISUALIZACIÓN DEL MATERIAL.",
+            "marca": "RENPAK",
+            "subcategoria": "Fundas de Esterilización",
+            "variantes": [
+              {
+                "nombre": "Size: 90mm x 260mm (3½\" x 10¼\")",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Caja x 200 Unidades",
+                    "precio": 14.00,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nombre": "Contenedores de Cortopunzantes",
+            "descripcion": "Contenedor para desechos corto-punzantes infecciosos.",
+            "marca": null,
+            "subcategoria": "Contenedores",
+            "variantes": [
+              {
+                "nombre": "1L",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 2.20,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "3L",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 2.30,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              },
+              {
+                "nombre": "5L",
+                "unidadesDeVenta": [
+                  {
+                    "descripcion": "Unidad",
+                    "precio": 2.40,
+                    "moneda": "USD",
+                    "impuestos": "MÁS IVA"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

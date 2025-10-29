@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from '../config/axios';
 
 const AuthContext = createContext();
 
@@ -16,22 +16,43 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-      // Aquí podrías hacer una llamada para obtener los datos del usuario
-      setUser({ token });
-    }
-    setLoading(false);
+    const initializeUser = async () => {
+      const token = localStorage.getItem('token');
+      if (token) {
+        try {
+          // Hacer una llamada para obtener los datos del usuario actual
+          const response = await axios.get('/auth/me');
+          console.log('✅ Usuario inicializado:', response.data);
+          const { userId, nombre, email, role } = response.data;
+          
+          setUser({
+            id: userId,
+            nombre,
+            email,
+            role,
+            token
+          });
+        } catch (error) {
+          console.error('❌ Error al inicializar usuario:', error);
+          // Si el token es inválido, eliminarlo
+          localStorage.removeItem('token');
+          setUser(null);
+        }
+      }
+      setLoading(false);
+    };
+
+    initializeUser();
   }, []);
 
   const login = async (email, password) => {
     try {
-      const response = await axios.post('/api/auth/login', { email, password });
+      console.log('🔐 Intentando login con:', email);
+      const response = await axios.post('/auth/login', { email, password });
+      console.log('✅ Login exitoso:', response.data);
       const { token, userId, nombre, email: userEmail, role } = response.data;
       
       localStorage.setItem('token', token);
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       
       setUser({
         id: userId,
@@ -43,6 +64,8 @@ export const AuthProvider = ({ children }) => {
       
       return { success: true };
     } catch (error) {
+      console.error('❌ Error en login:', error);
+      console.error('❌ Error response:', error.response);
       return { 
         success: false, 
         message: error.response?.data || 'Error al iniciar sesión' 
@@ -52,7 +75,7 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (nombre, email, password, rucCedula) => {
     try {
-      const response = await axios.post('/api/auth/register', {
+      const response = await axios.post('/auth/register', {
         nombre,
         email,
         password,
@@ -61,7 +84,6 @@ export const AuthProvider = ({ children }) => {
       const { token, userId, nombre: userName, email: userEmail, role } = response.data;
       
       localStorage.setItem('token', token);
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       
       setUser({
         id: userId,
@@ -82,7 +104,6 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     localStorage.removeItem('token');
-    delete axios.defaults.headers.common['Authorization'];
     setUser(null);
   };
 

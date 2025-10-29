@@ -21,7 +21,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { toast } from 'react-toastify';
-import axios from 'axios';
+import axios from '../config/axios';
 
 const Pedidos = () => {
   const navigate = useNavigate();
@@ -29,18 +29,10 @@ const Pedidos = () => {
   const [pedidos, setPedidos] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    if (!user) {
-      navigate('/login');
-    } else {
-      fetchPedidos();
-    }
-  }, [user, navigate]);
-
   const fetchPedidos = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('/api/pedidos/all');
+      const response = await axios.get('/pedidos/all');
       setPedidos(response.data);
     } catch (error) {
       console.error('Error al obtener pedidos:', error);
@@ -49,6 +41,14 @@ const Pedidos = () => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (!user) {
+      navigate('/login');
+    } else {
+      fetchPedidos();
+    }
+  }, [user, navigate]);
 
   const getEstadoColor = (estado) => {
     switch (estado) {
@@ -128,6 +128,18 @@ const Pedidos = () => {
                   <Typography variant="body2" gutterBottom>
                     <strong>Dirección:</strong> {pedido.direccionEnvio}
                   </Typography>
+                  
+                  {pedido.ciudad && (
+                    <Typography variant="body2" gutterBottom>
+                      <strong>Ciudad:</strong> {pedido.ciudad}
+                    </Typography>
+                  )}
+                  
+                  {pedido.sector && (
+                    <Typography variant="body2" gutterBottom>
+                      <strong>Sector:</strong> {pedido.sector}
+                    </Typography>
+                  )}
                   
                   {pedido.telefonoContacto && (
                     <Typography variant="body2" gutterBottom>

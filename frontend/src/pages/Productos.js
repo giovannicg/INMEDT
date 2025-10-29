@@ -16,15 +16,21 @@ import {
   MenuItem,
   Pagination,
   Chip,
-  CircularProgress
+  CircularProgress,
+  IconButton,
+  Tooltip
 } from '@mui/material';
-import { Search } from '@mui/icons-material';
+import { Search, Favorite as FavoriteIcon, FavoriteBorder as FavoriteBorderIcon } from '@mui/icons-material';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import axios from 'axios';
+import { useFavoritos } from '../context/FavoritosContext';
+import { useAuth } from '../context/AuthContext';
+import axios from '../config/axios';
 
 const Productos = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+  const { user } = useAuth();
+  const { toggleFavorito, isFavorito } = useFavoritos();
   const [productos, setProductos] = useState([]);
   const [categorias, setCategorias] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -37,21 +43,9 @@ const Productos = () => {
   const [totalPages, setTotalPages] = useState(0);
   const [marcas, setMarcas] = useState([]);
 
-  useEffect(() => {
-    fetchCategorias();
-    fetchProductos();
-  }, [page, sortBy, sortDir, fetchCategorias, fetchProductos]);
-
-  useEffect(() => {
-    const search = searchParams.get('search');
-    const categoria = searchParams.get('categoria');
-    if (search) setSearchTerm(search);
-    if (categoria) setSelectedCategoria(categoria);
-  }, [searchParams]);
-
   const fetchCategorias = async () => {
     try {
-      const response = await axios.get('/api/categorias');
+      const response = await axios.get('/categorias');
       setCategorias(response.data);
     } catch (error) {
       console.error('Error al obtener categorías:', error);
@@ -61,14 +55,14 @@ const Productos = () => {
   const fetchProductos = async () => {
     try {
       setLoading(true);
-      let url = `/api/productos?page=${page}&size=12&sort=${sortBy},${sortDir}`;
+      let url = `/productos?page=${page}&size=12&sort=${sortBy},${sortDir}`;
       
       if (searchTerm) {
-        url = `/api/productos/search?q=${encodeURIComponent(searchTerm)}&page=${page}&size=12&sort=${sortBy},${sortDir}`;
+        url = `/productos/search?q=${encodeURIComponent(searchTerm)}&page=${page}&size=12&sort=${sortBy},${sortDir}`;
       } else if (selectedCategoria) {
-        url = `/api/productos/categoria/${selectedCategoria}?page=${page}&size=12&sort=${sortBy},${sortDir}`;
+        url = `/productos/categoria/${selectedCategoria}?page=${page}&size=12&sort=${sortBy},${sortDir}`;
       } else if (selectedMarca) {
-        url = `/api/productos/marca/${encodeURIComponent(selectedMarca)}?page=${page}&size=12&sort=${sortBy},${sortDir}`;
+        url = `/productos/marca/${encodeURIComponent(selectedMarca)}?page=${page}&size=12&sort=${sortBy},${sortDir}`;
       }
 
       const response = await axios.get(url);
@@ -85,6 +79,18 @@ const Productos = () => {
     }
   };
 
+  useEffect(() => {
+    fetchCategorias();
+    fetchProductos();
+  }, [page, sortBy, sortDir]);
+
+  useEffect(() => {
+    const search = searchParams.get('search');
+    const categoria = searchParams.get('categoria');
+    if (search) setSearchTerm(search);
+    if (categoria) setSelectedCategoria(categoria);
+  }, [searchParams]);
+
   const handleSearch = () => {
     setPage(0);
     fetchProductos();
@@ -97,6 +103,17 @@ const Productos = () => {
 
   const handlePageChange = (event, newPage) => {
     setPage(newPage - 1);
+  };
+
+  const handleToggleFavorito = async (e, productoId) => {
+    e.stopPropagation(); // Evitar que se navegue al detalle del producto
+    
+    if (!user) {
+      navigate('/login');
+      return;
+    }
+
+    await toggleFavorito(productoId);
   };
 
   return (
@@ -242,18 +259,30 @@ const Productos = () => {
                       {producto.descripcion?.substring(0, 100)}...
                     </Typography>
                   </CardContent>
-                  <CardActions>
+                  <CardActions sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <Button
                       size="small"
                       variant="contained"
-                      fullWidth
                       onClick={(e) => {
                         e.stopPropagation();
                         navigate(`/productos/${producto.id}`);
                       }}
+                      sx={{ flexGrow: 1, mr: 1 }}
                     >
                       Ver Detalles
                     </Button>
+                    
+                    {user && (
+                      <Tooltip title={isFavorito(producto.id) ? "Remover de favoritos" : "Agregar a favoritos"}>
+                        <IconButton
+                          onClick={(e) => handleToggleFavorito(e, producto.id)}
+                          color={isFavorito(producto.id) ? "error" : "default"}
+                          size="small"
+                        >
+                          {isFavorito(producto.id) ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+                        </IconButton>
+                      </Tooltip>
+                    )}
                   </CardActions>
                 </Card>
               </Grid>

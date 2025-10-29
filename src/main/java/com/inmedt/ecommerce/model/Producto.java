@@ -40,11 +40,12 @@ public class Producto {
     // Constructores
     public Producto() {}
     
-    public Producto(String nombre, String descripcion, String marca, Categoria categoria) {
+    public Producto(String nombre, String descripcion, String marca, Categoria categoria, Boolean activo) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.marca = marca;
         this.categoria = categoria;
+        this.activo = activo;
     }
     
     // Getters y Setters

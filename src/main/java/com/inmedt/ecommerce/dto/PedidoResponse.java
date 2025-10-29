@@ -12,7 +12,11 @@ public class PedidoResponse {
     private String estado;
     private String direccionEnvio;
     private String telefonoContacto;
+    private String ciudad;
+    private String sector;
     private String notas;
+    private String userEmail;
+    private String userNombre;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private List<PedidoItemResponse> items;
@@ -48,6 +52,18 @@ public class PedidoResponse {
     
     public String getTelefonoContacto() { return telefonoContacto; }
     public void setTelefonoContacto(String telefonoContacto) { this.telefonoContacto = telefonoContacto; }
+    
+    public String getCiudad() { return ciudad; }
+    public void setCiudad(String ciudad) { this.ciudad = ciudad; }
+    
+    public String getSector() { return sector; }
+    public void setSector(String sector) { this.sector = sector; }
+    
+    public String getUserEmail() { return userEmail; }
+    public void setUserEmail(String userEmail) { this.userEmail = userEmail; }
+    
+    public String getUserNombre() { return userNombre; }
+    public void setUserNombre(String userNombre) { this.userNombre = userNombre; }
     
     public String getNotas() { return notas; }
     public void setNotas(String notas) { this.notas = notas; }

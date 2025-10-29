@@ -1,7 +1,9 @@
 package com.inmedt.ecommerce.controller;
 
 import com.inmedt.ecommerce.dto.PedidoResponse;
+import com.inmedt.ecommerce.dto.UpdatePedidoInfoRequest;
 import com.inmedt.ecommerce.service.AdminPedidoService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -92,11 +94,9 @@ public class AdminPedidoController {
     @PutMapping("/{id}/info")
     public ResponseEntity<?> updatePedidoInfo(
             @PathVariable Long id,
-            @RequestParam String direccionEnvio,
-            @RequestParam(required = false) String telefonoContacto,
-            @RequestParam(required = false) String notas) {
+            @Valid @RequestBody UpdatePedidoInfoRequest request) {
         try {
-            PedidoResponse pedido = adminPedidoService.updatePedidoInfo(id, direccionEnvio, telefonoContacto, notas);
+            PedidoResponse pedido = adminPedidoService.updatePedidoInfo(id, request);
             return ResponseEntity.ok(pedido);
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());

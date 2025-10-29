@@ -13,13 +13,98 @@ import {
   CircularProgress,
   Stepper,
   Step,
-  StepLabel
+  StepLabel,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  Radio,
+  RadioGroup,
+  FormControlLabel,
+  Chip,
+  IconButton
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 import { toast } from 'react-toastify';
-import axios from 'axios';
+import axios from '../config/axios';
+import { Add as AddIcon, Home as HomeIcon, Star as StarIcon } from '@mui/icons-material';
+
+const SECTORES_QUITO = [
+  // Parroquias Urbanas (170101-170132)
+  'Belisario Quevedo',
+  'Carcelén',
+  'Centro Histórico',
+  'Cochapamba',
+  'Comité del Pueblo',
+  'Cotocollao',
+  'Chilibulo',
+  'Chillogallo',
+  'Chimbacalle',
+  'El Condado',
+  'Guamaní',
+  'Iñaquito',
+  'Itchimbía',
+  'Jipijapa',
+  'Kennedy',
+  'La Argelia',
+  'La Concepción',
+  'La Ecuatoriana',
+  'La Ferroviaria',
+  'La Libertad',
+  'La Magdalena',
+  'La Mena',
+  'Mariscal Sucre',
+  'Ponceano',
+  'Puengasí',
+  'Quitumbe',
+  'Rumipamba',
+  'San Bartolo',
+  'San Isidro del Inca',
+  'San Juan',
+  'Solanda',
+  'Turubamba',
+  
+  // Parroquias Rurales/Suburbanas (170151-170187)
+  'Alangasí',
+  'Amaguaña',
+  'Atahualpa',
+  'Calacalí',
+  'Calderón',
+  'Conocoto',
+  'Cumbayá',
+  'Chavezpamba',
+  'Checa',
+  'El Quinche',
+  'Gualea',
+  'Guangopolo',
+  'Guayllabamba',
+  'La Merced',
+  'Llano Chico',
+  'Lloa',
+  'Mindo',
+  'Nanegal',
+  'Nanegalito',
+  'Nayón',
+  'Nono',
+  'Pacto',
+  'Pedro Vicente Maldonado',
+  'Perucho',
+  'Pifo',
+  'Píntag',
+  'Pomasqui',
+  'Puéllaro',
+  'Puembo',
+  'Puerto Quito',
+  'San Antonio',
+  'San José de Minas',
+  'San Miguel de los Bancos',
+  'Tababela',
+  'Tumbaco',
+  'Yaruquí',
+  'Zámbiza'
+];
 
 const Checkout = () => {
   const navigate = useNavigate();
@@ -29,20 +114,74 @@ const Checkout = () => {
   const [formData, setFormData] = useState({
     direccionEnvio: '',
     telefonoContacto: '',
+    ciudad: 'Quito',
+    sector: '',
     notas: ''
   });
   const [activeStep, setActiveStep] = useState(0);
+  const [direcciones, setDirecciones] = useState([]);
+  const [selectedDireccion, setSelectedDireccion] = useState(null);
+  const [showNewDireccionForm, setShowNewDireccionForm] = useState(false);
+  const [loadingDirecciones, setLoadingDirecciones] = useState(false);
 
   const steps = ['Información de Envío', 'Confirmación', 'Pago'];
 
   useEffect(() => {
     if (!user) {
       navigate('/login');
+      return;
     }
     if (cartItems.length === 0) {
       navigate('/carrito');
+      return;
     }
+    fetchDirecciones();
   }, [user, cartItems, navigate]);
+
+  const fetchDirecciones = async () => {
+    try {
+      setLoadingDirecciones(true);
+      const response = await axios.get('/direcciones');
+      setDirecciones(response.data);
+      
+      // Seleccionar automáticamente la dirección principal si existe
+      const direccionPrincipal = response.data.find(d => d.esPrincipal);
+      if (direccionPrincipal && !selectedDireccion) {
+        handleSelectDireccion(direccionPrincipal);
+      }
+    } catch (error) {
+      console.error('Error al obtener direcciones:', error);
+      // No mostrar error si no hay direcciones, es normal para usuarios nuevos
+    } finally {
+      setLoadingDirecciones(false);
+    }
+  };
+
+  const handleSelectDireccion = (direccion) => {
+    setSelectedDireccion(direccion);
+    setFormData({
+      ...formData,
+      direccionEnvio: direccion.direccion,
+      telefonoContacto: direccion.telefono || '',
+      ciudad: direccion.ciudad,
+      sector: direccion.sector,
+      // Mantener las notas del usuario
+      notas: formData.notas
+    });
+    setShowNewDireccionForm(false);
+  };
+
+  const handleNewDireccion = () => {
+    setSelectedDireccion(null);
+    setFormData({
+      direccionEnvio: '',
+      telefonoContacto: '',
+      ciudad: 'Quito',
+      sector: '',
+      notas: formData.notas
+    });
+    setShowNewDireccionForm(true);
+  };
 
   const handleChange = (e) => {
     setFormData({
@@ -57,6 +196,14 @@ const Checkout = () => {
         toast.error('La dirección de envío es obligatoria');
         return;
       }
+      if (!formData.ciudad.trim()) {
+        toast.error('La ciudad es obligatoria');
+        return;
+      }
+      if (!formData.sector.trim()) {
+        toast.error('El sector es obligatorio');
+        return;
+      }
     }
     setActiveStep((prevStep) => prevStep + 1);
   };
@@ -68,7 +215,7 @@ const Checkout = () => {
   const handleSubmit = async () => {
     try {
       setLoading(true);
-      await axios.post('/api/pedidos/checkout', formData);
+      await axios.post('/pedidos/checkout', formData);
       
       toast.success('¡Pedido realizado exitosamente!');
       await clearCart();
@@ -106,28 +253,136 @@ const Checkout = () => {
                 <Typography variant="h6" gutterBottom>
                   Información de Envío
                 </Typography>
-                
-                <TextField
-                  fullWidth
-                  label="Dirección de Envío *"
-                  name="direccionEnvio"
-                  value={formData.direccionEnvio}
-                  onChange={handleChange}
-                  required
-                  multiline
-                  rows={3}
-                  sx={{ mb: 2 }}
-                />
-                
-                <TextField
-                  fullWidth
-                  label="Teléfono de Contacto"
-                  name="telefonoContacto"
-                  value={formData.telefonoContacto}
-                  onChange={handleChange}
-                  sx={{ mb: 2 }}
-                />
-                
+
+                {/* Sección de direcciones guardadas */}
+                {!loadingDirecciones && direcciones.length > 0 && (
+                  <Box sx={{ mb: 3 }}>
+                    <Typography variant="subtitle1" gutterBottom>
+                      Selecciona una dirección guardada:
+                    </Typography>
+                    <RadioGroup
+                      value={selectedDireccion?.id || ''}
+                      onChange={(e) => {
+                        const direccion = direcciones.find(d => d.id === parseInt(e.target.value));
+                        if (direccion) handleSelectDireccion(direccion);
+                      }}
+                    >
+                      {direcciones.map((direccion) => (
+                        <FormControlLabel
+                          key={direccion.id}
+                          value={direccion.id}
+                          control={<Radio />}
+                          label={
+                            <Box sx={{ ml: 1 }}>
+                              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                <Typography variant="subtitle2">
+                                  {direccion.nombre}
+                                </Typography>
+                                {direccion.esPrincipal && (
+                                  <Chip
+                                    icon={<StarIcon />}
+                                    label="Principal"
+                                    color="primary"
+                                    size="small"
+                                  />
+                                )}
+                              </Box>
+                              <Typography variant="body2" color="text.secondary">
+                                {direccion.direccion}
+                              </Typography>
+                              <Typography variant="body2" color="text.secondary">
+                                {direccion.sector}, {direccion.ciudad}
+                              </Typography>
+                              {direccion.telefono && (
+                                <Typography variant="body2" color="text.secondary">
+                                  Tel: {direccion.telefono}
+                                </Typography>
+                              )}
+                            </Box>
+                          }
+                        />
+                      ))}
+                    </RadioGroup>
+                    
+                    <Button
+                      startIcon={<AddIcon />}
+                      onClick={handleNewDireccion}
+                      sx={{ mt: 2 }}
+                      variant={showNewDireccionForm ? "contained" : "outlined"}
+                    >
+                      {showNewDireccionForm ? "Usando nueva dirección" : "Usar nueva dirección"}
+                    </Button>
+                  </Box>
+                )}
+
+                {/* Formulario para nueva dirección o cuando no hay direcciones guardadas */}
+                {(showNewDireccionForm || direcciones.length === 0) && (
+                  <Box>
+                    {direcciones.length === 0 && (
+                      <Alert severity="info" sx={{ mb: 2 }}>
+                        <Typography variant="body2">
+                          No tienes direcciones guardadas. Completa la información de envío:
+                        </Typography>
+                      </Alert>
+                    )}
+                    
+                    <TextField
+                      fullWidth
+                      label="Dirección de Envío *"
+                      name="direccionEnvio"
+                      value={formData.direccionEnvio}
+                      onChange={handleChange}
+                      required
+                      multiline
+                      rows={3}
+                      sx={{ mb: 2 }}
+                    />
+                    
+                    <TextField
+                      fullWidth
+                      label="Teléfono de Contacto"
+                      name="telefonoContacto"
+                      value={formData.telefonoContacto}
+                      onChange={handleChange}
+                      sx={{ mb: 2 }}
+                    />
+                    
+                    <Grid container spacing={2} sx={{ mb: 2 }}>
+                      <Grid item xs={12} sm={6}>
+                        <FormControl fullWidth>
+                          <InputLabel>Ciudad *</InputLabel>
+                          <Select
+                            name="ciudad"
+                            value={formData.ciudad}
+                            onChange={handleChange}
+                            label="Ciudad *"
+                          >
+                            <MenuItem value="Quito">Quito</MenuItem>
+                          </Select>
+                        </FormControl>
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
+                        <FormControl fullWidth>
+                          <InputLabel>Sector *</InputLabel>
+                          <Select
+                            name="sector"
+                            value={formData.sector}
+                            onChange={handleChange}
+                            label="Sector *"
+                          >
+                            {SECTORES_QUITO.map((sector) => (
+                              <MenuItem key={sector} value={sector}>
+                                {sector}
+                              </MenuItem>
+                            ))}
+                          </Select>
+                        </FormControl>
+                      </Grid>
+                    </Grid>
+                  </Box>
+                )}
+
+                {/* Notas adicionales - siempre visible */}
                 <TextField
                   fullWidth
                   label="Notas Adicionales"
@@ -136,6 +391,7 @@ const Checkout = () => {
                   onChange={handleChange}
                   multiline
                   rows={2}
+                  sx={{ mt: 2 }}
                 />
               </CardContent>
             </Card>
@@ -194,6 +450,14 @@ const Checkout = () => {
                 <Typography variant="body1" gutterBottom>
                   <strong>Dirección de Envío:</strong><br />
                   {formData.direccionEnvio}
+                </Typography>
+                
+                <Typography variant="body1" gutterBottom>
+                  <strong>Ciudad:</strong> {formData.ciudad}
+                </Typography>
+                
+                <Typography variant="body1" gutterBottom>
+                  <strong>Sector:</strong> {formData.sector}
                 </Typography>
                 
                 {formData.telefonoContacto && (

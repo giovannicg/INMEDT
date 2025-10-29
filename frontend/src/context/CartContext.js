@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from '../config/axios';
 
 const CartContext = createContext();
 
@@ -19,7 +19,7 @@ export const CartProvider = ({ children }) => {
   const fetchCart = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('/api/carrito');
+      const response = await axios.get('/carrito');
       setCart(response.data);
       setCartItems(response.data.items || []);
     } catch (error) {
@@ -32,7 +32,7 @@ export const CartProvider = ({ children }) => {
   const addToCart = async (unidadVentaId, cantidad) => {
     try {
       setLoading(true);
-      const response = await axios.post('/api/carrito/items', {
+      const response = await axios.post('/carrito/items', {
         unidadVentaId,
         cantidad
       });
@@ -52,7 +52,7 @@ export const CartProvider = ({ children }) => {
   const updateCartItem = async (itemId, cantidad) => {
     try {
       setLoading(true);
-      const response = await axios.put(`/api/carrito/items/${itemId}`, {
+      const response = await axios.put(`/carrito/items/${itemId}`, {
         cantidad
       });
       setCart(response.data);
@@ -71,7 +71,7 @@ export const CartProvider = ({ children }) => {
   const removeFromCart = async (itemId) => {
     try {
       setLoading(true);
-      const response = await axios.delete(`/api/carrito/items/${itemId}`);
+      const response = await axios.delete(`/carrito/items/${itemId}`);
       setCart(response.data);
       setCartItems(response.data.items || []);
       return { success: true };
@@ -88,7 +88,7 @@ export const CartProvider = ({ children }) => {
   const clearCart = async () => {
     try {
       setLoading(true);
-      const response = await axios.delete('/api/carrito');
+      const response = await axios.delete('/carrito');
       setCart(response.data);
       setCartItems([]);
       return { success: true };

@@ -62,6 +62,8 @@ public class PedidoService {
         String numeroPedido = generateNumeroPedido();
         Pedido pedido = new Pedido(numeroPedido, carrito.getTotal(), request.getDireccionEnvio(), user);
         pedido.setTelefonoContacto(request.getTelefonoContacto());
+        pedido.setCiudad(request.getCiudad());
+        pedido.setSector(request.getSector());
         pedido.setNotas(request.getNotas());
         pedido.setEstado(Pedido.EstadoPedido.CONFIRMADO);
         
@@ -163,6 +165,10 @@ public class PedidoService {
         );
         
         response.setTelefonoContacto(pedido.getTelefonoContacto());
+        response.setCiudad(pedido.getCiudad());
+        response.setSector(pedido.getSector());
+        response.setUserEmail(pedido.getUser().getEmail());
+        response.setUserNombre(pedido.getUser().getNombre());
         response.setNotas(pedido.getNotas());
         response.setUpdatedAt(pedido.getUpdatedAt());
         

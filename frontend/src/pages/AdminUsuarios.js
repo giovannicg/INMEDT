@@ -36,7 +36,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { toast } from 'react-toastify';
-import axios from 'axios';
+import axios from '../config/axios';
 
 const AdminUsuarios = () => {
   const navigate = useNavigate();
@@ -53,18 +53,10 @@ const AdminUsuarios = () => {
     password: ''
   });
 
-  useEffect(() => {
-    if (!user || user.role !== 'ROLE_ADMIN') {
-      navigate('/');
-      return;
-    }
-    fetchUsuarios();
-  }, [user, navigate, page, fetchUsuarios]);
-
   const fetchUsuarios = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`/api/admin/usuarios?page=${page}&size=10`);
+      const response = await axios.get(`/admin/usuarios?page=${page}&size=10`);
       setUsuarios(response.data.content);
       setTotalPages(response.data.totalPages);
     } catch (error) {
@@ -74,6 +66,14 @@ const AdminUsuarios = () => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (!user || user.role !== 'ROLE_ADMIN') {
+      navigate('/');
+      return;
+    }
+    fetchUsuarios();
+  }, [user, navigate, page]);
 
   const handleOpenDialog = (usuario = null) => {
     if (usuario) {
@@ -106,7 +106,7 @@ const AdminUsuarios = () => {
 
   const handleUpdateRole = async () => {
     try {
-      await axios.put(`/api/admin/usuarios/${editingUsuario.id}/role?role=${formData.role}`);
+      await axios.put(`/admin/usuarios/${editingUsuario.id}/role?role=${formData.role}`);
       toast.success('Rol actualizado exitosamente');
       handleCloseDialog();
       fetchUsuarios();
@@ -117,7 +117,7 @@ const AdminUsuarios = () => {
 
   const handleUpdateStatus = async (id, enabled) => {
     try {
-      await axios.put(`/api/admin/usuarios/${id}/status?enabled=${enabled}`);
+      await axios.put(`/admin/usuarios/${id}/status?enabled=${enabled}`);
       toast.success('Estado actualizado exitosamente');
       fetchUsuarios();
     } catch (error) {
@@ -131,7 +131,7 @@ const AdminUsuarios = () => {
       return;
     }
     try {
-      await axios.put(`/api/admin/usuarios/${editingUsuario.id}/password?password=${formData.password}`);
+      await axios.put(`/admin/usuarios/${editingUsuario.id}/password?password=${formData.password}`);
       toast.success('Contraseña actualizada exitosamente');
       handleCloseDialog();
     } catch (error) {
@@ -142,7 +142,7 @@ const AdminUsuarios = () => {
   const handleDelete = async (id) => {
     if (window.confirm('¿Estás seguro de que quieres eliminar este usuario?')) {
       try {
-        await axios.delete(`/api/admin/usuarios/${id}`);
+        await axios.delete(`/admin/usuarios/${id}`);
         toast.success('Usuario eliminado exitosamente');
         fetchUsuarios();
       } catch (error) {

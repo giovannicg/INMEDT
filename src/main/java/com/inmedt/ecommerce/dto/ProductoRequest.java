@@ -24,11 +24,12 @@ public class ProductoRequest {
     // Constructores
     public ProductoRequest() {}
     
-    public ProductoRequest(String nombre, String descripcion, String marca, Long categoriaId) {
+    public ProductoRequest(String nombre, String descripcion, String marca, Long categoriaId, Boolean activo) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.marca = marca;
         this.categoriaId = categoriaId;
+        this.activo = activo;
     }
     
     // Getters y Setters

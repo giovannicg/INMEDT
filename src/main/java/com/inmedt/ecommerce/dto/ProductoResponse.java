@@ -10,6 +10,7 @@ public class ProductoResponse {
     private String descripcion;
     private String marca;
     private String categoriaNombre;
+    private Boolean activo;
     private List<VarianteResponse> variantes;
     
     // Constructores
@@ -39,6 +40,9 @@ public class ProductoResponse {
     public String getCategoriaNombre() { return categoriaNombre; }
     public void setCategoriaNombre(String categoriaNombre) { this.categoriaNombre = categoriaNombre; }
     
+    public Boolean getActivo() { return activo; }
+    public void setActivo(Boolean activo) { this.activo = activo; }
+    
     public List<VarianteResponse> getVariantes() { return variantes; }
     public void setVariantes(List<VarianteResponse> variantes) { this.variantes = variantes; }
     
@@ -46,6 +50,7 @@ public class ProductoResponse {
         private Long id;
         private String nombre;
         private String descripcion;
+        private Boolean activa;
         private List<UnidadVentaResponse> unidadesVenta;
         
         // Constructores
@@ -55,6 +60,13 @@ public class ProductoResponse {
             this.id = id;
             this.nombre = nombre;
             this.descripcion = descripcion;
+        }
+        
+        public VarianteResponse(Long id, String nombre, String descripcion, Boolean activa) {
+            this.id = id;
+            this.nombre = nombre;
+            this.descripcion = descripcion;
+            this.activa = activa;
         }
         
         // Getters y Setters
@@ -67,6 +79,9 @@ public class ProductoResponse {
         public String getDescripcion() { return descripcion; }
         public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
         
+        public Boolean getActiva() { return activa; }
+        public void setActiva(Boolean activa) { this.activa = activa; }
+        
         public List<UnidadVentaResponse> getUnidadesVenta() { return unidadesVenta; }
         public void setUnidadesVenta(List<UnidadVentaResponse> unidadesVenta) { this.unidadesVenta = unidadesVenta; }
     }
@@ -77,6 +92,7 @@ public class ProductoResponse {
         private String descripcion;
         private BigDecimal precio;
         private Integer stock;
+        private Boolean activa;
         private Boolean disponible;
         
         // Constructores
@@ -89,6 +105,16 @@ public class ProductoResponse {
             this.precio = precio;
             this.stock = stock;
             this.disponible = stock > 0;
+        }
+        
+        public UnidadVentaResponse(Long id, String sku, String descripcion, BigDecimal precio, Integer stock, Boolean activa) {
+            this.id = id;
+            this.sku = sku;
+            this.descripcion = descripcion;
+            this.precio = precio;
+            this.stock = stock;
+            this.activa = activa;
+            this.disponible = stock > 0 && activa;
         }
         
         // Getters y Setters
@@ -107,7 +133,13 @@ public class ProductoResponse {
         public Integer getStock() { return stock; }
         public void setStock(Integer stock) { 
             this.stock = stock;
-            this.disponible = stock > 0;
+            this.disponible = stock > 0 && (activa != null ? activa : true);
+        }
+        
+        public Boolean getActiva() { return activa; }
+        public void setActiva(Boolean activa) { 
+            this.activa = activa;
+            this.disponible = (stock != null ? stock > 0 : false) && activa;
         }
         
         public Boolean getDisponible() { return disponible; }

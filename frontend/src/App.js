@@ -17,16 +17,21 @@ import AdminDashboard from './pages/AdminDashboard';
 import AdminProductos from './pages/AdminProductos';
 import AdminUsuarios from './pages/AdminUsuarios';
 import AdminPedidos from './pages/AdminPedidos';
+import AdminCategorias from './pages/AdminCategorias';
+import MisDirecciones from './pages/MisDirecciones';
+import MisFavoritos from './pages/MisFavoritos';
 
 // Context
 import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
+import { FavoritosProvider } from './context/FavoritosContext';
 
 function App() {
   return (
     <AuthProvider>
       <CartProvider>
-        <div className="App">
+        <FavoritosProvider>
+          <div className="App">
           <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
@@ -36,11 +41,14 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/pedidos" element={<Pedidos />} />
+            <Route path="/direcciones" element={<MisDirecciones />} />
+            <Route path="/favoritos" element={<MisFavoritos />} />
             <Route path="/checkout" element={<Checkout />} />
             
             {/* Rutas de Administración */}
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/admin/productos" element={<AdminProductos />} />
+            <Route path="/admin/categorias" element={<AdminCategorias />} />
             <Route path="/admin/usuarios" element={<AdminUsuarios />} />
             <Route path="/admin/pedidos" element={<AdminPedidos />} />
           </Routes>
@@ -55,7 +63,8 @@ function App() {
             draggable
             pauseOnHover
           />
-        </div>
+          </div>
+        </FavoritosProvider>
       </CartProvider>
     </AuthProvider>
   );

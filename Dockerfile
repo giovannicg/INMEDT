@@ -13,6 +13,9 @@ RUN mvn dependency:go-offline -B
 # Copiar código fuente
 COPY src src
 
+# Copiar archivo de catálogo
+COPY catalogo.json .
+
 # Compilar la aplicación
 RUN mvn clean package -DskipTests
 

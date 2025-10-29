@@ -14,7 +14,7 @@ import {
 } from '@mui/material';
 import { Search, LocalHospital } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../config/axios';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -30,7 +30,7 @@ const Home = () => {
 
   const fetchCategorias = async () => {
     try {
-      const response = await axios.get('/api/categorias');
+      const response = await axios.get('/categorias');
       setCategorias(response.data);
     } catch (error) {
       console.error('Error al obtener categorías:', error);
@@ -40,7 +40,7 @@ const Home = () => {
   const fetchProductos = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('/api/productos?size=6');
+      const response = await axios.get('/productos?size=6');
       setProductos(response.data.content);
     } catch (error) {
       console.error('Error al obtener productos:', error);

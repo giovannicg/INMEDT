@@ -18,6 +18,8 @@ public interface UnidadDeVentaRepository extends JpaRepository<UnidadDeVenta, Lo
     
     List<UnidadDeVenta> findByActivaTrueAndVarianteId(Long varianteId);
     
+    List<UnidadDeVenta> findByVarianteId(Long varianteId);
+    
     List<UnidadDeVenta> findByActivaTrueAndVarianteActivaTrueAndVarianteProductoActivoTrueAndVarianteProductoId(Long productoId);
     
     @Query("SELECT u FROM UnidadDeVenta u WHERE u.activa = true AND u.stock > 0 AND " +
