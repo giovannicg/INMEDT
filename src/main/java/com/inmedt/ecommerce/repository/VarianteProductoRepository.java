@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface VarianteProductoRepository extends JpaRepository<VarianteProducto, Long> {
@@ -14,4 +15,8 @@ public interface VarianteProductoRepository extends JpaRepository<VarianteProduc
     List<VarianteProducto> findByActivaTrueAndProductoActivoTrueAndProductoId(Long productoId);
     
     List<VarianteProducto> findByProductoId(Long productoId);
+    
+    boolean existsByNombreAndProductoId(String nombre, Long productoId);
+    
+    Optional<VarianteProducto> findByNombreAndProductoId(String nombre, Long productoId);
 }

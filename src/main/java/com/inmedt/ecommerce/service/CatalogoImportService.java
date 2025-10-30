@@ -190,6 +190,12 @@ public class CatalogoImportService {
         try {
             String nombreVariante = varianteNode.get("nombre").asText();
 
+            // Verificar si la variante ya existe
+            if (varianteProductoRepository.existsByNombreAndProductoId(nombreVariante, producto.getId())) {
+                System.out.println("    ⚠️  Variante ya existe: " + nombreVariante);
+                return varianteProductoRepository.findByNombreAndProductoId(nombreVariante, producto.getId()).orElse(null);
+            }
+
             VarianteProducto variante = new VarianteProducto();
             variante.setNombre(nombreVariante);
             variante.setDescripcion("Variante " + nombreVariante);

@@ -52,6 +52,17 @@ const Productos = () => {
     }
   };
 
+  const fetchMarcas = async () => {
+    try {
+      // Obtener todas las marcas disponibles
+      const response = await axios.get('/productos?page=0&size=1000');
+      const marcasUnicas = [...new Set(response.data.content.map(p => p.marca).filter(Boolean))];
+      setMarcas(marcasUnicas.sort());
+    } catch (error) {
+      console.error('Error al obtener marcas:', error);
+    }
+  };
+
   const fetchProductos = async () => {
     try {
       setLoading(true);
@@ -68,10 +79,6 @@ const Productos = () => {
       const response = await axios.get(url);
       setProductos(response.data.content);
       setTotalPages(response.data.totalPages);
-      
-      // Extraer marcas únicas de los productos
-      const marcasUnicas = [...new Set(response.data.content.map(p => p.marca).filter(Boolean))];
-      setMarcas(marcasUnicas);
     } catch (error) {
       console.error('Error al obtener productos:', error);
     } finally {
@@ -81,8 +88,12 @@ const Productos = () => {
 
   useEffect(() => {
     fetchCategorias();
+    fetchMarcas();
+  }, []);
+
+  useEffect(() => {
     fetchProductos();
-  }, [page, sortBy, sortDir]);
+  }, [page, sortBy, sortDir, searchTerm, selectedCategoria, selectedMarca]);
 
   useEffect(() => {
     const search = searchParams.get('search');
@@ -93,12 +104,22 @@ const Productos = () => {
 
   const handleSearch = () => {
     setPage(0);
-    fetchProductos();
+    setSelectedCategoria('');
+    setSelectedMarca('');
   };
 
-  const handleFilterChange = () => {
+  const handleCategoriaChange = (value) => {
+    setSelectedCategoria(value);
+    setSelectedMarca('');
+    setSearchTerm('');
     setPage(0);
-    fetchProductos();
+  };
+
+  const handleMarcaChange = (value) => {
+    setSelectedMarca(value);
+    setSelectedCategoria('');
+    setSearchTerm('');
+    setPage(0);
   };
 
   const handlePageChange = (event, newPage) => {
@@ -147,11 +168,7 @@ const Productos = () => {
               <InputLabel>Categoría</InputLabel>
               <Select
                 value={selectedCategoria}
-                onChange={(e) => {
-                  setSelectedCategoria(e.target.value);
-                  setSelectedMarca('');
-                  handleFilterChange();
-                }}
+                onChange={(e) => handleCategoriaChange(e.target.value)}
               >
                 <MenuItem value="">Todas</MenuItem>
                 {categorias.map((categoria) => (
@@ -168,11 +185,7 @@ const Productos = () => {
               <InputLabel>Marca</InputLabel>
               <Select
                 value={selectedMarca}
-                onChange={(e) => {
-                  setSelectedMarca(e.target.value);
-                  setSelectedCategoria('');
-                  handleFilterChange();
-                }}
+                onChange={(e) => handleMarcaChange(e.target.value)}
               >
                 <MenuItem value="">Todas</MenuItem>
                 {marcas.map((marca) => (
@@ -189,10 +202,7 @@ const Productos = () => {
               <InputLabel>Ordenar por</InputLabel>
               <Select
                 value={sortBy}
-                onChange={(e) => {
-                  setSortBy(e.target.value);
-                  handleFilterChange();
-                }}
+                onChange={(e) => setSortBy(e.target.value)}
               >
                 <MenuItem value="nombre">Nombre</MenuItem>
                 <MenuItem value="marca">Marca</MenuItem>
@@ -206,10 +216,7 @@ const Productos = () => {
               <InputLabel>Dirección</InputLabel>
               <Select
                 value={sortDir}
-                onChange={(e) => {
-                  setSortDir(e.target.value);
-                  handleFilterChange();
-                }}
+                onChange={(e) => setSortDir(e.target.value)}
               >
                 <MenuItem value="asc">Ascendente</MenuItem>
                 <MenuItem value="desc">Descendente</MenuItem>
