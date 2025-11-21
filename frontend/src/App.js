@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 // Components
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import Home from './pages/Home';
 import Productos from './pages/Productos';
 import ProductoDetalle from './pages/ProductoDetalle';
@@ -52,6 +53,7 @@ function App() {
             <Route path="/admin/usuarios" element={<AdminUsuarios />} />
             <Route path="/admin/pedidos" element={<AdminPedidos />} />
           </Routes>
+          <Footer />
           <ToastContainer
             position="top-right"
             autoClose={3000}

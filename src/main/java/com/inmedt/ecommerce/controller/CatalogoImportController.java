@@ -11,7 +11,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/admin/catalogo")
 @CrossOrigin(origins = "*")
-@PreAuthorize("hasRole('ROLE_ADMIN')")
+@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 public class CatalogoImportController {
 
     @Autowired

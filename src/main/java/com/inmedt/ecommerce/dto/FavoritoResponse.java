@@ -100,17 +100,18 @@ public class FavoritoResponse {
         private String nombre;
         private String descripcion;
         private String imagen;
+        private String imagenThumbnail;
         private Boolean activo;
         private String categoriaNombre;
 
         public ProductoBasicoResponse() {}
 
-        public ProductoBasicoResponse(Long id, String nombre, String descripcion, String imagen,
+        public ProductoBasicoResponse(Long id, String nombre, String descripcion, String imagenThumbnail,
                                     Boolean activo, String categoriaNombre) {
             this.id = id;
             this.nombre = nombre;
             this.descripcion = descripcion;
-            this.imagen = imagen;
+            this.imagenThumbnail = imagenThumbnail;
             this.activo = activo;
             this.categoriaNombre = categoriaNombre;
         }
@@ -127,6 +128,9 @@ public class FavoritoResponse {
 
         public String getImagen() { return imagen; }
         public void setImagen(String imagen) { this.imagen = imagen; }
+
+        public String getImagenThumbnail() { return imagenThumbnail; }
+        public void setImagenThumbnail(String imagenThumbnail) { this.imagenThumbnail = imagenThumbnail; }
 
         public Boolean getActivo() { return activo; }
         public void setActivo(Boolean activo) { this.activo = activo; }

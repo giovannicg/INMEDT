@@ -24,6 +24,7 @@ import { useAuth } from '../context/AuthContext';
 import { useFavoritos } from '../context/FavoritosContext';
 import { useCart } from '../context/CartContext';
 import { toast } from 'react-toastify';
+import { IMAGES_URL } from '../config/axios';
 
 const MisFavoritos = () => {
   const navigate = useNavigate();
@@ -66,15 +67,37 @@ const MisFavoritos = () => {
   }
 
   return (
-    <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-      <Typography variant="h4" component="h1" gutterBottom>
-        Mis Favoritos
-      </Typography>
+    <Box sx={{ backgroundColor: '#fafafa', minHeight: '100vh', py: 4 }}>
+      <Container maxWidth="lg">
+        {/* Header */}
+        <Box
+          sx={{
+            background: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+            borderRadius: 3,
+            p: 4,
+            mb: 4,
+            color: 'white'
+          }}
+        >
+          <Typography variant="h4" component="h1" fontWeight="bold" gutterBottom>
+            Mis Favoritos
+          </Typography>
+          <Typography variant="body1" sx={{ opacity: 0.9 }}>
+            Tus productos favoritos guardados
+          </Typography>
+        </Box>
 
       {favoritos.length === 0 ? (
-        <Card>
-          <CardContent sx={{ textAlign: 'center', py: 6 }}>
-            <FavoriteBorderIcon sx={{ fontSize: 80, color: 'text.secondary', mb: 2 }} />
+        <Card
+          sx={{
+            borderRadius: 3,
+            boxShadow: '0 2px 12px rgba(0,0,0,0.08)',
+            textAlign: 'center',
+            py: 8
+          }}
+        >
+          <CardContent>
+            <FavoriteBorderIcon sx={{ fontSize: 80, color: 'text.secondary', opacity: 0.3, mb: 2 }} />
             <Typography variant="h6" color="text.secondary" gutterBottom>
               No tienes productos favoritos
             </Typography>
@@ -84,6 +107,11 @@ const MisFavoritos = () => {
             <Button
               variant="contained"
               onClick={() => navigate('/productos')}
+              sx={{
+                background: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+                textTransform: 'none',
+                fontWeight: 'bold'
+              }}
             >
               Explorar Productos
             </Button>
@@ -98,7 +126,22 @@ const MisFavoritos = () => {
           <Grid container spacing={3}>
             {favoritos.map((favorito) => (
               <Grid item xs={12} sm={6} md={4} lg={3} key={favorito.id}>
-                <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+                <Card
+                  sx={{
+                    height: '100%',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    borderRadius: 3,
+                    border: '1px solid',
+                    borderColor: 'divider',
+                    transition: 'all 0.3s',
+                    '&:hover': {
+                      transform: 'translateY(-8px)',
+                      boxShadow: '0 12px 24px rgba(0,0,0,0.12)',
+                      borderColor: '#f093fb'
+                    }
+                  }}
+                >
                   {/* Imagen del producto */}
                   <CardMedia
                     component="div"
@@ -111,9 +154,9 @@ const MisFavoritos = () => {
                       position: 'relative'
                     }}
                   >
-                    {favorito.productoImagen ? (
+                    {favorito.producto?.imagenThumbnail ? (
                       <img
-                        src={favorito.productoImagen}
+                        src={`${IMAGES_URL}${favorito.producto.imagenThumbnail}`}
                         alt={favorito.productoNombre}
                         style={{
                           width: '100%',
@@ -224,7 +267,8 @@ const MisFavoritos = () => {
           </Grid>
         </>
       )}
-    </Container>
+      </Container>
+    </Box>
   );
 };
 

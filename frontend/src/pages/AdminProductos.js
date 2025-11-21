@@ -33,12 +33,14 @@ import {
   Visibility,
   Category,
   Settings,
-  Inventory
+  Inventory,
+  Image
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { toast } from 'react-toastify';
 import axios from '../config/axios';
+import ProductoImagenesManager from '../components/ProductoImagenesManager';
 
 const AdminProductos = () => {
   const navigate = useNavigate();
@@ -83,6 +85,10 @@ const AdminProductos = () => {
     stock: '',
     activa: true
   });
+
+  // Estado para gestión de imágenes
+  const [openImagenesDialog, setOpenImagenesDialog] = useState(false);
+  const [productoParaImagenes, setProductoParaImagenes] = useState(null);
 
   const fetchProductos = async () => {
     try {
@@ -188,6 +194,25 @@ const AdminProductos = () => {
     setSelectedProducto(producto);
     setOpenVariantesDialog(true);
     await fetchVariantes(producto.id);
+  };
+
+  const handleOpenImagenesDialog = (producto) => {
+    setProductoParaImagenes(producto);
+    setOpenImagenesDialog(true);
+  };
+
+  const handleCloseImagenesDialog = () => {
+    setOpenImagenesDialog(false);
+    setProductoParaImagenes(null);
+  };
+
+  const handleImagenesUpdate = async () => {
+    await fetchProductos();
+    if (productoParaImagenes) {
+      // Actualizar el producto seleccionado
+      const response = await axios.get(`/admin/productos/${productoParaImagenes.id}`);
+      setProductoParaImagenes(response.data);
+    }
   };
 
   const fetchVariantes = async (productoId) => {
@@ -391,14 +416,24 @@ const AdminProductos = () => {
                       <IconButton
                         size="small"
                         onClick={() => navigate(`/admin/productos/${producto.id}`)}
+                        title="Ver detalles"
                       >
                         <Visibility />
                       </IconButton>
                       <IconButton
                         size="small"
                         onClick={() => handleOpenDialog(producto)}
+                        title="Editar"
                       >
                         <Edit />
+                      </IconButton>
+                      <IconButton
+                        size="small"
+                        onClick={() => handleOpenImagenesDialog(producto)}
+                        title="Gestionar imágenes"
+                        color="primary"
+                      >
+                        <Image />
                       </IconButton>
                       <IconButton
                         size="small"
@@ -754,6 +789,29 @@ const AdminProductos = () => {
           <Button onClick={handleCreateUnidad} variant="contained">
             {editingUnidad ? 'Actualizar' : 'Crear'}
           </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* Dialog para gestionar imágenes */}
+      <Dialog 
+        open={openImagenesDialog} 
+        onClose={handleCloseImagenesDialog}
+        maxWidth="md"
+        fullWidth
+      >
+        <DialogTitle>
+          Gestionar Imágenes - {productoParaImagenes?.nombre}
+        </DialogTitle>
+        <DialogContent>
+          {productoParaImagenes && (
+            <ProductoImagenesManager
+              producto={productoParaImagenes}
+              onUpdate={handleImagenesUpdate}
+            />
+          )}
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseImagenesDialog}>Cerrar</Button>
         </DialogActions>
       </Dialog>
 

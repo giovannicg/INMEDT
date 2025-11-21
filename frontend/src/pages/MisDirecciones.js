@@ -20,39 +20,39 @@ import {
   IconButton,
   FormControlLabel,
   Switch,
-  CircularProgress
+  CircularProgress,
+  Fade,
+  Divider
 } from '@mui/material';
 import {
   Add as AddIcon,
   Edit as EditIcon,
   Delete as DeleteIcon,
   Home as HomeIcon,
-  Star as StarIcon
+  Star as StarIcon,
+  StarBorder as StarBorderIcon,
+  LocationOn,
+  Phone,
+  Info
 } from '@mui/icons-material';
 import { useAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import axios from '../config/axios';
 
 const SECTORES_QUITO = [
-  // Parroquias Urbanas (170101-170132)
   'Belisario Quevedo', 'Carcelén', 'Centro Histórico', 'Cochapamba', 'Comité del Pueblo',
   'Cotocollao', 'Chilibulo', 'Chillogallo', 'Chimbacalle', 'El Condado', 'Guamaní',
   'Iñaquito', 'Itchimbía', 'Jipijapa', 'Kennedy', 'La Argelia', 'La Concepción',
   'La Ecuatoriana', 'La Ferroviaria', 'La Libertad', 'La Magdalena', 'La Mena',
   'Mariscal Sucre', 'Ponceano', 'Puengasí', 'Quitumbe', 'Rumipamba', 'San Bartolo',
   'San Isidro del Inca', 'San Juan', 'Solanda', 'Turubamba',
-  
-  // Parroquias Rurales/Suburbanas (170151-170187)
-  'Alangasí', 'Amaguaña', 'Atahualpa', 'Calacalí', 'Calderón', 'Conocoto', 'Cumbayá',
-  'Chavezpamba', 'Checa', 'El Quinche', 'Gualea', 'Guangopolo', 'Guayllabamba',
-  'La Merced', 'Llano Chico', 'Lloa', 'Mindo', 'Nanegal', 'Nanegalito', 'Nayón',
-  'Nono', 'Pacto', 'Pedro Vicente Maldonado', 'Perucho', 'Pifo', 'Píntag', 'Pomasqui',
-  'Puéllaro', 'Puembo', 'Puerto Quito', 'San Antonio', 'San José de Minas',
-  'San Miguel de los Bancos', 'Tababela', 'Tumbaco', 'Yaruquí', 'Zámbiza'
-];
+  'Alangasí', 'Amaguaña', 'Calderón', 'Conocoto', 'Cumbayá', 'Tumbaco', 'Pomasqui'
+].sort();
 
 const MisDirecciones = () => {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const [direcciones, setDirecciones] = useState([]);
   const [loading, setLoading] = useState(true);
   const [openDialog, setOpenDialog] = useState(false);
@@ -68,10 +68,12 @@ const MisDirecciones = () => {
   });
 
   useEffect(() => {
-    if (user) {
-      fetchDirecciones();
+    if (!user) {
+      navigate('/login');
+      return;
     }
-  }, [user]);
+    fetchDirecciones();
+  }, [user, navigate]);
 
   const fetchDirecciones = async () => {
     try {
@@ -116,42 +118,37 @@ const MisDirecciones = () => {
   const handleCloseDialog = () => {
     setOpenDialog(false);
     setEditingDireccion(null);
-    setFormData({
-      nombre: '',
-      direccion: '',
-      ciudad: 'Quito',
-      sector: '',
-      telefono: '',
-      referencias: '',
-      esPrincipal: false
-    });
   };
 
-  const handleSubmit = async () => {
+  const handleSaveDireccion = async () => {
     try {
       if (editingDireccion) {
         await axios.put(`/direcciones/${editingDireccion.id}`, formData);
-        toast.success('Dirección actualizada exitosamente');
+        toast.success('Dirección actualizada correctamente');
       } else {
         await axios.post('/direcciones', formData);
-        toast.success('Dirección creada exitosamente');
+        toast.success('Dirección agregada correctamente');
       }
-      handleCloseDialog();
       fetchDirecciones();
+      handleCloseDialog();
     } catch (error) {
+      console.error('Error al guardar dirección:', error);
       toast.error(error.response?.data || 'Error al guardar la dirección');
     }
   };
 
-  const handleDelete = async (id) => {
-    if (window.confirm('¿Estás seguro de que quieres eliminar esta dirección?')) {
-      try {
-        await axios.delete(`/direcciones/${id}`);
-        toast.success('Dirección eliminada exitosamente');
-        fetchDirecciones();
-      } catch (error) {
-        toast.error(error.response?.data || 'Error al eliminar la dirección');
-      }
+  const handleDeleteDireccion = async (id) => {
+    if (!window.confirm('¿Estás seguro de que quieres eliminar esta dirección?')) {
+      return;
+    }
+
+    try {
+      await axios.delete(`/direcciones/${id}`);
+      toast.success('Dirección eliminada correctamente');
+      fetchDirecciones();
+    } catch (error) {
+      console.error('Error al eliminar dirección:', error);
+      toast.error('Error al eliminar la dirección');
     }
   };
 
@@ -161,239 +158,347 @@ const MisDirecciones = () => {
       toast.success('Dirección principal actualizada');
       fetchDirecciones();
     } catch (error) {
-      toast.error(error.response?.data || 'Error al actualizar dirección principal');
+      console.error('Error al establecer dirección principal:', error);
+      toast.error('Error al establecer dirección principal');
     }
   };
 
   if (loading) {
     return (
-      <Container maxWidth="md" sx={{ mt: 4, display: 'flex', justifyContent: 'center' }}>
+      <Container maxWidth="lg" sx={{ mt: 4, display: 'flex', justifyContent: 'center' }}>
         <CircularProgress />
       </Container>
     );
   }
 
   return (
-    <Container maxWidth="md" sx={{ mt: 4, mb: 4 }}>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
-        <Typography variant="h4" component="h1">
-          Mis Direcciones
-        </Typography>
-        <Button
-          variant="contained"
-          startIcon={<AddIcon />}
-          onClick={() => handleOpenDialog()}
+    <Box sx={{ backgroundColor: '#fafafa', minHeight: '100vh', py: 4 }}>
+      <Container maxWidth="lg">
+        {/* Header */}
+        <Box
+          sx={{
+            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            borderRadius: 3,
+            p: 4,
+            mb: 4,
+            color: 'white'
+          }}
         >
-          Agregar Dirección
-        </Button>
-      </Box>
+          <Typography variant="h4" component="h1" fontWeight="bold" gutterBottom>
+            Mis Direcciones
+          </Typography>
+          <Typography variant="body1" sx={{ opacity: 0.9 }}>
+            Gestiona tus direcciones de envío
+          </Typography>
+        </Box>
 
-      {direcciones.length === 0 ? (
-        <Card>
-          <CardContent sx={{ textAlign: 'center', py: 4 }}>
-            <HomeIcon sx={{ fontSize: 64, color: 'text.secondary', mb: 2 }} />
+        {/* Botón Agregar */}
+        <Box sx={{ mb: 3 }}>
+          <Button
+            variant="contained"
+            startIcon={<AddIcon />}
+            onClick={() => handleOpenDialog()}
+            sx={{
+              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+              color: 'white',
+              fontWeight: 'bold',
+              px: 3,
+              py: 1.5,
+              borderRadius: 2,
+              textTransform: 'none',
+              boxShadow: '0 4px 12px rgba(102, 126, 234, 0.3)',
+              '&:hover': {
+                transform: 'translateY(-2px)',
+                boxShadow: '0 6px 16px rgba(102, 126, 234, 0.4)'
+              }
+            }}
+          >
+            Nueva Dirección
+          </Button>
+        </Box>
+
+        {/* Grid de Direcciones */}
+        {direcciones.length === 0 ? (
+          <Card
+            sx={{
+              borderRadius: 3,
+              boxShadow: '0 2px 12px rgba(0,0,0,0.08)',
+              textAlign: 'center',
+              py: 8
+            }}
+          >
+            <HomeIcon sx={{ fontSize: 80, color: 'text.secondary', opacity: 0.3, mb: 2 }} />
             <Typography variant="h6" color="text.secondary" gutterBottom>
               No tienes direcciones guardadas
             </Typography>
             <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
-              Agrega tu primera dirección para facilitar tus compras futuras
+              Agrega una dirección para facilitar tus compras
             </Typography>
             <Button
               variant="contained"
               startIcon={<AddIcon />}
               onClick={() => handleOpenDialog()}
+              sx={{
+                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+              }}
             >
-              Agregar Primera Dirección
+              Agregar Dirección
             </Button>
-          </CardContent>
-        </Card>
-      ) : (
-        <Grid container spacing={3}>
-          {direcciones.map((direccion) => (
-            <Grid item xs={12} md={6} key={direccion.id}>
-              <Card sx={{ height: '100%', position: 'relative' }}>
-                <CardContent>
-                  <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 2 }}>
-                    <Typography variant="h6" component="h3">
-                      {direccion.nombre}
-                      {direccion.esPrincipal && (
-                        <Chip
-                          icon={<StarIcon />}
-                          label="Principal"
-                          color="primary"
-                          size="small"
-                          sx={{ ml: 1 }}
-                        />
-                      )}
-                    </Typography>
-                    <Box>
-                      <IconButton
-                        size="small"
-                        onClick={() => handleOpenDialog(direccion)}
-                        color="primary"
-                      >
-                        <EditIcon />
-                      </IconButton>
-                      <IconButton
-                        size="small"
-                        onClick={() => handleDelete(direccion.id)}
-                        color="error"
-                      >
-                        <DeleteIcon />
-                      </IconButton>
-                    </Box>
-                  </Box>
+          </Card>
+        ) : (
+          <Grid container spacing={3}>
+            {direcciones.map((direccion, index) => (
+              <Grid item xs={12} md={6} key={direccion.id}>
+                <Fade in={true} timeout={300 + index * 100}>
+                  <Card
+                    sx={{
+                      borderRadius: 3,
+                      boxShadow: '0 2px 12px rgba(0,0,0,0.08)',
+                      border: '2px solid',
+                      borderColor: direccion.esPrincipal ? '#667eea' : 'transparent',
+                      transition: 'all 0.3s',
+                      '&:hover': {
+                        transform: 'translateY(-4px)',
+                        boxShadow: '0 8px 24px rgba(0,0,0,0.12)',
+                        borderColor: '#667eea'
+                      }
+                    }}
+                  >
+                    <CardContent sx={{ p: 3 }}>
+                      {/* Header con nombre y badges */}
+                      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 2 }}>
+                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flexWrap: 'wrap' }}>
+                          <Typography variant="h6" fontWeight="bold">
+                            {direccion.nombre}
+                          </Typography>
+                          {direccion.esPrincipal && (
+                            <Chip
+                              icon={<StarIcon sx={{ fontSize: 16 }} />}
+                              label="Principal"
+                              size="small"
+                              sx={{
+                                backgroundColor: 'rgba(255, 193, 7, 0.15)',
+                                color: '#ffa000',
+                                fontWeight: 600,
+                                border: '1px solid rgba(255, 193, 7, 0.3)'
+                              }}
+                            />
+                          )}
+                        </Box>
+                        <Box sx={{ display: 'flex', gap: 0.5 }}>
+                          <IconButton
+                            size="small"
+                            onClick={() => handleSetPrincipal(direccion.id)}
+                            disabled={direccion.esPrincipal}
+                            sx={{
+                              color: direccion.esPrincipal ? '#ffa000' : 'text.secondary',
+                              '&:hover': { backgroundColor: 'rgba(255, 193, 7, 0.1)' }
+                            }}
+                          >
+                            {direccion.esPrincipal ? <StarIcon /> : <StarBorderIcon />}
+                          </IconButton>
+                          <IconButton
+                            size="small"
+                            onClick={() => handleOpenDialog(direccion)}
+                            sx={{
+                              color: '#667eea',
+                              '&:hover': { backgroundColor: 'rgba(102, 126, 234, 0.1)' }
+                            }}
+                          >
+                            <EditIcon />
+                          </IconButton>
+                          <IconButton
+                            size="small"
+                            onClick={() => handleDeleteDireccion(direccion.id)}
+                            sx={{
+                              color: 'error.main',
+                              '&:hover': { backgroundColor: 'rgba(244, 67, 54, 0.1)' }
+                            }}
+                          >
+                            <DeleteIcon />
+                          </IconButton>
+                        </Box>
+                      </Box>
 
-                  <Typography variant="body2" color="text.secondary" gutterBottom>
-                    <strong>Dirección:</strong> {direccion.direccion}
-                  </Typography>
-                  
-                  <Typography variant="body2" color="text.secondary" gutterBottom>
-                    <strong>Ciudad:</strong> {direccion.ciudad}
-                  </Typography>
-                  
-                  <Typography variant="body2" color="text.secondary" gutterBottom>
-                    <strong>Sector:</strong> {direccion.sector}
-                  </Typography>
+                      <Divider sx={{ mb: 2 }} />
 
-                  {direccion.telefono && (
-                    <Typography variant="body2" color="text.secondary" gutterBottom>
-                      <strong>Teléfono:</strong> {direccion.telefono}
-                    </Typography>
-                  )}
+                      {/* Detalles */}
+                      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
+                        <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 1 }}>
+                          <LocationOn sx={{ fontSize: 20, color: '#667eea', mt: 0.3 }} />
+                          <Box>
+                            <Typography variant="body2" color="text.secondary" sx={{ fontSize: '0.75rem' }}>
+                              Dirección
+                            </Typography>
+                            <Typography variant="body1" fontWeight={500}>
+                              {direccion.direccion}
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary">
+                              {direccion.sector}, {direccion.ciudad}
+                            </Typography>
+                          </Box>
+                        </Box>
 
-                  {direccion.referencias && (
-                    <Typography variant="body2" color="text.secondary" gutterBottom>
-                      <strong>Referencias:</strong> {direccion.referencias}
-                    </Typography>
-                  )}
+                        {direccion.telefono && (
+                          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                            <Phone sx={{ fontSize: 20, color: '#4facfe' }} />
+                            <Box>
+                              <Typography variant="body2" color="text.secondary" sx={{ fontSize: '0.75rem' }}>
+                                Teléfono
+                              </Typography>
+                              <Typography variant="body1" fontWeight={500}>
+                                {direccion.telefono}
+                              </Typography>
+                            </Box>
+                          </Box>
+                        )}
 
-                  {!direccion.esPrincipal && (
-                    <Box sx={{ mt: 2 }}>
-                      <Button
-                        size="small"
-                        variant="outlined"
-                        startIcon={<StarIcon />}
-                        onClick={() => handleSetPrincipal(direccion.id)}
-                      >
-                        Marcar como Principal
-                      </Button>
-                    </Box>
-                  )}
-                </CardContent>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
-      )}
-
-      {/* Dialog para agregar/editar dirección */}
-      <Dialog open={openDialog} onClose={handleCloseDialog} maxWidth="sm" fullWidth>
-        <DialogTitle>
-          {editingDireccion ? 'Editar Dirección' : 'Agregar Nueva Dirección'}
-        </DialogTitle>
-        <DialogContent>
-          <Grid container spacing={2} sx={{ mt: 1 }}>
-            <Grid item xs={12}>
-              <TextField
-                fullWidth
-                label="Nombre de la Dirección"
-                value={formData.nombre}
-                onChange={(e) => setFormData({ ...formData, nombre: e.target.value })}
-                placeholder="Ej: Casa, Trabajo, Casa de mamá"
-                required
-              />
-            </Grid>
-            
-            <Grid item xs={12}>
-              <TextField
-                fullWidth
-                label="Dirección Completa"
-                value={formData.direccion}
-                onChange={(e) => setFormData({ ...formData, direccion: e.target.value })}
-                multiline
-                rows={2}
-                placeholder="Ej: Av. 6 de Diciembre N24-253 y Lizardo García"
-                required
-              />
-            </Grid>
-
-            <Grid item xs={12} md={6}>
-              <TextField
-                fullWidth
-                label="Ciudad"
-                value={formData.ciudad}
-                onChange={(e) => setFormData({ ...formData, ciudad: e.target.value })}
-                required
-              />
-            </Grid>
-
-            <Grid item xs={12} md={6}>
-              <FormControl fullWidth required>
-                <InputLabel>Sector</InputLabel>
-                <Select
-                  value={formData.sector}
-                  onChange={(e) => setFormData({ ...formData, sector: e.target.value })}
-                  label="Sector"
-                >
-                  {SECTORES_QUITO.map((sector) => (
-                    <MenuItem key={sector} value={sector}>
-                      {sector}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </Grid>
-
-            <Grid item xs={12} md={6}>
-              <TextField
-                fullWidth
-                label="Teléfono de Contacto"
-                value={formData.telefono}
-                onChange={(e) => setFormData({ ...formData, telefono: e.target.value })}
-                placeholder="Ej: 0987654321"
-              />
-            </Grid>
-
-            <Grid item xs={12}>
-              <TextField
-                fullWidth
-                label="Referencias"
-                value={formData.referencias}
-                onChange={(e) => setFormData({ ...formData, referencias: e.target.value })}
-                multiline
-                rows={2}
-                placeholder="Ej: Casa blanca con portón negro, frente al parque"
-              />
-            </Grid>
-
-            <Grid item xs={12}>
-              <FormControlLabel
-                control={
-                  <Switch
-                    checked={formData.esPrincipal}
-                    onChange={(e) => setFormData({ ...formData, esPrincipal: e.target.checked })}
-                  />
-                }
-                label="Marcar como dirección principal"
-              />
-            </Grid>
+                        {direccion.referencias && (
+                          <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 1 }}>
+                            <Info sx={{ fontSize: 20, color: '#43e97b', mt: 0.3 }} />
+                            <Box>
+                              <Typography variant="body2" color="text.secondary" sx={{ fontSize: '0.75rem' }}>
+                                Referencias
+                              </Typography>
+                              <Typography variant="body2">
+                                {direccion.referencias}
+                              </Typography>
+                            </Box>
+                          </Box>
+                        )}
+                      </Box>
+                    </CardContent>
+                  </Card>
+                </Fade>
+              </Grid>
+            ))}
           </Grid>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCloseDialog}>
-            Cancelar
-          </Button>
-          <Button 
-            onClick={handleSubmit} 
-            variant="contained"
-            disabled={!formData.nombre || !formData.direccion || !formData.sector}
+        )}
+
+        {/* Dialog Agregar/Editar */}
+        <Dialog
+          open={openDialog}
+          onClose={handleCloseDialog}
+          maxWidth="sm"
+          fullWidth
+          PaperProps={{
+            sx: {
+              borderRadius: 3,
+              boxShadow: '0 8px 32px rgba(0,0,0,0.12)'
+            }
+          }}
+        >
+          <DialogTitle
+            sx={{
+              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+              color: 'white',
+              fontWeight: 'bold'
+            }}
           >
-            {editingDireccion ? 'Actualizar' : 'Guardar'}
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </Container>
+            {editingDireccion ? 'Editar Dirección' : 'Nueva Dirección'}
+          </DialogTitle>
+          <DialogContent sx={{ mt: 2 }}>
+            <TextField
+              fullWidth
+              label="Nombre de la dirección"
+              value={formData.nombre}
+              onChange={(e) => setFormData({ ...formData, nombre: e.target.value })}
+              margin="normal"
+              placeholder="Ej: Casa, Oficina, etc."
+            />
+            <TextField
+              fullWidth
+              label="Dirección completa"
+              value={formData.direccion}
+              onChange={(e) => setFormData({ ...formData, direccion: e.target.value })}
+              margin="normal"
+              multiline
+              rows={2}
+              placeholder="Calle, número, edificio..."
+            />
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  fullWidth
+                  label="Ciudad"
+                  value={formData.ciudad}
+                  onChange={(e) => setFormData({ ...formData, ciudad: e.target.value })}
+                  margin="normal"
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <FormControl fullWidth margin="normal">
+                  <InputLabel>Sector</InputLabel>
+                  <Select
+                    value={formData.sector}
+                    onChange={(e) => setFormData({ ...formData, sector: e.target.value })}
+                    label="Sector"
+                  >
+                    {SECTORES_QUITO.map((sector) => (
+                      <MenuItem key={sector} value={sector}>
+                        {sector}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Grid>
+            </Grid>
+            <TextField
+              fullWidth
+              label="Teléfono de contacto"
+              value={formData.telefono}
+              onChange={(e) => setFormData({ ...formData, telefono: e.target.value })}
+              margin="normal"
+              placeholder="0999999999"
+            />
+            <TextField
+              fullWidth
+              label="Referencias"
+              value={formData.referencias}
+              onChange={(e) => setFormData({ ...formData, referencias: e.target.value })}
+              margin="normal"
+              multiline
+              rows={2}
+              placeholder="Casa de color azul, frente al parque..."
+            />
+            <FormControlLabel
+              control={
+                <Switch
+                  checked={formData.esPrincipal}
+                  onChange={(e) => setFormData({ ...formData, esPrincipal: e.target.checked })}
+                  sx={{
+                    '& .MuiSwitch-switchBase.Mui-checked': {
+                      color: '#667eea'
+                    },
+                    '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
+                      backgroundColor: '#667eea'
+                    }
+                  }}
+                />
+              }
+              label="Establecer como dirección principal"
+              sx={{ mt: 2 }}
+            />
+          </DialogContent>
+          <DialogActions sx={{ p: 3 }}>
+            <Button onClick={handleCloseDialog} sx={{ textTransform: 'none' }}>
+              Cancelar
+            </Button>
+            <Button
+              onClick={handleSaveDireccion}
+              variant="contained"
+              sx={{
+                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                textTransform: 'none',
+                fontWeight: 'bold'
+              }}
+            >
+              {editingDireccion ? 'Actualizar' : 'Guardar'}
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </Container>
+    </Box>
   );
 };
 

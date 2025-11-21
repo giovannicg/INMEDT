@@ -84,12 +84,20 @@ public class FavoritoService {
     private FavoritoResponse convertToResponse(Favorito favorito) {
         Producto producto = favorito.getProducto();
         
+        // Construir URL de imagen si existe
+        String imagenUrl = producto.getImagenPrincipal() != null 
+            ? "/uploads/productos/" + producto.getImagenPrincipal() 
+            : null;
+        String imagenThumbnailUrl = producto.getImagenThumbnail() != null 
+            ? "/uploads/productos/" + producto.getImagenThumbnail() 
+            : null;
+        
         FavoritoResponse response = new FavoritoResponse(
                 favorito.getId(),
                 producto.getId(),
                 producto.getNombre(),
                 producto.getDescripcion(),
-                null, // imagen - no disponible en el modelo actual
+                imagenUrl,
                 producto.getActivo(),
                 favorito.getCreatedAt()
         );
@@ -99,7 +107,7 @@ public class FavoritoService {
                 producto.getId(),
                 producto.getNombre(),
                 producto.getDescripcion(),
-                null, // imagen - no disponible en el modelo actual
+                imagenThumbnailUrl,
                 producto.getActivo(),
                 producto.getCategoria().getNombre()
         );

@@ -20,7 +20,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/admin/pedidos")
 @CrossOrigin(origins = "*")
-@PreAuthorize("hasRole('ADMIN')")
+@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 public class AdminPedidoController {
     
     @Autowired

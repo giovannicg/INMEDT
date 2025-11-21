@@ -18,7 +18,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/direcciones")
 @CrossOrigin(origins = "*")
-@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+@PreAuthorize("hasAuthority('ROLE_CLIENTE') or hasAuthority('ROLE_ADMIN')")
 public class DireccionController {
 
     @Autowired

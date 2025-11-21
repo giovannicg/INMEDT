@@ -16,7 +16,7 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/admin/categorias")
-@PreAuthorize("hasRole('ADMIN')")
+@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 @CrossOrigin(origins = "*")
 public class AdminCategoriaController {
 

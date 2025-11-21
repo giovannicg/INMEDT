@@ -2,26 +2,35 @@ package com.inmedt.ecommerce.controller;
 
 import com.inmedt.ecommerce.dto.*;
 import com.inmedt.ecommerce.service.AdminProductoService;
+import com.inmedt.ecommerce.service.ImageService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/admin/productos")
 @CrossOrigin(origins = "*")
-@PreAuthorize("hasRole('ADMIN')")
+@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 public class AdminProductoController {
     
     @Autowired
     private AdminProductoService adminProductoService;
+    
+    @Autowired
+    private ImageService imageService;
     
     // Gestión de Productos
     @GetMapping
@@ -187,6 +196,81 @@ public class AdminProductoController {
             return ResponseEntity.ok("Unidad de venta eliminada exitosamente");
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+    
+    // Gestión de Imágenes
+    @PostMapping("/{id}/imagen-principal")
+    public ResponseEntity<?> uploadImagenPrincipal(
+            @PathVariable Long id,
+            @RequestParam("imagen") MultipartFile file) {
+        try {
+            String filename = imageService.saveProductImage(file, true);
+            String thumbnailName = imageService.getThumbnailName(filename);
+            
+            ProductoResponse producto = adminProductoService.updateImagenPrincipal(id, filename, thumbnailName);
+            
+            Map<String, Object> response = new HashMap<>();
+            response.put("success", true);
+            response.put("imagenPrincipal", producto.getImagenPrincipal());
+            response.put("imagenThumbnail", producto.getImagenThumbnail());
+            
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            Map<String, Object> error = new HashMap<>();
+            error.put("success", false);
+            error.put("error", e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+        }
+    }
+    
+    @PostMapping("/{id}/imagenes-galeria")
+    public ResponseEntity<?> uploadImagenGaleria(
+            @PathVariable Long id,
+            @RequestParam("imagen") MultipartFile file) {
+        try {
+            String filename = imageService.saveProductImage(file, false);
+            ProductoResponse producto = adminProductoService.addImagenGaleria(id, filename);
+            
+            Map<String, Object> response = new HashMap<>();
+            response.put("success", true);
+            response.put("imagenesGaleria", producto.getImagenesGaleria());
+            
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            Map<String, Object> error = new HashMap<>();
+            error.put("success", false);
+            error.put("error", e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+        }
+    }
+    
+    @DeleteMapping("/{id}/imagen-principal")
+    public ResponseEntity<?> deleteImagenPrincipal(@PathVariable Long id) {
+        try {
+            adminProductoService.deleteImagenPrincipal(id);
+            return ResponseEntity.ok(Map.of("success", true, "message", "Imagen eliminada exitosamente"));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(Map.of("success", false, "error", e.getMessage()));
+        }
+    }
+    
+    @DeleteMapping("/{productoId}/imagenes-galeria")
+    public ResponseEntity<?> deleteImagenGaleria(
+            @PathVariable Long productoId,
+            @RequestParam("filename") String filename) {
+        try {
+            ProductoResponse producto = adminProductoService.deleteImagenGaleria(productoId, filename);
+            
+            Map<String, Object> response = new HashMap<>();
+            response.put("success", true);
+            response.put("imagenesGaleria", producto.getImagenesGaleria());
+            
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(Map.of("success", false, "error", e.getMessage()));
         }
     }
 }

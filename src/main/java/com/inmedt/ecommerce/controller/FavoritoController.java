@@ -17,7 +17,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/favoritos")
 @CrossOrigin(origins = "*")
-@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+@PreAuthorize("hasAuthority('ROLE_CLIENTE') or hasAuthority('ROLE_ADMIN')")
 public class FavoritoController {
 
     @Autowired

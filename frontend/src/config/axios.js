@@ -1,8 +1,13 @@
 import axios from 'axios';
 
-// Configurar la URL base de axios - FORZAR localhost para desarrollo
-const baseURL = 'http://localhost:8085/api';
-console.log('🔧 Axios baseURL FORZADO:', baseURL);
+// Configurar la URL base de axios desde variable de entorno o fallback a localhost
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8085';
+const baseURL = `${API_URL}/api`;
+console.log('🔧 Axios baseURL:', baseURL);
+
+// URL para imágenes (CON /api porque el context path es /api)
+export const API_BASE_URL = API_URL;
+export const IMAGES_URL = `${API_URL}/api`;
 
 // Crear instancia de axios con configuración personalizada
 const axiosInstance = axios.create({

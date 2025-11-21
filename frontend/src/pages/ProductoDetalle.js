@@ -3,38 +3,62 @@ import {
   Container,
   Typography,
   Box,
-  Card,
-  CardContent,
   Button,
   Grid,
   Chip,
-  TextField,
-  Alert,
   CircularProgress,
-  Divider,
   IconButton,
-  Tooltip
+  Breadcrumbs,
+  Link,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  Rating,
+  Avatar,
+  Divider,
+  useTheme,
+  useMediaQuery,
+  Skeleton
 } from '@mui/material';
+import {
+  NavigateNext,
+  Favorite as FavoriteIcon,
+  FavoriteBorder as FavoriteBorderIcon,
+  ShoppingCart,
+  LocalShipping,
+  VerifiedUser,
+  ExpandMore,
+  Add,
+  Remove,
+  ArrowBack
+} from '@mui/icons-material';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 import { useFavoritos } from '../context/FavoritosContext';
 import { toast } from 'react-toastify';
-import axios from '../config/axios';
-import { Favorite as FavoriteIcon, FavoriteBorder as FavoriteBorderIcon } from '@mui/icons-material';
+import axios, { IMAGES_URL } from '../config/axios';
 
 const ProductoDetalle = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const { user } = useAuth();
   const { addToCart } = useCart();
   const { toggleFavorito, isFavorito } = useFavoritos();
+  
   const [producto, setProducto] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectedVariante, setSelectedVariante] = useState(null);
   const [selectedUnidad, setSelectedUnidad] = useState(null);
   const [cantidad, setCantidad] = useState(1);
   const [addingToCart, setAddingToCart] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(0);
+
+  useEffect(() => {
+    fetchProducto();
+  }, [id]);
 
   const fetchProducto = async () => {
     try {
@@ -59,25 +83,13 @@ const ProductoDetalle = () => {
     }
   };
 
-  useEffect(() => {
-    fetchProducto();
-  }, [id]);
-
   const handleVarianteChange = (variante) => {
-    console.log('🔄 Variante seleccionada:', variante);
     setSelectedVariante(variante);
     if (variante.unidadesVenta && variante.unidadesVenta.length > 0) {
       setSelectedUnidad(variante.unidadesVenta[0]);
-      console.log('🔄 Primera unidad auto-seleccionada:', variante.unidadesVenta[0]);
     } else {
       setSelectedUnidad(null);
     }
-  };
-
-  const handleUnidadChange = (unidad, event) => {
-    event.stopPropagation(); // Evitar que se propague al Card de la variante
-    setSelectedUnidad(unidad);
-    console.log('🔄 Unidad seleccionada:', unidad);
   };
 
   const handleAddToCart = async () => {
@@ -119,191 +131,498 @@ const ProductoDetalle = () => {
       navigate('/login');
       return;
     }
-
     await toggleFavorito(producto.id);
   };
+
+  const images = [
+    producto?.imagenPrincipal,
+    ...(producto?.imagenesGaleria || [])
+  ].filter(Boolean);
 
   if (loading) {
     return (
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-          <CircularProgress />
-        </Box>
+        <Grid container spacing={4}>
+          <Grid item xs={12} md={6}>
+            <Skeleton variant="rectangular" height={500} sx={{ borderRadius: 3 }} />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Skeleton width="60%" height={40} sx={{ mb: 2 }} />
+            <Skeleton width="100%" height={30} sx={{ mb: 2 }} />
+            <Skeleton width="80%" height={60} />
+          </Grid>
+        </Grid>
       </Container>
     );
   }
 
   if (!producto) {
     return (
-      <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-        <Alert severity="error">Producto no encontrado</Alert>
+      <Container maxWidth="lg" sx={{ mt: 4, mb: 4, textAlign: 'center' }}>
+        <Typography variant="h5" gutterBottom>
+          Producto no encontrado
+        </Typography>
+        <Button
+          variant="contained"
+          startIcon={<ArrowBack />}
+          onClick={() => navigate('/productos')}
+          sx={{ mt: 2 }}
+        >
+          Volver a Productos
+        </Button>
       </Container>
     );
   }
 
   return (
-    <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-      <Grid container spacing={4}>
-        <Grid item xs={12} md={8}>
-          <Card>
-            <CardContent>
-              <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 2 }}>
-                <Typography variant="h4" component="h1">
-                  {producto.nombre}
-                </Typography>
-                <Tooltip title={isFavorito(producto.id) ? "Remover de favoritos" : "Agregar a favoritos"}>
-                  <IconButton
-                    onClick={handleToggleFavorito}
-                    color={isFavorito(producto.id) ? "error" : "default"}
-                    size="large"
+    <Box sx={{ backgroundColor: '#fafafa', minHeight: '100vh' }}>
+      <Container maxWidth="lg" sx={{ pt: 4, pb: 8 }}>
+        {/* Breadcrumbs */}
+        <Breadcrumbs
+          separator={<NavigateNext fontSize="small" />}
+          sx={{ mb: 3 }}
+        >
+          <Link
+            component="button"
+            variant="body2"
+            onClick={() => navigate('/')}
+            sx={{
+              color: 'text.secondary',
+              textDecoration: 'none',
+              '&:hover': { color: '#667eea' }
+            }}
+          >
+            Inicio
+          </Link>
+          <Link
+            component="button"
+            variant="body2"
+            onClick={() => navigate('/productos')}
+            sx={{
+              color: 'text.secondary',
+              textDecoration: 'none',
+              '&:hover': { color: '#667eea' }
+            }}
+          >
+            Productos
+          </Link>
+          <Typography variant="body2" color="text.primary" fontWeight={600}>
+            {producto.nombre}
+          </Typography>
+        </Breadcrumbs>
+
+        <Grid container spacing={4}>
+          {/* Galería de Imágenes */}
+          <Grid item xs={12} md={6}>
+            <Box sx={{ position: 'sticky', top: 100 }}>
+              {/* Imagen Principal */}
+              <Box
+                sx={{
+                  backgroundColor: 'white',
+                  borderRadius: 3,
+                  overflow: 'hidden',
+                  mb: 2,
+                  boxShadow: '0 2px 12px rgba(0,0,0,0.08)',
+                  aspectRatio: '1/1'
+                }}
+              >
+                {images.length > 0 ? (
+                  <img
+                    src={`${IMAGES_URL}${images[selectedImage]}`}
+                    alt={producto.nombre}
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover'
+                    }}
+                  />
+                ) : (
+                  <Box
+                    sx={{
+                      width: '100%',
+                      height: '100%',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      backgroundColor: '#f5f5f5'
+                    }}
                   >
-                    {isFavorito(producto.id) ? <FavoriteIcon /> : <FavoriteBorderIcon />}
-                  </IconButton>
-                </Tooltip>
+                    <ShoppingCart sx={{ fontSize: 80, color: 'text.secondary', opacity: 0.3 }} />
+                  </Box>
+                )}
               </Box>
-              
-              <Box sx={{ mb: 2 }}>
-                <Chip label={producto.categoriaNombre} color="primary" sx={{ mr: 1 }} />
-                <Chip label={producto.marca} variant="outlined" />
-              </Box>
-              
-              <Typography variant="body1" paragraph>
-                {producto.descripcion}
-              </Typography>
-              
-              <Divider sx={{ my: 3 }} />
-              
-              <Typography variant="h6" gutterBottom>
-                Variantes Disponibles
-              </Typography>
-              
-              {producto.variantes && producto.variantes.length > 0 ? (
-                <Box sx={{ mb: 3 }}>
-                  {producto.variantes.map((variante) => (
-                    <Card
-                      key={variante.id}
+
+              {/* Miniaturas */}
+              {images.length > 1 && (
+                <Box sx={{ display: 'flex', gap: 2, overflowX: 'auto' }}>
+                  {images.map((img, index) => (
+                    <Box
+                      key={index}
+                      onClick={() => setSelectedImage(index)}
                       sx={{
-                        mb: 2,
+                        minWidth: 80,
+                        height: 80,
+                        borderRadius: 2,
+                        overflow: 'hidden',
                         cursor: 'pointer',
-                        border: selectedVariante?.id === variante.id ? 2 : 1,
-                        borderColor: selectedVariante?.id === variante.id ? 'primary.main' : 'grey.300'
+                        border: '3px solid',
+                        borderColor: selectedImage === index ? '#667eea' : 'transparent',
+                        transition: 'all 0.2s',
+                        '&:hover': {
+                          borderColor: '#667eea',
+                          opacity: 0.8
+                        }
                       }}
-                      onClick={() => handleVarianteChange(variante)}
                     >
-                      <CardContent>
-                        <Typography variant="h6" gutterBottom>
-                          {variante.nombre}
-                        </Typography>
-                        {variante.descripcion && (
-                          <Typography variant="body2" color="text.secondary" gutterBottom>
-                            {variante.descripcion}
-                          </Typography>
-                        )}
-                        
-                        {selectedVariante?.id === variante.id && variante.unidadesVenta && (
-                          <Box sx={{ mt: 2 }}>
-                            <Typography variant="subtitle2" gutterBottom>
-                              Unidades de Venta:
-                            </Typography>
-                            <Grid container spacing={1}>
-                              {variante.unidadesVenta.map((unidad) => (
-                                <Grid item xs={12} sm={6} md={4} key={unidad.id}>
-                                  <Card
-                                    sx={{
-                                      cursor: 'pointer',
-                                      border: selectedUnidad?.id === unidad.id ? 2 : 1,
-                                      borderColor: selectedUnidad?.id === unidad.id ? 'primary.main' : 'grey.300',
-                                      backgroundColor: selectedUnidad?.id === unidad.id ? 'primary.50' : 'white'
-                                    }}
-                                    onClick={(event) => handleUnidadChange(unidad, event)}
-                                  >
-                                    <CardContent sx={{ p: 2 }}>
-                                      <Typography variant="subtitle2" gutterBottom>
-                                        {unidad.descripcion}
-                                      </Typography>
-                                      <Typography variant="h6" color="primary">
-                                        ${unidad.precio.toFixed(2)}
-                                      </Typography>
-                                      <Typography variant="caption" color="text.secondary">
-                                        Stock: {unidad.stock}
-                                      </Typography>
-                                    </CardContent>
-                                  </Card>
-                                </Grid>
-                              ))}
-                            </Grid>
-                          </Box>
-                        )}
-                      </CardContent>
-                    </Card>
+                      <img
+                        src={`${IMAGES_URL}${img}`}
+                        alt={`Vista ${index + 1}`}
+                        style={{
+                          width: '100%',
+                          height: '100%',
+                          objectFit: 'cover'
+                        }}
+                      />
+                    </Box>
                   ))}
                 </Box>
-              ) : (
-                <Alert severity="info">
-                  No hay variantes disponibles para este producto
-                </Alert>
               )}
-            </CardContent>
-          </Card>
-        </Grid>
+            </Box>
+          </Grid>
 
-        <Grid item xs={12} md={4}>
-          <Card>
-            <CardContent>
-              <Typography variant="h6" gutterBottom>
-                Agregar al Carrito
-              </Typography>
-              
-              {selectedUnidad ? (
-                <>
-                  <Box sx={{ mb: 2 }}>
-                    <Typography variant="subtitle1" gutterBottom>
-                      {selectedUnidad.descripcion}
-                    </Typography>
-                    <Typography variant="h5" color="primary" gutterBottom>
-                      ${selectedUnidad.precio.toFixed(2)}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      Stock disponible: {selectedUnidad.stock}
-                    </Typography>
-                  </Box>
-                  
-                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 3 }}>
-                    <Typography variant="body1">Cantidad:</Typography>
-                    <TextField
-                      type="number"
-                      value={cantidad}
-                      onChange={(e) => setCantidad(Math.max(1, parseInt(e.target.value) || 1))}
-                      inputProps={{ min: 1, max: selectedUnidad.stock }}
-                      sx={{ width: 80 }}
-                    />
-                  </Box>
-                  
-                  <Button
-                    fullWidth
-                    variant="contained"
-                    size="large"
-                    onClick={handleAddToCart}
-                    disabled={addingToCart || cantidad > selectedUnidad.stock}
-                    sx={{ mb: 2 }}
-                  >
-                    {addingToCart ? <CircularProgress size={24} /> : 'Agregar al Carrito'}
-                  </Button>
-                  
-                  <Typography variant="h6" color="primary" align="center">
-                    Total: ${(selectedUnidad.precio * cantidad).toFixed(2)}
-                  </Typography>
-                </>
-              ) : (
-                <Alert severity="warning">
-                  Selecciona una variante y unidad de venta
-                </Alert>
+          {/* Información del Producto */}
+          <Grid item xs={12} md={6}>
+            <Box
+              sx={{
+                backgroundColor: 'white',
+                borderRadius: 3,
+                p: { xs: 3, md: 4 },
+                boxShadow: '0 2px 12px rgba(0,0,0,0.08)'
+              }}
+            >
+              {/* Badge NEW */}
+              {producto.activo && (
+                <Chip
+                  label="DISPONIBLE"
+                  size="small"
+                  sx={{
+                    backgroundColor: 'rgba(67, 233, 123, 0.15)',
+                    color: '#43e97b',
+                    fontWeight: 700,
+                    mb: 2
+                  }}
+                />
               )}
-            </CardContent>
-          </Card>
+
+              {/* Título y Favorito */}
+              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 2 }}>
+                <Typography
+                  variant={isMobile ? 'h5' : 'h4'}
+                  component="h1"
+                  fontWeight="bold"
+                  sx={{ pr: 2, lineHeight: 1.2 }}
+                >
+                  {producto.nombre}
+                </Typography>
+                <IconButton
+                  onClick={handleToggleFavorito}
+                  sx={{
+                    backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                    '&:hover': {
+                      backgroundColor: 'rgba(102, 126, 234, 0.2)',
+                      transform: 'scale(1.1)'
+                    }
+                  }}
+                >
+                  {isFavorito(producto.id) ? (
+                    <FavoriteIcon sx={{ color: '#f093fb' }} />
+                  ) : (
+                    <FavoriteBorderIcon sx={{ color: '#667eea' }} />
+                  )}
+                </IconButton>
+              </Box>
+
+              {/* Categoría y Marca */}
+              <Box sx={{ display: 'flex', gap: 1, mb: 3 }}>
+                {producto.categoriaNombre && (
+                  <Chip
+                    label={producto.categoriaNombre}
+                    size="small"
+                    sx={{
+                      backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                      color: '#667eea',
+                      fontWeight: 600
+                    }}
+                  />
+                )}
+                {producto.marca && (
+                  <Chip
+                    label={producto.marca}
+                    size="small"
+                    variant="outlined"
+                    sx={{ fontWeight: 600 }}
+                  />
+                )}
+              </Box>
+
+              {/* Descripción */}
+              {producto.descripcion && (
+                <Typography
+                  variant="body1"
+                  color="text.secondary"
+                  sx={{ mb: 4, lineHeight: 1.7 }}
+                >
+                  {producto.descripcion}
+                </Typography>
+              )}
+
+              <Divider sx={{ my: 3 }} />
+
+              {/* Variantes */}
+              {producto.variantes && producto.variantes.length > 0 && (
+                <Box sx={{ mb: 3 }}>
+                  <Typography variant="h6" fontWeight="bold" gutterBottom>
+                    Selecciona una presentación
+                  </Typography>
+                  <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+                    {producto.variantes.map((variante) => (
+                      <Chip
+                        key={variante.id}
+                        label={variante.nombre}
+                        onClick={() => handleVarianteChange(variante)}
+                        sx={{
+                          fontSize: '0.95rem',
+                          py: 2.5,
+                          px: 2,
+                          fontWeight: 600,
+                          cursor: 'pointer',
+                          transition: 'all 0.2s',
+                          ...(selectedVariante?.id === variante.id
+                            ? {
+                                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                                color: 'white',
+                                '&:hover': {
+                                  background: 'linear-gradient(135deg, #764ba2 0%, #667eea 100%)'
+                                }
+                              }
+                            : {
+                                backgroundColor: 'rgba(0,0,0,0.04)',
+                                '&:hover': {
+                                  backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                                  transform: 'translateY(-2px)'
+                                }
+                              })
+                        }}
+                      />
+                    ))}
+                  </Box>
+                </Box>
+              )}
+
+              {/* Unidades de Venta */}
+              {selectedVariante && selectedVariante.unidadesVenta && selectedVariante.unidadesVenta.length > 0 && (
+                <Box sx={{ mb: 4 }}>
+                  <Typography variant="h6" fontWeight="bold" gutterBottom>
+                    Selecciona cantidad
+                  </Typography>
+                  <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                    {selectedVariante.unidadesVenta.map((unidad) => (
+                      <Box
+                        key={unidad.id}
+                        onClick={() => setSelectedUnidad(unidad)}
+                        sx={{
+                          p: 2,
+                          borderRadius: 2,
+                          border: '2px solid',
+                          borderColor: selectedUnidad?.id === unidad.id ? '#667eea' : 'divider',
+                          cursor: 'pointer',
+                          transition: 'all 0.2s',
+                          backgroundColor: selectedUnidad?.id === unidad.id
+                            ? 'rgba(102, 126, 234, 0.05)'
+                            : 'transparent',
+                          '&:hover': {
+                            borderColor: '#667eea',
+                            transform: 'translateX(5px)',
+                            boxShadow: '0 4px 12px rgba(102, 126, 234, 0.15)'
+                          }
+                        }}
+                      >
+                        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                          <Box>
+                            <Typography variant="body1" fontWeight="bold">
+                              {unidad.descripcion}
+                            </Typography>
+                            <Typography variant="caption" color="text.secondary">
+                              SKU: {unidad.sku}
+                            </Typography>
+                          </Box>
+                          <Box sx={{ textAlign: 'right' }}>
+                            <Typography variant="h6" fontWeight="bold" color="primary">
+                              ${unidad.precio?.toFixed(2)}
+                            </Typography>
+                            <Typography variant="caption" color={unidad.stock > 10 ? 'success.main' : 'warning.main'}>
+                              Stock: {unidad.stock}
+                            </Typography>
+                          </Box>
+                        </Box>
+                      </Box>
+                    ))}
+                  </Box>
+                </Box>
+              )}
+
+              {/* Cantidad */}
+              {selectedUnidad && (
+                <Box sx={{ mb: 3 }}>
+                  <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
+                    Cantidad
+                  </Typography>
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        border: '2px solid',
+                        borderColor: 'divider',
+                        borderRadius: 2,
+                        overflow: 'hidden'
+                      }}
+                    >
+                      <IconButton
+                        onClick={() => setCantidad(Math.max(1, cantidad - 1))}
+                        disabled={cantidad <= 1}
+                        sx={{ borderRadius: 0 }}
+                      >
+                        <Remove />
+                      </IconButton>
+                      <Typography
+                        sx={{
+                          minWidth: 60,
+                          textAlign: 'center',
+                          fontWeight: 'bold',
+                          fontSize: '1.1rem'
+                        }}
+                      >
+                        {cantidad}
+                      </Typography>
+                      <IconButton
+                        onClick={() => setCantidad(Math.min(selectedUnidad.stock, cantidad + 1))}
+                        disabled={cantidad >= selectedUnidad.stock}
+                        sx={{ borderRadius: 0 }}
+                      >
+                        <Add />
+                      </IconButton>
+                    </Box>
+                    <Typography variant="body2" color="text.secondary">
+                      Máximo: {selectedUnidad.stock}
+                    </Typography>
+                  </Box>
+                </Box>
+              )}
+
+              {/* Botón Agregar al Carrito */}
+              <Button
+                fullWidth
+                variant="contained"
+                size="large"
+                startIcon={addingToCart ? <CircularProgress size={20} color="inherit" /> : <ShoppingCart />}
+                onClick={handleAddToCart}
+                disabled={!selectedUnidad || addingToCart || selectedUnidad?.stock === 0}
+                sx={{
+                  py: 2,
+                  fontSize: '1.1rem',
+                  fontWeight: 'bold',
+                  textTransform: 'none',
+                  borderRadius: 2,
+                  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                  boxShadow: '0 4px 16px rgba(102, 126, 234, 0.4)',
+                  transition: 'all 0.2s',
+                  '&:hover': {
+                    transform: 'translateY(-2px)',
+                    boxShadow: '0 6px 20px rgba(102, 126, 234, 0.5)'
+                  },
+                  '&:disabled': {
+                    background: 'linear-gradient(135deg, #ccc 0%, #999 100%)'
+                  }
+                }}
+              >
+                {addingToCart ? 'Agregando...' : 'Agregar al Carrito'}
+              </Button>
+
+              {/* Beneficios */}
+              <Box sx={{ mt: 4 }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
+                  <LocalShipping sx={{ color: '#667eea' }} />
+                  <Box>
+                    <Typography variant="body2" fontWeight="bold">
+                      Envío Rápido
+                    </Typography>
+                    <Typography variant="caption" color="text.secondary">
+                      Entrega en 24-48 horas
+                    </Typography>
+                  </Box>
+                </Box>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                  <VerifiedUser sx={{ color: '#43e97b' }} />
+                  <Box>
+                    <Typography variant="body2" fontWeight="bold">
+                      Producto Certificado
+                    </Typography>
+                    <Typography variant="caption" color="text.secondary">
+                      Calidad garantizada
+                    </Typography>
+                  </Box>
+                </Box>
+              </Box>
+            </Box>
+
+            {/* Información Adicional */}
+            <Box sx={{ mt: 3 }}>
+              <Accordion
+                sx={{
+                  borderRadius: 2,
+                  '&:before': { display: 'none' },
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.06)'
+                }}
+              >
+                <AccordionSummary expandIcon={<ExpandMore />}>
+                  <Typography fontWeight="bold">Detalles del Producto</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Typography variant="body2" color="text.secondary">
+                    {producto.descripcion || 'Información detallada del producto próximamente.'}
+                  </Typography>
+                </AccordionDetails>
+              </Accordion>
+
+              <Accordion
+                sx={{
+                  mt: 1,
+                  borderRadius: 2,
+                  '&:before': { display: 'none' },
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.06)'
+                }}
+              >
+                <AccordionSummary expandIcon={<ExpandMore />}>
+                  <Typography fontWeight="bold">Envío y Devoluciones</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Typography variant="body2" color="text.secondary" paragraph>
+                    • Envío gratis en compras superiores a $50
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary" paragraph>
+                    • Entregas en 24-48 horas en Quito
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    • Devoluciones aceptadas dentro de 30 días
+                  </Typography>
+                </AccordionDetails>
+              </Accordion>
+            </Box>
+          </Grid>
         </Grid>
-      </Grid>
-    </Container>
+      </Container>
+    </Box>
   );
 };
 

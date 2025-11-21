@@ -89,6 +89,20 @@ public class ProductoService {
             producto.getCategoria().getNombre()
         );
         
+        // Agregar imágenes
+        if (producto.getImagenPrincipal() != null) {
+            response.setImagenPrincipal("/uploads/productos/" + producto.getImagenPrincipal());
+        }
+        if (producto.getImagenThumbnail() != null) {
+            response.setImagenThumbnail("/uploads/productos/" + producto.getImagenThumbnail());
+        }
+        if (producto.getImagenesGaleria() != null && !producto.getImagenesGaleria().isEmpty()) {
+            List<String> galeriaUrls = producto.getImagenesGaleria().stream()
+                .map(img -> "/uploads/productos/" + img)
+                .collect(Collectors.toList());
+            response.setImagenesGaleria(galeriaUrls);
+        }
+        
         // Convertir variantes
         List<ProductoResponse.VarianteResponse> variantes = producto.getVariantes().stream()
                 .filter(VarianteProducto::getActiva)

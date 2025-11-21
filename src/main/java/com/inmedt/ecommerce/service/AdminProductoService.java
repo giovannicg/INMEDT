@@ -29,6 +29,9 @@ public class AdminProductoService {
     @Autowired
     private UnidadDeVentaRepository unidadDeVentaRepository;
     
+    @Autowired
+    private ImageService imageService;
+    
     // Gestión de Productos
     public Page<ProductoResponse> getAllProductos(Pageable pageable) {
         Page<Producto> productos = productoRepository.findAll(pageable);
@@ -214,6 +217,21 @@ public class AdminProductoService {
             producto.getCategoria().getNombre()
         );
         response.setActivo(producto.getActivo());
+        
+        // Agregar imágenes
+        if (producto.getImagenPrincipal() != null) {
+            response.setImagenPrincipal("/uploads/productos/" + producto.getImagenPrincipal());
+        }
+        if (producto.getImagenThumbnail() != null) {
+            response.setImagenThumbnail("/uploads/productos/" + producto.getImagenThumbnail());
+        }
+        if (producto.getImagenesGaleria() != null && !producto.getImagenesGaleria().isEmpty()) {
+            List<String> galeriaUrls = producto.getImagenesGaleria().stream()
+                .map(img -> "/uploads/productos/" + img)
+                .collect(Collectors.toList());
+            response.setImagenesGaleria(galeriaUrls);
+        }
+        
         List<ProductoResponse.VarianteResponse> variantes = producto.getVariantes() != null 
                 ? producto.getVariantes().stream()
                     .map(this::convertToVarianteResponse)
@@ -260,5 +278,69 @@ public class AdminProductoService {
             unidad.getStock(),
             unidad.getActiva()
         );
+    }
+    
+    // Gestión de Imágenes
+    public ProductoResponse updateImagenPrincipal(Long productoId, String filename, String thumbnailName) {
+        Producto producto = productoRepository.findById(productoId)
+                .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+        
+        // Eliminar imagen anterior si existe
+        if (producto.getImagenPrincipal() != null) {
+            imageService.deleteImage(producto.getImagenPrincipal());
+        }
+        
+        producto.setImagenPrincipal(filename);
+        producto.setImagenThumbnail(thumbnailName);
+        productoRepository.save(producto);
+        
+        return convertToProductoResponse(producto);
+    }
+    
+    public ProductoResponse addImagenGaleria(Long productoId, String filename) {
+        Producto producto = productoRepository.findById(productoId)
+                .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+        
+        List<String> galeria = producto.getImagenesGaleria();
+        if (galeria == null) {
+            galeria = new ArrayList<>();
+        }
+        
+        galeria.add(filename);
+        producto.setImagenesGaleria(galeria);
+        productoRepository.save(producto);
+        
+        return convertToProductoResponse(producto);
+    }
+    
+    public void deleteImagenPrincipal(Long productoId) {
+        Producto producto = productoRepository.findById(productoId)
+                .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+        
+        if (producto.getImagenPrincipal() != null) {
+            imageService.deleteImage(producto.getImagenPrincipal());
+            producto.setImagenPrincipal(null);
+            producto.setImagenThumbnail(null);
+            productoRepository.save(producto);
+        }
+    }
+    
+    public ProductoResponse deleteImagenGaleria(Long productoId, String filename) {
+        Producto producto = productoRepository.findById(productoId)
+                .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+        
+        List<String> galeria = producto.getImagenesGaleria();
+        if (galeria != null) {
+            // Extraer solo el nombre del archivo de la URL
+            String nombreArchivo = filename.replace("/uploads/productos/", "");
+            galeria.remove(nombreArchivo);
+            producto.setImagenesGaleria(galeria);
+            productoRepository.save(producto);
+            
+            // Eliminar archivo físico
+            imageService.deleteImage(nombreArchivo);
+        }
+        
+        return convertToProductoResponse(producto);
     }
 }

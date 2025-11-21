@@ -30,6 +30,17 @@ public class Producto {
     @Column(name = "activo", nullable = false)
     private Boolean activo = true;
     
+    @Column(name = "imagen_principal")
+    private String imagenPrincipal;
+    
+    @Column(name = "imagen_thumbnail")
+    private String imagenThumbnail;
+    
+    @ElementCollection
+    @CollectionTable(name = "producto_imagenes", joinColumns = @JoinColumn(name = "producto_id"))
+    @Column(name = "imagen_url")
+    private List<String> imagenesGaleria;
+    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "categoria_id", nullable = false)
     private Categoria categoria;
@@ -69,4 +80,13 @@ public class Producto {
     
     public List<VarianteProducto> getVariantes() { return variantes; }
     public void setVariantes(List<VarianteProducto> variantes) { this.variantes = variantes; }
+    
+    public String getImagenPrincipal() { return imagenPrincipal; }
+    public void setImagenPrincipal(String imagenPrincipal) { this.imagenPrincipal = imagenPrincipal; }
+    
+    public String getImagenThumbnail() { return imagenThumbnail; }
+    public void setImagenThumbnail(String imagenThumbnail) { this.imagenThumbnail = imagenThumbnail; }
+    
+    public List<String> getImagenesGaleria() { return imagenesGaleria; }
+    public void setImagenesGaleria(List<String> imagenesGaleria) { this.imagenesGaleria = imagenesGaleria; }
 }

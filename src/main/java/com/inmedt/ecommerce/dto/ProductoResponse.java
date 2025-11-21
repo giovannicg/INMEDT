@@ -11,6 +11,9 @@ public class ProductoResponse {
     private String marca;
     private String categoriaNombre;
     private Boolean activo;
+    private String imagenPrincipal;
+    private String imagenThumbnail;
+    private List<String> imagenesGaleria;
     private List<VarianteResponse> variantes;
     
     // Constructores
@@ -42,6 +45,15 @@ public class ProductoResponse {
     
     public Boolean getActivo() { return activo; }
     public void setActivo(Boolean activo) { this.activo = activo; }
+    
+    public String getImagenPrincipal() { return imagenPrincipal; }
+    public void setImagenPrincipal(String imagenPrincipal) { this.imagenPrincipal = imagenPrincipal; }
+    
+    public String getImagenThumbnail() { return imagenThumbnail; }
+    public void setImagenThumbnail(String imagenThumbnail) { this.imagenThumbnail = imagenThumbnail; }
+    
+    public List<String> getImagenesGaleria() { return imagenesGaleria; }
+    public void setImagenesGaleria(List<String> imagenesGaleria) { this.imagenesGaleria = imagenesGaleria; }
     
     public List<VarianteResponse> getVariantes() { return variantes; }
     public void setVariantes(List<VarianteResponse> variantes) { this.variantes = variantes; }
