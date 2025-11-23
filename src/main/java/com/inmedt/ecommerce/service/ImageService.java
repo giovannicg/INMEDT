@@ -1,5 +1,6 @@
 package com.inmedt.ecommerce.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,11 +18,16 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.UUID;
 
 @Service
 public class ImageService {
+
+    @Autowired(required = false)
+    private CloudinaryService cloudinaryService;
 
     @Value("${app.upload.dir:uploads/productos}")
     private String uploadDir;
@@ -35,7 +41,58 @@ public class ImageService {
     @Value("${app.image.quality:0.85}")
     private float imageQuality;
 
-    public String saveProductImage(MultipartFile file, boolean createThumbnail) throws IOException {
+    /**
+     * Guarda una imagen de producto usando Cloudinary o almacenamiento local como fallback
+     * @return Map con las URLs: "main" para imagen principal y "thumbnail" para miniatura
+     */
+    public Map<String, String> saveProductImage(MultipartFile file, boolean createThumbnail) throws IOException {
+        Map<String, String> urls = new HashMap<>();
+
+        // Intentar usar Cloudinary primero
+        if (cloudinaryService != null && cloudinaryService.isEnabled()) {
+            try {
+                // Subir imagen principal optimizada
+                String mainUrl = cloudinaryService.uploadImageWithTransformation(
+                    file, 
+                    "productos", 
+                    maxImageSize, 
+                    maxImageSize
+                );
+                urls.put("main", mainUrl);
+
+                // Subir thumbnail si se solicita
+                if (createThumbnail) {
+                    String thumbnailUrl = cloudinaryService.uploadImageWithTransformation(
+                        file, 
+                        "productos/thumbnails", 
+                        thumbnailSize, 
+                        thumbnailSize
+                    );
+                    urls.put("thumbnail", thumbnailUrl);
+                }
+
+                return urls;
+            } catch (Exception e) {
+                System.err.println("⚠️ Error al subir a Cloudinary, usando almacenamiento local: " + e.getMessage());
+                // Continuar con almacenamiento local como fallback
+            }
+        }
+
+        // Fallback: Usar almacenamiento local
+        String filename = saveProductImageLocal(file, createThumbnail);
+        urls.put("main", "/uploads/productos/" + filename);
+        
+        if (createThumbnail) {
+            urls.put("thumbnail", "/uploads/productos/" + getThumbnailName(filename));
+        }
+
+        return urls;
+    }
+
+    /**
+     * Guarda imagen en almacenamiento local (método original)
+     */
+    private String saveProductImageLocal(MultipartFile file, boolean createThumbnail) throws IOException {
         // Validar que sea una imagen
         String contentType = file.getContentType();
         if (contentType == null || !contentType.startsWith("image/")) {
@@ -80,7 +137,33 @@ public class ImageService {
         return "thumb_" + originalFilename;
     }
 
-    public void deleteImage(String filename) {
+    /**
+     * Elimina una imagen (de Cloudinary o local)
+     */
+    public void deleteImage(String imageUrl) {
+        if (imageUrl == null || imageUrl.isEmpty()) {
+            return;
+        }
+
+        // Si es una URL de Cloudinary
+        if (imageUrl.contains("cloudinary.com")) {
+            if (cloudinaryService != null && cloudinaryService.isEnabled()) {
+                try {
+                    String publicId = cloudinaryService.extractPublicId(imageUrl);
+                    if (publicId != null) {
+                        cloudinaryService.deleteImage(publicId);
+                    }
+                } catch (IOException e) {
+                    System.err.println("Error al eliminar imagen de Cloudinary: " + e.getMessage());
+                }
+            }
+        } else {
+            // Es una ruta local
+            deleteImageLocal(imageUrl.replace("/uploads/productos/", ""));
+        }
+    }
+
+    private void deleteImageLocal(String filename) {
         try {
             Path filePath = Paths.get(uploadDir, filename);
             Files.deleteIfExists(filePath);

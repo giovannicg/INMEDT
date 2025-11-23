@@ -27,6 +27,7 @@ services:
       JWT_SECRET: miClaveSecretaSuperSeguraParaJWT2024
       JWT_EXPIRATION: 86400000
       GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-dummy-client-id}
+      CLOUDINARY_URL: ${CLOUDINARY_URL:-}
     ports:
       - "8085:8080"
     depends_on:

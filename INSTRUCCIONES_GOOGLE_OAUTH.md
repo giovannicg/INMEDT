@@ -64,7 +64,7 @@ docker compose -f docker-compose.dev.yml up -d --build
 # 3. Ver los logs para verificar que todo está bien
 docker compose -f docker-compose.dev.yml logs -f backend
 ```
-
+db=qUJkbttr8vYvutIy
 ---
 
 ## 🧪 Probar la Integración

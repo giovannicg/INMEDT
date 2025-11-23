@@ -205,10 +205,11 @@ public class AdminProductoController {
             @PathVariable Long id,
             @RequestParam("imagen") MultipartFile file) {
         try {
-            String filename = imageService.saveProductImage(file, true);
-            String thumbnailName = imageService.getThumbnailName(filename);
+            Map<String, String> urls = imageService.saveProductImage(file, true);
+            String mainUrl = urls.get("main");
+            String thumbnailUrl = urls.get("thumbnail");
             
-            ProductoResponse producto = adminProductoService.updateImagenPrincipal(id, filename, thumbnailName);
+            ProductoResponse producto = adminProductoService.updateImagenPrincipal(id, mainUrl, thumbnailUrl);
             
             Map<String, Object> response = new HashMap<>();
             response.put("success", true);
@@ -229,8 +230,10 @@ public class AdminProductoController {
             @PathVariable Long id,
             @RequestParam("imagen") MultipartFile file) {
         try {
-            String filename = imageService.saveProductImage(file, false);
-            ProductoResponse producto = adminProductoService.addImagenGaleria(id, filename);
+            Map<String, String> urls = imageService.saveProductImage(file, false);
+            String mainUrl = urls.get("main");
+            
+            ProductoResponse producto = adminProductoService.addImagenGaleria(id, mainUrl);
             
             Map<String, Object> response = new HashMap<>();
             response.put("success", true);
