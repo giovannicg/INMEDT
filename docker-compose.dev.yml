@@ -26,6 +26,7 @@ services:
       SPRING_JPA_SHOW_SQL: "true"
       JWT_SECRET: miClaveSecretaSuperSeguraParaJWT2024
       JWT_EXPIRATION: 86400000
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-dummy-client-id}
     ports:
       - "8085:8080"
     depends_on:
@@ -45,6 +46,7 @@ services:
     environment:
       CHOKIDAR_USEPOLLING: "true"
       REACT_APP_API_URL: http://localhost:8085
+      REACT_APP_GOOGLE_CLIENT_ID: ${REACT_APP_GOOGLE_CLIENT_ID:-dummy-client-id}
     ports:
       - "3000:3000"
     depends_on:
