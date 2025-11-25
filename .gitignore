@@ -95,3 +95,8 @@ frontend/dist/
 # Logs
 logs/
 *.log
+log*
+node_modules
+package.json
+package-lock.json
+supabase
