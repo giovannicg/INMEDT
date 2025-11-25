@@ -15,7 +15,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,13 +24,13 @@ import java.util.Map;
 @CrossOrigin(origins = "*")
 @PreAuthorize("hasAuthority('ROLE_ADMIN')")
 public class AdminProductoController {
-    
+
     @Autowired
     private AdminProductoService adminProductoService;
-    
+
     @Autowired
     private ImageService imageService;
-    
+
     // Gestión de Productos
     @GetMapping
     public ResponseEntity<Page<ProductoResponse>> getAllProductos(
@@ -39,15 +38,14 @@ public class AdminProductoController {
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue = "nombre") String sortBy,
             @RequestParam(defaultValue = "asc") String sortDir) {
-        
-        Sort sort = sortDir.equalsIgnoreCase("desc") ? 
-            Sort.by(sortBy).descending() : Sort.by(sortBy).ascending();
+
+        Sort sort = sortDir.equalsIgnoreCase("desc") ? Sort.by(sortBy).descending() : Sort.by(sortBy).ascending();
         Pageable pageable = PageRequest.of(page, size, sort);
-        
+
         Page<ProductoResponse> productos = adminProductoService.getAllProductos(pageable);
         return ResponseEntity.ok(productos);
     }
-    
+
     @GetMapping("/{id}")
     public ResponseEntity<?> getProductoById(@PathVariable Long id) {
         try {
@@ -57,7 +55,7 @@ public class AdminProductoController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-    
+
     @PostMapping
     public ResponseEntity<?> createProducto(@Valid @RequestBody ProductoRequest request) {
         try {
@@ -67,7 +65,7 @@ public class AdminProductoController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-    
+
     @PutMapping("/{id}")
     public ResponseEntity<?> updateProducto(@PathVariable Long id, @Valid @RequestBody ProductoRequest request) {
         try {
@@ -77,7 +75,7 @@ public class AdminProductoController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-    
+
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteProducto(@PathVariable Long id) {
         try {
@@ -87,14 +85,14 @@ public class AdminProductoController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-    
+
     // Gestión de Categorías
     @GetMapping("/categorias")
     public ResponseEntity<List<CategoriaResponse>> getAllCategorias() {
         List<CategoriaResponse> categorias = adminProductoService.getAllCategorias();
         return ResponseEntity.ok(categorias);
     }
-    
+
     @PostMapping("/categorias")
     public ResponseEntity<?> createCategoria(@Valid @RequestBody CategoriaRequest request) {
         try {
@@ -104,7 +102,7 @@ public class AdminProductoController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-    
+
     @PutMapping("/categorias/{id}")
     public ResponseEntity<?> updateCategoria(@PathVariable Long id, @Valid @RequestBody CategoriaRequest request) {
         try {
@@ -114,7 +112,7 @@ public class AdminProductoController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-    
+
     @DeleteMapping("/categorias/{id}")
     public ResponseEntity<?> deleteCategoria(@PathVariable Long id) {
         try {
@@ -124,14 +122,15 @@ public class AdminProductoController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-    
+
     // Gestión de Variantes
     @GetMapping("/{productoId}/variantes")
-    public ResponseEntity<List<ProductoResponse.VarianteResponse>> getVariantesByProducto(@PathVariable Long productoId) {
+    public ResponseEntity<List<ProductoResponse.VarianteResponse>> getVariantesByProducto(
+            @PathVariable Long productoId) {
         List<ProductoResponse.VarianteResponse> variantes = adminProductoService.getVariantesByProducto(productoId);
         return ResponseEntity.ok(variantes);
     }
-    
+
     @PostMapping("/variantes")
     public ResponseEntity<?> createVariante(@Valid @RequestBody VarianteRequest request) {
         try {
@@ -141,7 +140,7 @@ public class AdminProductoController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-    
+
     @PutMapping("/variantes/{id}")
     public ResponseEntity<?> updateVariante(@PathVariable Long id, @Valid @RequestBody VarianteUpdateRequest request) {
         try {
@@ -151,7 +150,7 @@ public class AdminProductoController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-    
+
     @DeleteMapping("/variantes/{id}")
     public ResponseEntity<?> deleteVariante(@PathVariable Long id) {
         try {
@@ -161,14 +160,15 @@ public class AdminProductoController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-    
+
     // Gestión de Unidades de Venta
     @GetMapping("/variantes/{varianteId}/unidades")
-    public ResponseEntity<List<ProductoResponse.UnidadVentaResponse>> getUnidadesByVariante(@PathVariable Long varianteId) {
+    public ResponseEntity<List<ProductoResponse.UnidadVentaResponse>> getUnidadesByVariante(
+            @PathVariable Long varianteId) {
         List<ProductoResponse.UnidadVentaResponse> unidades = adminProductoService.getUnidadesByVariante(varianteId);
         return ResponseEntity.ok(unidades);
     }
-    
+
     @PostMapping("/unidades")
     public ResponseEntity<?> createUnidadVenta(@Valid @RequestBody UnidadVentaRequest request) {
         try {
@@ -178,9 +178,10 @@ public class AdminProductoController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-    
+
     @PutMapping("/unidades/{id}")
-    public ResponseEntity<?> updateUnidadVenta(@PathVariable Long id, @Valid @RequestBody UnidadVentaUpdateRequest request) {
+    public ResponseEntity<?> updateUnidadVenta(@PathVariable Long id,
+            @Valid @RequestBody UnidadVentaUpdateRequest request) {
         try {
             ProductoResponse.UnidadVentaResponse unidad = adminProductoService.updateUnidadVenta(id, request);
             return ResponseEntity.ok(unidad);
@@ -188,7 +189,7 @@ public class AdminProductoController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-    
+
     @DeleteMapping("/unidades/{id}")
     public ResponseEntity<?> deleteUnidadVenta(@PathVariable Long id) {
         try {
@@ -198,7 +199,7 @@ public class AdminProductoController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-    
+
     // Gestión de Imágenes
     @PostMapping("/{id}/imagen-principal")
     public ResponseEntity<?> uploadImagenPrincipal(
@@ -208,14 +209,14 @@ public class AdminProductoController {
             Map<String, String> urls = imageService.saveProductImage(file, true);
             String mainUrl = urls.get("main");
             String thumbnailUrl = urls.get("thumbnail");
-            
+
             ProductoResponse producto = adminProductoService.updateImagenPrincipal(id, mainUrl, thumbnailUrl);
-            
+
             Map<String, Object> response = new HashMap<>();
             response.put("success", true);
             response.put("imagenPrincipal", producto.getImagenPrincipal());
             response.put("imagenThumbnail", producto.getImagenThumbnail());
-            
+
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             Map<String, Object> error = new HashMap<>();
@@ -224,7 +225,7 @@ public class AdminProductoController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
         }
     }
-    
+
     @PostMapping("/{id}/imagenes-galeria")
     public ResponseEntity<?> uploadImagenGaleria(
             @PathVariable Long id,
@@ -232,13 +233,13 @@ public class AdminProductoController {
         try {
             Map<String, String> urls = imageService.saveProductImage(file, false);
             String mainUrl = urls.get("main");
-            
+
             ProductoResponse producto = adminProductoService.addImagenGaleria(id, mainUrl);
-            
+
             Map<String, Object> response = new HashMap<>();
             response.put("success", true);
             response.put("imagenesGaleria", producto.getImagenesGaleria());
-            
+
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             Map<String, Object> error = new HashMap<>();
@@ -247,7 +248,7 @@ public class AdminProductoController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
         }
     }
-    
+
     @DeleteMapping("/{id}/imagen-principal")
     public ResponseEntity<?> deleteImagenPrincipal(@PathVariable Long id) {
         try {
@@ -255,25 +256,25 @@ public class AdminProductoController {
             return ResponseEntity.ok(Map.of("success", true, "message", "Imagen eliminada exitosamente"));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(Map.of("success", false, "error", e.getMessage()));
+                    .body(Map.of("success", false, "error", e.getMessage()));
         }
     }
-    
+
     @DeleteMapping("/{productoId}/imagenes-galeria")
     public ResponseEntity<?> deleteImagenGaleria(
             @PathVariable Long productoId,
             @RequestParam("filename") String filename) {
         try {
             ProductoResponse producto = adminProductoService.deleteImagenGaleria(productoId, filename);
-            
+
             Map<String, Object> response = new HashMap<>();
             response.put("success", true);
             response.put("imagenesGaleria", producto.getImagenesGaleria());
-            
+
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(Map.of("success", false, "error", e.getMessage()));
+                    .body(Map.of("success", false, "error", e.getMessage()));
         }
     }
 }

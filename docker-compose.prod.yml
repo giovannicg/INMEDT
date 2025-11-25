@@ -1,0 +1,20 @@
+services:
+  backend:
+    build: .
+    container_name: inmedt-backend-prod
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - DATABASE_URL=${DATABASE_URL}
+      - DATABASE_USERNAME=${DATABASE_USERNAME}
+      - DATABASE_PASSWORD=${DATABASE_PASSWORD}
+      - CLOUDINARY_URL=${CLOUDINARY_URL}
+      - JWT_SECRET=${JWT_SECRET}
+      - JWT_EXPIRATION=${JWT_EXPIRATION}
+      - PORT=8080
+    ports:
+      - "8086:8080"
+    env_file:
+      - .env
+    volumes:
+      - ./src:/app/src
+    command: ["mvn", "spring-boot:run"]
