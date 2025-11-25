@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }) => {
           const response = await axios.get('/auth/me');
           console.log('✅ Usuario inicializado:', response.data);
           const { userId, nombre, email, role } = response.data;
-          
+
           setUser({
             id: userId,
             nombre,
@@ -51,9 +51,9 @@ export const AuthProvider = ({ children }) => {
       const response = await axios.post('/auth/login', { email, password });
       console.log('✅ Login exitoso:', response.data);
       const { token, userId, nombre, email: userEmail, role } = response.data;
-      
+
       localStorage.setItem('token', token);
-      
+
       setUser({
         id: userId,
         nombre,
@@ -61,19 +61,19 @@ export const AuthProvider = ({ children }) => {
         role,
         token
       });
-      
+
       return { success: true };
     } catch (error) {
       console.error('❌ Error en login:', error);
       console.error('❌ Error response:', error.response);
-      return { 
-        success: false, 
-        message: error.response?.data || 'Error al iniciar sesión' 
+      return {
+        success: false,
+        message: error.response?.data || 'Error al iniciar sesión'
       };
     }
   };
 
-  const register = async (nombre, email, password, rucCedula) => {
+  const register = async ({ nombre, email, password, rucCedula }) => {
     try {
       const response = await axios.post('/auth/register', {
         nombre,
@@ -82,9 +82,9 @@ export const AuthProvider = ({ children }) => {
         rucCedula
       });
       const { token, userId, nombre: userName, email: userEmail, role } = response.data;
-      
+
       localStorage.setItem('token', token);
-      
+
       setUser({
         id: userId,
         nombre: userName,
@@ -92,12 +92,12 @@ export const AuthProvider = ({ children }) => {
         role,
         token
       });
-      
+
       return { success: true };
     } catch (error) {
-      return { 
-        success: false, 
-        message: error.response?.data || 'Error al registrarse' 
+      return {
+        success: false,
+        message: error.response?.data || 'Error al registrarse'
       };
     }
   };
