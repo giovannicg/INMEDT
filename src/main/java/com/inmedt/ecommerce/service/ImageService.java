@@ -58,22 +58,29 @@ public class ImageService {
                     maxImageSize, 
                     maxImageSize
                 );
-                urls.put("main", mainUrl);
+                
+                // Verificar que la URL retornada sea válida
+                if (mainUrl != null && !mainUrl.isEmpty()) {
+                    urls.put("main", mainUrl);
+                    System.out.println("✅ Imagen principal subida a Cloudinary: " + mainUrl);
+                    
+                    // Subir thumbnail si se solicita
+                    if (createThumbnail) {
+                        String thumbnailUrl = cloudinaryService.uploadImageWithTransformation(
+                            file, 
+                            "productos/thumbnails", 
+                            thumbnailSize, 
+                            thumbnailSize
+                        );
+                        urls.put("thumbnail", thumbnailUrl);
+                        System.out.println("✅ Thumbnail subido a Cloudinary: " + thumbnailUrl);
+                    }
 
-                // Subir thumbnail si se solicita
-                if (createThumbnail) {
-                    String thumbnailUrl = cloudinaryService.uploadImageWithTransformation(
-                        file, 
-                        "productos/thumbnails", 
-                        thumbnailSize, 
-                        thumbnailSize
-                    );
-                    urls.put("thumbnail", thumbnailUrl);
+                    return urls;
                 }
-
-                return urls;
             } catch (Exception e) {
                 System.err.println("⚠️ Error al subir a Cloudinary, usando almacenamiento local: " + e.getMessage());
+                e.printStackTrace(); // Ver el stack trace completo
                 // Continuar con almacenamiento local como fallback
             }
         }

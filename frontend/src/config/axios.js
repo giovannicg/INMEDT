@@ -22,7 +22,24 @@ export const getImageUrl = (imagePath) => {
     return imagePath;
   }
   
-  // Si es una ruta relativa, agregar IMAGES_URL
+  // CASO ESPECIAL: Si tiene el prefijo incorrecto /uploads/productos/https://
+  // Extraer solo la URL de Cloudinary
+  if (imagePath.includes('/uploads/productos/https://')) {
+    const cloudinaryUrl = imagePath.substring(imagePath.indexOf('https://'));
+    console.warn('⚠️ URL incorrecta detectada y corregida:', imagePath, '→', cloudinaryUrl);
+    return cloudinaryUrl;
+  }
+  
+  // Si contiene cloudinary.com en alguna parte, buscar y extraer la URL
+  if (imagePath.includes('cloudinary.com')) {
+    const match = imagePath.match(/(https?:\/\/.*cloudinary\.com\/.*)/);
+    if (match) {
+      console.warn('⚠️ URL de Cloudinary encontrada dentro de ruta:', imagePath, '→', match[1]);
+      return match[1];
+    }
+  }
+  
+  // Si es una ruta relativa normal, agregar IMAGES_URL
   return `${IMAGES_URL}${imagePath}`;
 };
 
