@@ -1,6 +1,7 @@
 package com.inmedt.ecommerce.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -23,18 +24,21 @@ import java.util.Arrays;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-    
+
     @Autowired
     private UserDetailsService userDetailsService;
-    
+
     @Autowired
     private JwtAuthenticationFilter jwtAuthenticationFilter;
-    
+
+    @Value("${spring.web.cors.allowed-origins}")
+    private String allowedOrigins;
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-    
+
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
@@ -42,47 +46,47 @@ public class SecurityConfig {
         authProvider.setPasswordEncoder(passwordEncoder());
         return authProvider;
     }
-    
+
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
-    
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.cors(cors -> cors.configurationSource(corsConfigurationSource()))
-            .csrf(csrf -> csrf.disable())
-            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .authorizeHttpRequests(auth -> auth
-                // Endpoints públicos
-                .requestMatchers("/auth/**").permitAll()
-                .requestMatchers("/productos/**").permitAll()
-                .requestMatchers("/categorias/**").permitAll()
-                .requestMatchers("/unidades-venta/**").permitAll()
-                .requestMatchers("/uploads/**").permitAll() // Imágenes de productos
-                .requestMatchers("/setup/**").permitAll() // Endpoint temporal para setup inicial
-                // Endpoints que requieren autenticación
-                .requestMatchers("/carrito/**").authenticated()
-                .requestMatchers("/pedidos/**").authenticated()
-                .requestMatchers("/direcciones/**").authenticated()
-                .requestMatchers("/favoritos/**").authenticated()
-                .requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
-                .anyRequest().authenticated()
-            )
-            .authenticationProvider(authenticationProvider())
-            .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
-        
+                .csrf(csrf -> csrf.disable())
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeHttpRequests(auth -> auth
+                        // Endpoints públicos
+                        .requestMatchers("/auth/**").permitAll()
+                        .requestMatchers("/productos/**").permitAll()
+                        .requestMatchers("/categorias/**").permitAll()
+                        .requestMatchers("/unidades-venta/**").permitAll()
+                        .requestMatchers("/uploads/**").permitAll() // Imágenes de productos
+                        .requestMatchers("/setup/**").permitAll() // Endpoint temporal para setup inicial
+                        .requestMatchers("/manifest.json").permitAll()
+                        .requestMatchers("/favicon.ico").permitAll()
+                        // Endpoints que requieren autenticación
+                        .requestMatchers("/carrito/**").authenticated()
+                        .requestMatchers("/pedidos/**").authenticated()
+                        .requestMatchers("/direcciones/**").authenticated()
+                        .requestMatchers("/favoritos/**").authenticated()
+                        .requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN"))
+                .authenticationProvider(authenticationProvider())
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+
         return http.build();
     }
-    
+
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOriginPatterns(Arrays.asList("*"));
+        configuration.setAllowedOriginPatterns(Arrays.asList(allowedOrigins.split(",")));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
         configuration.setAllowCredentials(true);
-        
+
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
