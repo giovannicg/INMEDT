@@ -1,5 +1,7 @@
 package com.inmedt.ecommerce.dto;
 
+import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.Nulls;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -20,6 +22,7 @@ public class RegisterRequest {
     private String password;
     
     @Size(max = 20, message = "El RUC/Cédula no puede exceder 20 caracteres")
+    @JsonSetter(nulls = Nulls.AS_EMPTY)
     private String rucCedula;
     
     // Constructores

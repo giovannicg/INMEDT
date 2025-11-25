@@ -61,7 +61,7 @@ const Register = () => {
       nombre: formData.nombre,
       email: formData.email,
       password: formData.password,
-      rucCedula: formData.rucCedula || null
+      rucCedula: formData.rucCedula && formData.rucCedula.trim() !== '' ? formData.rucCedula : ''
     });
     
     if (result.success) {

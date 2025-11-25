@@ -38,9 +38,15 @@ public class AuthService {
             throw new RuntimeException("El email ya está registrado");
         }
         
+        // Limpiar rucCedula si está vacío o es null
+        String rucCedulaClean = request.getRucCedula();
+        if (rucCedulaClean != null && rucCedulaClean.trim().isEmpty()) {
+            rucCedulaClean = null;
+        }
+        
         // Verificar si el RUC/Cédula ya existe (si se proporciona)
-        if (request.getRucCedula() != null && !request.getRucCedula().isEmpty() 
-            && userRepository.existsByRucCedula(request.getRucCedula())) {
+        if (rucCedulaClean != null && !rucCedulaClean.isEmpty() 
+            && userRepository.existsByRucCedula(rucCedulaClean)) {
             throw new RuntimeException("El RUC/Cédula ya está registrado");
         }
         
@@ -49,7 +55,7 @@ public class AuthService {
         user.setNombre(request.getNombre());
         user.setEmail(request.getEmail());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
-        user.setRucCedula(request.getRucCedula());
+        user.setRucCedula(rucCedulaClean);
         user.setRole(User.Role.ROLE_CLIENTE);
         
         User savedUser = userRepository.save(user);

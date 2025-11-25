@@ -88,12 +88,18 @@ public class SecurityConfig {
         if (allowedOrigins == null || allowedOrigins.trim().isEmpty()) {
             configuration.setAllowedOriginPatterns(Arrays.asList("*"));
         } else {
-            configuration.setAllowedOriginPatterns(Arrays.asList(allowedOrigins.split(",")));
+            String[] origins = allowedOrigins.split(",");
+            for (int i = 0; i < origins.length; i++) {
+                origins[i] = origins[i].trim();
+            }
+            configuration.setAllowedOriginPatterns(Arrays.asList(origins));
         }
 
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
+        configuration.setExposedHeaders(Arrays.asList("Authorization"));
         configuration.setAllowCredentials(true);
+        configuration.setMaxAge(3600L);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
