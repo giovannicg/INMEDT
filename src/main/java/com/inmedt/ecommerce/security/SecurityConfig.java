@@ -72,7 +72,8 @@ public class SecurityConfig {
                         .requestMatchers("/pedidos/**").authenticated()
                         .requestMatchers("/direcciones/**").authenticated()
                         .requestMatchers("/favoritos/**").authenticated()
-                        .requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN"))
+                        .requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
+                        .anyRequest().permitAll())
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
@@ -82,7 +83,14 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOriginPatterns(Arrays.asList(allowedOrigins.split(",")));
+
+        // Si allowedOrigins está vacío o es null, permitir todos los orígenes
+        if (allowedOrigins == null || allowedOrigins.trim().isEmpty()) {
+            configuration.setAllowedOriginPatterns(Arrays.asList("*"));
+        } else {
+            configuration.setAllowedOriginPatterns(Arrays.asList(allowedOrigins.split(",")));
+        }
+
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
         configuration.setAllowCredentials(true);
