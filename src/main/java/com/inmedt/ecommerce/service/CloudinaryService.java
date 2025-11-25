@@ -1,6 +1,7 @@
 package com.inmedt.ecommerce.service;
 
 import com.cloudinary.Cloudinary;
+import com.cloudinary.Transformation;
 import com.cloudinary.utils.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -31,13 +32,17 @@ public class CloudinaryService {
         }
 
         try {
+            // Crear transformación básica para optimización
+            Transformation transformation = new Transformation()
+                .quality("auto:good")
+                .fetchFormat("auto");
+
             // Opciones de subida
             @SuppressWarnings("unchecked")
             Map<String, Object> uploadParams = ObjectUtils.asMap(
                 "folder", folder,
                 "resource_type", "auto",
-                "quality", "auto:good",
-                "fetch_format", "auto"
+                "transformation", transformation
             );
 
             // Subir imagen
@@ -64,17 +69,19 @@ public class CloudinaryService {
         }
 
         try {
+            // Crear transformación usando el objeto Transformation de Cloudinary
+            Transformation transformation = new Transformation()
+                .width(width)
+                .height(height)
+                .crop("limit")
+                .quality("auto:good")
+                .fetchFormat("auto");
+
             @SuppressWarnings("unchecked")
             Map<String, Object> uploadParams = ObjectUtils.asMap(
                 "folder", folder,
                 "resource_type", "auto",
-                "quality", "auto:good",
-                "fetch_format", "auto",
-                "transformation", ObjectUtils.asMap(
-                    "width", width,
-                    "height", height,
-                    "crop", "limit"
-                )
+                "transformation", transformation
             );
 
             Map<?, ?> uploadResult = cloudinary.uploader().upload(file.getBytes(), uploadParams);
