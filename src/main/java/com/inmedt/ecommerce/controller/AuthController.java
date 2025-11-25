@@ -12,28 +12,35 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @RestController
 @RequestMapping("/auth")
 @CrossOrigin(origins = "*")
 public class AuthController {
-    
+
+    private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
+
     @Autowired
     private AuthService authService;
-    
+
     @Autowired
     private GoogleOAuthService googleOAuthService;
-    
+
     @PostMapping("/register")
     public ResponseEntity<?> register(@Valid @RequestBody RegisterRequest request) {
+        logger.info("Intento de registro para email: {}", request.getEmail());
         try {
             AuthResponse response = authService.register(request);
+            logger.info("Registro exitoso para email: {}", request.getEmail());
             return ResponseEntity.ok(response);
         } catch (RuntimeException e) {
+            logger.error("Error en registro para email: {}. Error: {}", request.getEmail(), e.getMessage(), e);
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-    
+
     @PostMapping("/login")
     public ResponseEntity<?> login(@Valid @RequestBody LoginRequest request) {
         try {
@@ -43,7 +50,7 @@ public class AuthController {
             return ResponseEntity.badRequest().body("Credenciales inválidas");
         }
     }
-    
+
     @GetMapping("/me")
     public ResponseEntity<?> getCurrentUser(Authentication authentication) {
         try {
@@ -54,7 +61,7 @@ public class AuthController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-    
+
     @PostMapping("/google")
     public ResponseEntity<?> googleAuth(@RequestBody Map<String, String> request) {
         try {
@@ -62,7 +69,7 @@ public class AuthController {
             if (idToken == null || idToken.isEmpty()) {
                 return ResponseEntity.badRequest().body("Token de Google requerido");
             }
-            
+
             AuthResponse response = googleOAuthService.authenticateWithGoogle(idToken);
             return ResponseEntity.ok(response);
         } catch (RuntimeException e) {
