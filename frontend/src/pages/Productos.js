@@ -31,7 +31,7 @@ import {
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useFavoritos } from '../context/FavoritosContext';
 import { useAuth } from '../context/AuthContext';
-import axios, { IMAGES_URL } from '../config/axios';
+import axios, { getImageUrl } from '../config/axios';
 
 const Productos = () => {
   const navigate = useNavigate();
@@ -336,7 +336,7 @@ const Productos = () => {
                     >
                       {producto.imagenThumbnail ? (
                         <img
-                          src={`${IMAGES_URL}${producto.imagenThumbnail}`}
+                          src={getImageUrl(producto.imagenThumbnail)}
                           alt={producto.nombre}
                           loading="lazy"
                           style={{

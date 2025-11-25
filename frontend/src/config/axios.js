@@ -9,6 +9,23 @@ console.log('🔧 Axios baseURL:', baseURL);
 export const API_BASE_URL = API_URL;
 export const IMAGES_URL = `${API_URL}/api`;
 
+/**
+ * Helper para obtener la URL completa de una imagen
+ * Si la imagen ya es una URL completa (Cloudinary), la retorna tal cual
+ * Si es una ruta relativa (almacenamiento local), agrega IMAGES_URL
+ */
+export const getImageUrl = (imagePath) => {
+  if (!imagePath) return null;
+  
+  // Si ya es una URL completa (empieza con http:// o https://), retornarla tal cual
+  if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
+    return imagePath;
+  }
+  
+  // Si es una ruta relativa, agregar IMAGES_URL
+  return `${IMAGES_URL}${imagePath}`;
+};
+
 // Crear instancia de axios con configuración personalizada
 const axiosInstance = axios.create({
   baseURL: baseURL,

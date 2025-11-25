@@ -37,7 +37,7 @@ import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 import { useFavoritos } from '../context/FavoritosContext';
 import { toast } from 'react-toastify';
-import axios, { IMAGES_URL } from '../config/axios';
+import axios, { getImageUrl } from '../config/axios';
 
 const ProductoDetalle = () => {
   const { id } = useParams();
@@ -228,7 +228,7 @@ const ProductoDetalle = () => {
               >
                 {images.length > 0 ? (
                   <img
-                    src={`${IMAGES_URL}${images[selectedImage]}`}
+                    src={getImageUrl(images[selectedImage])}
                     alt={producto.nombre}
                     style={{
                       width: '100%',
@@ -275,7 +275,7 @@ const ProductoDetalle = () => {
                       }}
                     >
                       <img
-                        src={`${IMAGES_URL}${img}`}
+                        src={getImageUrl(img)}
                         alt={`Vista ${index + 1}`}
                         style={{
                           width: '100%',

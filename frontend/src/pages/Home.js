@@ -23,8 +23,7 @@ import {
   KeyboardArrowRight
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
-import axios from '../config/axios';
-import { IMAGES_URL } from '../config/axios';
+import axios, { getImageUrl } from '../config/axios';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -370,7 +369,7 @@ const Home = () => {
                     >
                       {producto.imagenThumbnail ? (
                         <img
-                          src={`${IMAGES_URL}${producto.imagenThumbnail}`}
+                          src={getImageUrl(producto.imagenThumbnail)}
                           alt={producto.nombre}
                           loading="lazy"
                           style={{

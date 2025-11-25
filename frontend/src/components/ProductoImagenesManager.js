@@ -17,7 +17,7 @@ import {
   StarBorder
 } from '@mui/icons-material';
 import { toast } from 'react-toastify';
-import axios, { IMAGES_URL } from '../config/axios';
+import axios, { getImageUrl } from '../config/axios';
 
 const ProductoImagenesManager = ({ producto, onUpdate }) => {
   const [uploading, setUploading] = useState(false);
@@ -161,7 +161,7 @@ const ProductoImagenesManager = ({ producto, onUpdate }) => {
               <CardMedia
                 component="img"
                 height="200"
-                image={`${IMAGES_URL}${producto.imagenPrincipal}`}
+                image={getImageUrl(producto.imagenPrincipal)}
                 alt={producto.nombre}
               />
             <CardActions>
@@ -220,7 +220,7 @@ const ProductoImagenesManager = ({ producto, onUpdate }) => {
                   <CardMedia
                     component="img"
                     height="140"
-                    image={`${IMAGES_URL}${imagen}`}
+                    image={getImageUrl(imagen)}
                     alt={`Galería ${index + 1}`}
                   />
                 <CardActions>

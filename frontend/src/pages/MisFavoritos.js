@@ -24,7 +24,7 @@ import { useAuth } from '../context/AuthContext';
 import { useFavoritos } from '../context/FavoritosContext';
 import { useCart } from '../context/CartContext';
 import { toast } from 'react-toastify';
-import { IMAGES_URL } from '../config/axios';
+import { getImageUrl } from '../config/axios';
 
 const MisFavoritos = () => {
   const navigate = useNavigate();
@@ -156,7 +156,7 @@ const MisFavoritos = () => {
                   >
                     {favorito.producto?.imagenThumbnail ? (
                       <img
-                        src={`${IMAGES_URL}${favorito.producto.imagenThumbnail}`}
+                        src={getImageUrl(favorito.producto.imagenThumbnail)}
                         alt={favorito.productoNombre}
                         style={{
                           width: '100%',
