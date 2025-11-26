@@ -89,19 +89,13 @@ public class ProductoService {
             producto.getCategoria().getNombre()
         );
         
-        // Agregar imágenes
-        if (producto.getImagenPrincipal() != null) {
-            response.setImagenPrincipal("/uploads/productos/" + producto.getImagenPrincipal());
-        }
-        if (producto.getImagenThumbnail() != null) {
-            response.setImagenThumbnail("/uploads/productos/" + producto.getImagenThumbnail());
-        }
-        if (producto.getImagenesGaleria() != null && !producto.getImagenesGaleria().isEmpty()) {
-            List<String> galeriaUrls = producto.getImagenesGaleria().stream()
-                .map(img -> "/uploads/productos/" + img)
-                .collect(Collectors.toList());
-            response.setImagenesGaleria(galeriaUrls);
-        }
+        // Agregar campo activo
+        response.setActivo(producto.getActivo());
+        
+        // Agregar imágenes (sin agregar prefijo, ya vienen correctas de la BD)
+        response.setImagenPrincipal(producto.getImagenPrincipal());
+        response.setImagenThumbnail(producto.getImagenThumbnail());
+        response.setImagenesGaleria(producto.getImagenesGaleria());
         
         // Convertir variantes
         List<ProductoResponse.VarianteResponse> variantes = producto.getVariantes().stream()
