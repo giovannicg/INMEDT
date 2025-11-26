@@ -10,13 +10,15 @@ import {
   IconButton,
   TextField,
   Divider,
-  CircularProgress
+  CircularProgress,
+  Alert
 } from '@mui/material';
 import {
   Delete,
   Add,
   Remove,
-  ShoppingCart
+  ShoppingCart,
+  LocalShipping
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -178,21 +180,47 @@ const Carrito = () => {
                 <Divider sx={{ mb: 2 }} />
                 
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-                  <Typography>Productos ({getCartItemsCount()})</Typography>
+                  <Typography>Subtotal ({getCartItemsCount()} productos)</Typography>
                   <Typography>${getCartTotal().toFixed(2)}</Typography>
                 </Box>
                 
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-                  <Typography>Envío</Typography>
-                  <Typography>Gratis</Typography>
-                </Box>
+                {/* Notificación de envío */}
+                {getCartTotal() < 40 ? (
+                  <>
+                    <Alert 
+                      severity="info" 
+                      icon={<LocalShipping />}
+                      sx={{ mb: 2, mt: 1 }}
+                    >
+                      <Typography variant="body2" fontWeight={500}>
+                        ¡Agrega ${(40 - getCartTotal()).toFixed(2)} más para envío GRATIS!
+                      </Typography>
+                      <Typography variant="caption" display="block" sx={{ mt: 0.5 }}>
+                        El costo de envío se calculará según tu ubicación en el checkout
+                        (Quito: $2.99, Fuera de Quito: $3.99)
+                      </Typography>
+                    </Alert>
+                    <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
+                      <Typography>Envío</Typography>
+                      <Typography color="text.secondary">Se calcula en checkout</Typography>
+                    </Box>
+                  </>
+                ) : (
+                  <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
+                    <Typography>Envío</Typography>
+                    <Typography color="success.main" fontWeight={500}>
+                      ¡GRATIS! 🎉
+                    </Typography>
+                  </Box>
+                )}
                 
                 <Divider sx={{ my: 2 }} />
                 
                 <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <Typography variant="h6">Total</Typography>
+                  <Typography variant="h6">Total estimado</Typography>
                   <Typography variant="h6" color="primary">
                     ${getCartTotal().toFixed(2)}
+                    {getCartTotal() < 40 && <Typography variant="caption" color="text.secondary"> + envío</Typography>}
                   </Typography>
                 </Box>
                 

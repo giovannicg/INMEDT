@@ -125,6 +125,30 @@ const Checkout = () => {
   const [loadingDirecciones, setLoadingDirecciones] = useState(false);
 
   const steps = ['Información de Envío', 'Confirmación', 'Pago'];
+  
+  // Calcular costo de envío
+  const calcularCostoEnvio = () => {
+    const subtotal = getCartTotal();
+    
+    // Envío gratis si el total es mayor o igual a $40
+    if (subtotal >= 40) {
+      return 0;
+    }
+    
+    // Si no hay sector seleccionado, retornar el costo máximo como estimación
+    if (!formData.sector) {
+      return 3.99;
+    }
+    
+    // Verificar si el sector está en la lista de Quito
+    const esQuito = SECTORES_QUITO.some(s => s.toLowerCase() === formData.sector.toLowerCase());
+    
+    return esQuito ? 2.99 : 3.99;
+  };
+  
+  const calcularTotal = () => {
+    return getCartTotal() + calcularCostoEnvio();
+  };
 
   useEffect(() => {
     if (!user) {
@@ -425,10 +449,28 @@ const Checkout = () => {
                 
                 <Divider sx={{ my: 2 }} />
                 
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
+                  <Typography>Subtotal</Typography>
+                  <Typography>${getCartTotal().toFixed(2)}</Typography>
+                </Box>
+                
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
+                  <Typography>Envío</Typography>
+                  {calcularCostoEnvio() === 0 ? (
+                    <Typography color="success.main" fontWeight={500}>
+                      ¡GRATIS!
+                    </Typography>
+                  ) : (
+                    <Typography>
+                      ${calcularCostoEnvio().toFixed(2)}
+                    </Typography>
+                  )}
+                </Box>
+                
                 <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                   <Typography variant="h6">Total</Typography>
                   <Typography variant="h6" color="primary">
-                    ${getCartTotal().toFixed(2)}
+                    ${calcularTotal().toFixed(2)}
                   </Typography>
                 </Box>
               </CardContent>
@@ -484,21 +526,37 @@ const Checkout = () => {
               </Typography>
               
               <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-                <Typography>Productos ({cartItems.length})</Typography>
+                <Typography>Subtotal ({cartItems.length} productos)</Typography>
                 <Typography>${getCartTotal().toFixed(2)}</Typography>
               </Box>
               
               <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
                 <Typography>Envío</Typography>
-                <Typography>Gratis</Typography>
+                {calcularCostoEnvio() === 0 ? (
+                  <Typography color="success.main" fontWeight={500}>
+                    ¡GRATIS!
+                  </Typography>
+                ) : (
+                  <Typography>
+                    ${calcularCostoEnvio().toFixed(2)}
+                  </Typography>
+                )}
               </Box>
+              
+              {calcularCostoEnvio() === 0 && getCartTotal() >= 40 && (
+                <Alert severity="success" sx={{ mb: 2, mt: 1 }}>
+                  <Typography variant="body2">
+                    ¡Felicidades! Tu pedido califica para envío GRATIS 🎉
+                  </Typography>
+                </Alert>
+              )}
               
               <Divider sx={{ my: 2 }} />
               
               <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                 <Typography variant="h6">Total</Typography>
                 <Typography variant="h6" color="primary">
-                  ${getCartTotal().toFixed(2)}
+                  ${calcularTotal().toFixed(2)}
                 </Typography>
               </Box>
               

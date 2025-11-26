@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -21,6 +22,29 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 public class PedidoService {
+    
+    // Sectores del Distrito Metropolitano de Quito
+    private static final List<String> SECTORES_QUITO = Arrays.asList(
+        // Parroquias Urbanas
+        "Belisario Quevedo", "Carcelén", "Centro Histórico", "Chilibulo", "Chillogallo",
+        "Chimbacalle", "Cochapamba", "Comité del Pueblo", "Concepción", "Cotocollao",
+        "El Condado", "Guamaní", "Iñaquito", "Itchimbía", "Jipijapa", "Kennedy",
+        "La Argelia", "La Ecuatoriana", "La Ferroviaria", "La Libertad", "La Magdalena",
+        "La Mena", "Mariscal Sucre", "Ponceano", "Puengasí", "Quitumbe", "Rumipamba",
+        "San Bartolo", "San Isidro del Inca", "San Juan", "Solanda", "Turubamba",
+        // Parroquias Rurales
+        "Alangasí", "Amaguaña", "Atahualpa", "Calacalí", "Calderón", "Conocoto",
+        "Cumbayá", "Chavezpamba", "Checa", "El Quinche", "Gualea", "Guangopolo",
+        "Guayllabamba", "La Merced", "Llano Chico", "Lloa", "Mindo", "Nanegal",
+        "Nanegalito", "Nayón", "Nono", "Pacto", "Pedro Vicente Maldonado", "Perucho",
+        "Pifo", "Píntag", "Pomasqui", "Puéllaro", "Puembo", "San Antonio",
+        "San José de Minas", "San Miguel de los Bancos", "Tababela", "Tumbaco",
+        "Yaruquí", "Zámbiza"
+    );
+    
+    private static final BigDecimal ENVIO_GRATIS_MINIMO = new BigDecimal("40.00");
+    private static final BigDecimal COSTO_ENVIO_QUITO = new BigDecimal("2.99");
+    private static final BigDecimal COSTO_ENVIO_FUERA_QUITO = new BigDecimal("3.99");
     
     @Autowired
     private PedidoRepository pedidoRepository;
@@ -58,9 +82,14 @@ public class PedidoService {
             }
         }
         
+        // Calcular costo de envío
+        BigDecimal subtotal = carrito.getTotal();
+        BigDecimal costoEnvio = calcularCostoEnvio(subtotal, request.getSector());
+        BigDecimal total = subtotal.add(costoEnvio);
+        
         // Crear pedido
         String numeroPedido = generateNumeroPedido();
-        Pedido pedido = new Pedido(numeroPedido, carrito.getTotal(), request.getDireccionEnvio(), user);
+        Pedido pedido = new Pedido(numeroPedido, subtotal, costoEnvio, total, request.getDireccionEnvio(), user);
         pedido.setTelefonoContacto(request.getTelefonoContacto());
         pedido.setCiudad(request.getCiudad());
         pedido.setSector(request.getSector());
@@ -154,10 +183,25 @@ public class PedidoService {
         return "PED-" + timestamp.substring(timestamp.length() - 6) + "-" + uuid;
     }
     
+    private BigDecimal calcularCostoEnvio(BigDecimal subtotal, String sector) {
+        // Envío gratis si el subtotal es mayor o igual a $40
+        if (subtotal.compareTo(ENVIO_GRATIS_MINIMO) >= 0) {
+            return BigDecimal.ZERO;
+        }
+        
+        // Verificar si el sector está en Quito
+        boolean esQuito = SECTORES_QUITO.stream()
+            .anyMatch(s -> s.equalsIgnoreCase(sector));
+        
+        return esQuito ? COSTO_ENVIO_QUITO : COSTO_ENVIO_FUERA_QUITO;
+    }
+    
     private PedidoResponse convertToPedidoResponse(Pedido pedido) {
         PedidoResponse response = new PedidoResponse(
             pedido.getId(),
             pedido.getNumeroPedido(),
+            pedido.getSubtotal(),
+            pedido.getCostoEnvio(),
             pedido.getTotal(),
             pedido.getEstado().name(),
             pedido.getDireccionEnvio(),

@@ -21,6 +21,12 @@ public class Pedido {
     @Column(name = "numero_pedido", nullable = false, unique = true)
     private String numeroPedido;
     
+    @Column(name = "subtotal", nullable = false, precision = 10, scale = 2)
+    private BigDecimal subtotal;
+    
+    @Column(name = "costo_envio", nullable = false, precision = 10, scale = 2)
+    private BigDecimal costoEnvio = BigDecimal.ZERO;
+    
     @Column(name = "total", nullable = false, precision = 10, scale = 2)
     private BigDecimal total;
     
@@ -65,8 +71,10 @@ public class Pedido {
     // Constructores
     public Pedido() {}
     
-    public Pedido(String numeroPedido, BigDecimal total, String direccionEnvio, User user) {
+    public Pedido(String numeroPedido, BigDecimal subtotal, BigDecimal costoEnvio, BigDecimal total, String direccionEnvio, User user) {
         this.numeroPedido = numeroPedido;
+        this.subtotal = subtotal;
+        this.costoEnvio = costoEnvio;
         this.total = total;
         this.direccionEnvio = direccionEnvio;
         this.user = user;
@@ -78,6 +86,12 @@ public class Pedido {
     
     public String getNumeroPedido() { return numeroPedido; }
     public void setNumeroPedido(String numeroPedido) { this.numeroPedido = numeroPedido; }
+    
+    public BigDecimal getSubtotal() { return subtotal; }
+    public void setSubtotal(BigDecimal subtotal) { this.subtotal = subtotal; }
+    
+    public BigDecimal getCostoEnvio() { return costoEnvio; }
+    public void setCostoEnvio(BigDecimal costoEnvio) { this.costoEnvio = costoEnvio; }
     
     public BigDecimal getTotal() { return total; }
     public void setTotal(BigDecimal total) { this.total = total; }

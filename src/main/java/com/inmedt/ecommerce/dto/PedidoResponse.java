@@ -8,6 +8,8 @@ public class PedidoResponse {
     
     private Long id;
     private String numeroPedido;
+    private BigDecimal subtotal;
+    private BigDecimal costoEnvio;
     private BigDecimal total;
     private String estado;
     private String direccionEnvio;
@@ -24,10 +26,12 @@ public class PedidoResponse {
     // Constructores
     public PedidoResponse() {}
     
-    public PedidoResponse(Long id, String numeroPedido, BigDecimal total, String estado, 
-                         String direccionEnvio, LocalDateTime createdAt) {
+    public PedidoResponse(Long id, String numeroPedido, BigDecimal subtotal, BigDecimal costoEnvio,
+                         BigDecimal total, String estado, String direccionEnvio, LocalDateTime createdAt) {
         this.id = id;
         this.numeroPedido = numeroPedido;
+        this.subtotal = subtotal;
+        this.costoEnvio = costoEnvio;
         this.total = total;
         this.estado = estado;
         this.direccionEnvio = direccionEnvio;
@@ -40,6 +44,12 @@ public class PedidoResponse {
     
     public String getNumeroPedido() { return numeroPedido; }
     public void setNumeroPedido(String numeroPedido) { this.numeroPedido = numeroPedido; }
+    
+    public BigDecimal getSubtotal() { return subtotal; }
+    public void setSubtotal(BigDecimal subtotal) { this.subtotal = subtotal; }
+    
+    public BigDecimal getCostoEnvio() { return costoEnvio; }
+    public void setCostoEnvio(BigDecimal costoEnvio) { this.costoEnvio = costoEnvio; }
     
     public BigDecimal getTotal() { return total; }
     public void setTotal(BigDecimal total) { this.total = total; }

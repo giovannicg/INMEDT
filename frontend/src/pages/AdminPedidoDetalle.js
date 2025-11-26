@@ -272,6 +272,26 @@ const AdminPedidoDetalle = () => {
                   ))}
                   <TableRow>
                     <TableCell colSpan={3} align="right">
+                      <Typography>Subtotal:</Typography>
+                    </TableCell>
+                    <TableCell align="right">
+                      <Typography>
+                        ${pedido.subtotal?.toFixed(2) || pedido.total.toFixed(2)}
+                      </Typography>
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell colSpan={3} align="right">
+                      <Typography>Envío:</Typography>
+                    </TableCell>
+                    <TableCell align="right">
+                      <Typography color={pedido.costoEnvio === 0 ? "success.main" : "inherit"} fontWeight={pedido.costoEnvio === 0 ? 500 : 400}>
+                        {pedido.costoEnvio === 0 ? "¡GRATIS!" : `$${pedido.costoEnvio?.toFixed(2) || '0.00'}`}
+                      </Typography>
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell colSpan={3} align="right">
                       <Typography variant="h6">Total:</Typography>
                     </TableCell>
                     <TableCell align="right">

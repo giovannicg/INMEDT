@@ -32,6 +32,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useFavoritos } from '../context/FavoritosContext';
 import { useAuth } from '../context/AuthContext';
 import axios, { getImageUrl } from '../config/axios';
+import SEO from '../components/SEO';
 
 const Productos = () => {
   const navigate = useNavigate();
@@ -120,6 +121,12 @@ const Productos = () => {
 
   return (
     <Box sx={{ minHeight: '100vh', backgroundColor: '#fafafa' }}>
+      <SEO 
+        title="Catálogo de Productos Médicos | INMEDT Ecuador"
+        description="Explora nuestro amplio catálogo de equipamiento y productos médicos profesionales. Instrumental, antisépticos, guantes, equipos y más. Calidad garantizada y envío gratis en compras mayores a $40."
+        keywords="catálogo médico Ecuador, productos médicos online, comprar instrumental médico, equipamiento hospitalario, suministros médicos Quito"
+        canonicalPath="/productos"
+      />
       {/* Header Section */}
       <Box
         sx={{

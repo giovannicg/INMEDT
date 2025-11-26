@@ -38,6 +38,7 @@ import { useCart } from '../context/CartContext';
 import { useFavoritos } from '../context/FavoritosContext';
 import { toast } from 'react-toastify';
 import axios, { getImageUrl } from '../config/axios';
+import SEO from '../components/SEO';
 
 const ProductoDetalle = () => {
   const { id } = useParams();
@@ -139,6 +140,54 @@ const ProductoDetalle = () => {
     ...(producto?.imagenesGaleria || [])
   ].filter(Boolean);
 
+  // Añadir structured data para el producto
+  useEffect(() => {
+    if (producto && selectedUnidad) {
+      const structuredData = {
+        "@context": "https://schema.org/",
+        "@type": "Product",
+        "name": producto.nombre,
+        "description": producto.descripcion || `${producto.nombre} - ${producto.marca}`,
+        "brand": {
+          "@type": "Brand",
+          "name": producto.marca
+        },
+        "category": producto.categoriaNombre,
+        "image": producto.imagenPrincipal ? `https://inmedt.vercel.app${getImageUrl(producto.imagenPrincipal)}` : "https://inmedt.vercel.app/logo512.png",
+        "offers": {
+          "@type": "Offer",
+          "url": `https://inmedt.vercel.app/productos/${producto.id}`,
+          "priceCurrency": "USD",
+          "price": selectedUnidad.precio,
+          "priceValidUntil": new Date(new Date().setFullYear(new Date().getFullYear() + 1)).toISOString().split('T')[0],
+          "availability": selectedUnidad.stock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
+          "seller": {
+            "@type": "Organization",
+            "name": "INMEDT"
+          }
+        }
+      };
+
+      // Crear o actualizar el script tag
+      let script = document.querySelector('#product-structured-data');
+      if (!script) {
+        script = document.createElement('script');
+        script.id = 'product-structured-data';
+        script.type = 'application/ld+json';
+        document.head.appendChild(script);
+      }
+      script.textContent = JSON.stringify(structuredData);
+
+      // Limpiar al desmontar
+      return () => {
+        const scriptToRemove = document.querySelector('#product-structured-data');
+        if (scriptToRemove) {
+          scriptToRemove.remove();
+        }
+      };
+    }
+  }, [producto, selectedUnidad]);
+
   if (loading) {
     return (
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
@@ -176,6 +225,14 @@ const ProductoDetalle = () => {
 
   return (
     <Box sx={{ backgroundColor: '#fafafa', minHeight: '100vh' }}>
+      <SEO 
+        title={`${producto.nombre} - ${producto.marca} | INMEDT`}
+        description={`${producto.descripcion || `Compra ${producto.nombre} de ${producto.marca} en INMEDT.`} Productos médicos profesionales de calidad garantizada. Envío gratis en compras mayores a $40.`}
+        keywords={`${producto.nombre}, ${producto.marca}, ${producto.categoriaNombre}, equipamiento médico, productos médicos Ecuador`}
+        image={producto.imagenPrincipal || '/og-image.jpg'}
+        type="product"
+        canonicalPath={`/productos/${producto.id}`}
+      />
       <Container maxWidth="lg" sx={{ pt: 4, pb: 8 }}>
         {/* Breadcrumbs */}
         <Breadcrumbs

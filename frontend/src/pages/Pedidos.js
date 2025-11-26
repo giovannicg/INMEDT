@@ -324,6 +324,26 @@ const Pedidos = () => {
 
                                 <Divider sx={{ my: 1 }} />
 
+                                <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 0.5 }}>
+                                  <Typography variant="body2">
+                                    Subtotal
+                                  </Typography>
+                                  <Typography variant="body2">
+                                    ${pedido.subtotal?.toFixed(2) || pedido.total.toFixed(2)}
+                                  </Typography>
+                                </Box>
+                                
+                                <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
+                                  <Typography variant="body2">
+                                    Envío
+                                  </Typography>
+                                  <Typography variant="body2" color={pedido.costoEnvio === 0 ? "success.main" : "inherit"} fontWeight={pedido.costoEnvio === 0 ? 500 : 400}>
+                                    {pedido.costoEnvio === 0 ? "¡GRATIS!" : `$${pedido.costoEnvio?.toFixed(2) || '0.00'}`}
+                                  </Typography>
+                                </Box>
+                                
+                                <Divider sx={{ my: 1 }} />
+
                                 <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                                   <Typography variant="body1" fontWeight="bold">
                                     Total

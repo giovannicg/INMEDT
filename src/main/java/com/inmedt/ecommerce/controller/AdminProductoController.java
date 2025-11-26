@@ -37,12 +37,16 @@ public class AdminProductoController {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue = "nombre") String sortBy,
-            @RequestParam(defaultValue = "asc") String sortDir) {
+            @RequestParam(defaultValue = "asc") String sortDir,
+            @RequestParam(required = false) String search,
+            @RequestParam(required = false) Long categoriaId,
+            @RequestParam(required = false) Boolean activo,
+            @RequestParam(required = false) String marca) {
 
         Sort sort = sortDir.equalsIgnoreCase("desc") ? Sort.by(sortBy).descending() : Sort.by(sortBy).ascending();
         Pageable pageable = PageRequest.of(page, size, sort);
 
-        Page<ProductoResponse> productos = adminProductoService.getAllProductos(pageable);
+        Page<ProductoResponse> productos = adminProductoService.getAllProductos(pageable, search, categoriaId, activo, marca);
         return ResponseEntity.ok(productos);
     }
 

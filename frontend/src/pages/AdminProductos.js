@@ -34,7 +34,10 @@ import {
   Category,
   Settings,
   Inventory,
-  Image
+  Image,
+  Search,
+  FilterList,
+  Clear
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -59,6 +62,13 @@ const AdminProductos = () => {
     categoriaId: '',
     activo: true
   });
+  
+  // Estados para búsqueda y filtrado
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filterCategoria, setFilterCategoria] = useState('');
+  const [filterEstado, setFilterEstado] = useState('');
+  const [filterMarca, setFilterMarca] = useState('');
+  const [marcasDisponibles, setMarcasDisponibles] = useState([]);
   
   // Estado para gestión de variantes
   const [openVariantesDialog, setOpenVariantesDialog] = useState(false);
@@ -93,9 +103,27 @@ const AdminProductos = () => {
   const fetchProductos = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`/admin/productos?page=${page}&size=10`);
+      
+      // Construir parámetros de búsqueda
+      const params = new URLSearchParams();
+      params.append('page', page);
+      params.append('size', 10);
+      
+      if (searchTerm) params.append('search', searchTerm);
+      if (filterCategoria) params.append('categoriaId', filterCategoria);
+      if (filterEstado !== '') params.append('activo', filterEstado);
+      if (filterMarca) params.append('marca', filterMarca);
+      
+      const response = await axios.get(`/admin/productos?${params.toString()}`);
       setProductos(response.data.content);
       setTotalPages(response.data.totalPages);
+      
+      // Extraer marcas únicas para el filtro
+      const marcas = [...new Set(response.data.content.map(p => p.marca).filter(Boolean))];
+      setMarcasDisponibles(prev => {
+        const todasMarcas = [...new Set([...prev, ...marcas])];
+        return todasMarcas.sort();
+      });
     } catch (error) {
       console.error('Error al cargar productos:', error);
       toast.error('Error al cargar productos');
@@ -120,7 +148,15 @@ const AdminProductos = () => {
     }
     fetchProductos();
     fetchCategorias();
-  }, [user, navigate, page]);
+  }, [user, navigate, page, searchTerm, filterCategoria, filterEstado, filterMarca]);
+  
+  const handleClearFilters = () => {
+    setSearchTerm('');
+    setFilterCategoria('');
+    setFilterEstado('');
+    setFilterMarca('');
+    setPage(0);
+  };
 
   const handleOpenDialog = (producto = null) => {
     if (producto) {
@@ -264,7 +300,8 @@ const AdminProductos = () => {
       await fetchVariantes(selectedProducto.id);
     } catch (error) {
       console.error('Error al guardar variante:', error.response?.data || error.message);
-      toast.error(error.response?.data?.message || 'Error al guardar variante');
+      const errorMessage = error.response?.data || 'Error al guardar variante';
+      toast.error(errorMessage);
     }
   };
 
@@ -276,7 +313,8 @@ const AdminProductos = () => {
         await fetchVariantes(selectedProducto.id);
       } catch (error) {
         console.error('Error al eliminar variante:', error);
-        toast.error(error.response?.data?.message || 'Error al eliminar variante');
+        const errorMessage = error.response?.data || 'Error al eliminar variante';
+        toast.error(errorMessage);
       }
     }
   };
@@ -343,7 +381,9 @@ const AdminProductos = () => {
       await fetchVariantes(selectedProducto.id); // Actualizar el conteo de unidades
     } catch (error) {
       console.error('Error al guardar unidad:', error);
-      toast.error(error.response?.data?.message || 'Error al guardar unidad de venta');
+      // El backend devuelve el mensaje directamente en response.data
+      const errorMessage = error.response?.data || 'Error al guardar unidad de venta';
+      toast.error(errorMessage);
     }
   };
 
@@ -356,7 +396,8 @@ const AdminProductos = () => {
         await fetchVariantes(selectedProducto.id); // Actualizar el conteo de unidades
       } catch (error) {
         console.error('Error al eliminar unidad:', error);
-        toast.error(error.response?.data?.message || 'Error al eliminar unidad de venta');
+        const errorMessage = error.response?.data || 'Error al eliminar unidad de venta';
+        toast.error(errorMessage);
       }
     }
   };
@@ -384,8 +425,162 @@ const AdminProductos = () => {
         </Button>
       </Box>
 
+      {/* Filtros y búsqueda */}
+      <Paper sx={{ p: 2, mb: 3 }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2 }}>
+          <FilterList color="primary" />
+          <Typography variant="h6">Filtros y Búsqueda</Typography>
+        </Box>
+        
+        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2 }}>
+          {/* Búsqueda por nombre */}
+          <TextField
+            size="small"
+            placeholder="Buscar por nombre..."
+            value={searchTerm}
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+              setPage(0);
+            }}
+            InputProps={{
+              startAdornment: <Search sx={{ mr: 1, color: 'action.active' }} />
+            }}
+            sx={{ minWidth: 250 }}
+          />
+
+          {/* Filtro por categoría */}
+          <FormControl size="small" sx={{ minWidth: 180 }}>
+            <InputLabel>Categoría</InputLabel>
+            <Select
+              value={filterCategoria}
+              label="Categoría"
+              onChange={(e) => {
+                setFilterCategoria(e.target.value);
+                setPage(0);
+              }}
+            >
+              <MenuItem value="">
+                <em>Todas</em>
+              </MenuItem>
+              {categorias.map((cat) => (
+                <MenuItem key={cat.id} value={cat.id}>
+                  {cat.nombre}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+
+          {/* Filtro por estado */}
+          <FormControl size="small" sx={{ minWidth: 140 }}>
+            <InputLabel>Estado</InputLabel>
+            <Select
+              value={filterEstado}
+              label="Estado"
+              onChange={(e) => {
+                setFilterEstado(e.target.value);
+                setPage(0);
+              }}
+            >
+              <MenuItem value="">
+                <em>Todos</em>
+              </MenuItem>
+              <MenuItem value="true">Activo</MenuItem>
+              <MenuItem value="false">Inactivo</MenuItem>
+            </Select>
+          </FormControl>
+
+          {/* Filtro por marca */}
+          <FormControl size="small" sx={{ minWidth: 180 }}>
+            <InputLabel>Marca</InputLabel>
+            <Select
+              value={filterMarca}
+              label="Marca"
+              onChange={(e) => {
+                setFilterMarca(e.target.value);
+                setPage(0);
+              }}
+            >
+              <MenuItem value="">
+                <em>Todas</em>
+              </MenuItem>
+              {marcasDisponibles.map((marca) => (
+                <MenuItem key={marca} value={marca}>
+                  {marca}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+
+          {/* Botón limpiar filtros */}
+          {(searchTerm || filterCategoria || filterEstado !== '' || filterMarca) && (
+            <Button
+              variant="outlined"
+              startIcon={<Clear />}
+              onClick={handleClearFilters}
+              size="small"
+            >
+              Limpiar Filtros
+            </Button>
+          )}
+        </Box>
+
+        {/* Mostrar filtros activos */}
+        {(searchTerm || filterCategoria || filterEstado !== '' || filterMarca) && (
+          <Box sx={{ display: 'flex', gap: 1, mt: 2, flexWrap: 'wrap' }}>
+            <Typography variant="body2" color="text.secondary" sx={{ mr: 1, alignSelf: 'center' }}>
+              Filtros activos:
+            </Typography>
+            {searchTerm && (
+              <Chip 
+                label={`Búsqueda: "${searchTerm}"`} 
+                size="small" 
+                onDelete={() => setSearchTerm('')}
+              />
+            )}
+            {filterCategoria && (
+              <Chip 
+                label={`Categoría: ${categorias.find(c => c.id === filterCategoria)?.nombre}`}
+                size="small" 
+                onDelete={() => setFilterCategoria('')}
+              />
+            )}
+            {filterEstado !== '' && (
+              <Chip 
+                label={`Estado: ${filterEstado === 'true' ? 'Activo' : 'Inactivo'}`}
+                size="small" 
+                onDelete={() => setFilterEstado('')}
+              />
+            )}
+            {filterMarca && (
+              <Chip 
+                label={`Marca: ${filterMarca}`}
+                size="small" 
+                onDelete={() => setFilterMarca('')}
+              />
+            )}
+          </Box>
+        )}
+      </Paper>
+
       {loading ? (
         <Typography>Cargando productos...</Typography>
+      ) : productos.length === 0 ? (
+        <Paper sx={{ p: 4, textAlign: 'center' }}>
+          <Category sx={{ fontSize: 64, color: 'grey.400', mb: 2 }} />
+          <Typography variant="h6" color="text.secondary" gutterBottom>
+            No se encontraron productos
+          </Typography>
+          <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+            {(searchTerm || filterCategoria || filterEstado !== '' || filterMarca) 
+              ? 'Intenta ajustar los filtros de búsqueda'
+              : 'Comienza creando tu primer producto'}
+          </Typography>
+          {(searchTerm || filterCategoria || filterEstado !== '' || filterMarca) && (
+            <Button variant="outlined" onClick={handleClearFilters}>
+              Limpiar Filtros
+            </Button>
+          )}
+        </Paper>
       ) : (
         <>
           <TableContainer component={Paper}>

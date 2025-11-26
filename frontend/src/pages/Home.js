@@ -24,6 +24,7 @@ import {
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import axios, { getImageUrl } from '../config/axios';
+import SEO from '../components/SEO';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -92,6 +93,12 @@ const Home = () => {
 
   return (
     <Box>
+      <SEO 
+        title="INMEDT - Equipamiento Médico Profesional en Ecuador | Quito"
+        description="Tu proveedor confiable de equipamiento médico profesional en Ecuador. Amplio catálogo de productos médicos de calidad garantizada. Envío gratis en compras mayores a $40. Atención en Quito y todo el país."
+        keywords="equipamiento médico Ecuador, productos médicos Quito, instrumental médico, suministros médicos, equipos hospitalarios, material médico profesional, antisépticos, desinfección, guantes médicos"
+        canonicalPath="/"
+      />
       {/* Hero Section con Slider */}
       <Box
         sx={{

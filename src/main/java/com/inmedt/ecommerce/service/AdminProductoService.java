@@ -3,9 +3,12 @@ package com.inmedt.ecommerce.service;
 import com.inmedt.ecommerce.dto.*;
 import com.inmedt.ecommerce.model.*;
 import com.inmedt.ecommerce.repository.*;
+import jakarta.persistence.criteria.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,9 +36,51 @@ public class AdminProductoService {
     private ImageService imageService;
     
     // Gestión de Productos
-    public Page<ProductoResponse> getAllProductos(Pageable pageable) {
-        Page<Producto> productos = productoRepository.findAll(pageable);
+    public Page<ProductoResponse> getAllProductos(Pageable pageable, String search, Long categoriaId, Boolean activo, String marca) {
+        Specification<Producto> spec = (root, query, criteriaBuilder) -> {
+            List<Predicate> predicates = new ArrayList<>();
+            
+            // Búsqueda por nombre (case insensitive)
+            if (search != null && !search.trim().isEmpty()) {
+                String searchPattern = "%" + search.toLowerCase() + "%";
+                predicates.add(
+                    criteriaBuilder.like(
+                        criteriaBuilder.lower(root.get("nombre")),
+                        searchPattern
+                    )
+                );
+            }
+            
+            // Filtro por categoría
+            if (categoriaId != null) {
+                predicates.add(criteriaBuilder.equal(root.get("categoria").get("id"), categoriaId));
+            }
+            
+            // Filtro por estado activo/inactivo
+            if (activo != null) {
+                predicates.add(criteriaBuilder.equal(root.get("activo"), activo));
+            }
+            
+            // Filtro por marca (case insensitive)
+            if (marca != null && !marca.trim().isEmpty()) {
+                predicates.add(
+                    criteriaBuilder.equal(
+                        criteriaBuilder.lower(root.get("marca")),
+                        marca.toLowerCase()
+                    )
+                );
+            }
+            
+            return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
+        };
+        
+        Page<Producto> productos = productoRepository.findAll(spec, pageable);
         return productos.map(this::convertToProductoResponse);
+    }
+    
+    // Mantener el método sin filtros para compatibilidad
+    public Page<ProductoResponse> getAllProductos(Pageable pageable) {
+        return getAllProductos(pageable, null, null, null, null);
     }
     
     public ProductoResponse getProductoById(Long id) {
@@ -170,13 +215,18 @@ public class AdminProductoService {
         VarianteProducto variante = varianteProductoRepository.findById(request.getVarianteId())
                 .orElseThrow(() -> new RuntimeException("Variante no encontrada"));
         
+        // Verificar que el SKU no esté en uso
+        if (unidadDeVentaRepository.existsBySku(request.getSku())) {
+            throw new RuntimeException("El SKU ya existe. Por favor, use un SKU diferente");
+        }
+        
         UnidadDeVenta unidad = new UnidadDeVenta();
         unidad.setSku(request.getSku());
         unidad.setDescripcion(request.getDescripcion());
         unidad.setPrecio(request.getPrecio());
         unidad.setStock(request.getStock());
         unidad.setVariante(variante);
-        unidad.setActiva(request.getActiva());
+        unidad.setActiva(request.getActiva() != null ? request.getActiva() : true);
         
         UnidadDeVenta savedUnidad = unidadDeVentaRepository.save(unidad);
         return convertToUnidadVentaResponse(savedUnidad);

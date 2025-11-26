@@ -122,6 +122,8 @@ public class AdminPedidoService {
         PedidoResponse response = new PedidoResponse(
             pedido.getId(),
             pedido.getNumeroPedido(),
+            pedido.getSubtotal(),
+            pedido.getCostoEnvio(),
             pedido.getTotal(),
             pedido.getEstado().name(),
             pedido.getDireccionEnvio(),
