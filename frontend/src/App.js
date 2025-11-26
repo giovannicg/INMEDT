@@ -18,6 +18,7 @@ import AdminDashboard from './pages/AdminDashboard';
 import AdminProductos from './pages/AdminProductos';
 import AdminUsuarios from './pages/AdminUsuarios';
 import AdminPedidos from './pages/AdminPedidos';
+import AdminPedidoDetalle from './pages/AdminPedidoDetalle';
 import AdminCategorias from './pages/AdminCategorias';
 import MisDirecciones from './pages/MisDirecciones';
 import MisFavoritos from './pages/MisFavoritos';
@@ -51,6 +52,7 @@ function App() {
             <Route path="/admin/productos" element={<AdminProductos />} />
             <Route path="/admin/categorias" element={<AdminCategorias />} />
             <Route path="/admin/usuarios" element={<AdminUsuarios />} />
+            <Route path="/admin/pedidos/:id" element={<AdminPedidoDetalle />} />
             <Route path="/admin/pedidos" element={<AdminPedidos />} />
           </Routes>
           <Footer />

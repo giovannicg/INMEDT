@@ -131,6 +131,14 @@ public class AdminPedidoService {
         response.setTelefonoContacto(pedido.getTelefonoContacto());
         response.setNotas(pedido.getNotas());
         response.setUpdatedAt(pedido.getUpdatedAt());
+        response.setCiudad(pedido.getCiudad());
+        response.setSector(pedido.getSector());
+        
+        // Agregar información del usuario
+        if (pedido.getUser() != null) {
+            response.setUserNombre(pedido.getUser().getNombre());
+            response.setUserEmail(pedido.getUser().getEmail());
+        }
         
         List<PedidoResponse.PedidoItemResponse> items = pedidoItemRepository.findByPedido(pedido)
                 .stream()
