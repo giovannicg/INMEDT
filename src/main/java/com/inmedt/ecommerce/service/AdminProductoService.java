@@ -6,7 +6,6 @@ import com.inmedt.ecommerce.repository.*;
 import jakarta.persistence.criteria.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -40,14 +39,23 @@ public class AdminProductoService {
         Specification<Producto> spec = (root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
             
-            // Búsqueda por nombre (case insensitive)
+            // Búsqueda por nombre, descripción o marca (case insensitive)
             if (search != null && !search.trim().isEmpty()) {
                 String searchPattern = "%" + search.toLowerCase() + "%";
+                Predicate nombrePredicate = criteriaBuilder.like(
+                    criteriaBuilder.lower(root.get("nombre")),
+                    searchPattern
+                );
+                Predicate descripcionPredicate = criteriaBuilder.like(
+                    criteriaBuilder.lower(root.get("descripcion")),
+                    searchPattern
+                );
+                Predicate marcaPredicate = criteriaBuilder.like(
+                    criteriaBuilder.lower(root.get("marca")),
+                    searchPattern
+                );
                 predicates.add(
-                    criteriaBuilder.like(
-                        criteriaBuilder.lower(root.get("nombre")),
-                        searchPattern
-                    )
+                    criteriaBuilder.or(nombrePredicate, descripcionPredicate, marcaPredicate)
                 );
             }
             

@@ -292,6 +292,16 @@ const AdminPedidoDetalle = () => {
                   </TableRow>
                   <TableRow>
                     <TableCell colSpan={3} align="right">
+                      <Typography>IVA (15%):</Typography>
+                    </TableCell>
+                    <TableCell align="right">
+                      <Typography>
+                        ${pedido.iva?.toFixed(2) || '0.00'}
+                      </Typography>
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell colSpan={3} align="right">
                       <Typography variant="h6">Total:</Typography>
                     </TableCell>
                     <TableCell align="right">

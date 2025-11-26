@@ -71,6 +71,12 @@ const Carrito = () => {
     navigate('/checkout');
   };
 
+  // Calcular IVA (15% solo sobre el subtotal de productos)
+  const calcularIVA = () => {
+    const subtotal = getCartTotal();
+    return subtotal * 0.15;
+  };
+
   if (!user) {
     return null;
   }
@@ -214,12 +220,17 @@ const Carrito = () => {
                   </Box>
                 )}
                 
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
+                  <Typography>IVA (15%)</Typography>
+                  <Typography>${calcularIVA().toFixed(2)}</Typography>
+                </Box>
+                
                 <Divider sx={{ my: 2 }} />
                 
                 <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                   <Typography variant="h6">Total estimado</Typography>
                   <Typography variant="h6" color="primary">
-                    ${getCartTotal().toFixed(2)}
+                    ${(getCartTotal() + calcularIVA()).toFixed(2)}
                     {getCartTotal() < 40 && <Typography variant="caption" color="text.secondary"> + envío</Typography>}
                   </Typography>
                 </Box>

@@ -333,12 +333,21 @@ const Pedidos = () => {
                                   </Typography>
                                 </Box>
                                 
-                                <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
+                                <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 0.5 }}>
                                   <Typography variant="body2">
                                     Envío
                                   </Typography>
                                   <Typography variant="body2" color={pedido.costoEnvio === 0 ? "success.main" : "inherit"} fontWeight={pedido.costoEnvio === 0 ? 500 : 400}>
                                     {pedido.costoEnvio === 0 ? "¡GRATIS!" : `$${pedido.costoEnvio?.toFixed(2) || '0.00'}`}
+                                  </Typography>
+                                </Box>
+                                
+                                <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
+                                  <Typography variant="body2">
+                                    IVA (15%)
+                                  </Typography>
+                                  <Typography variant="body2">
+                                    ${pedido.iva?.toFixed(2) || '0.00'}
                                   </Typography>
                                 </Box>
                                 

@@ -124,6 +124,7 @@ public class AdminPedidoService {
             pedido.getNumeroPedido(),
             pedido.getSubtotal(),
             pedido.getCostoEnvio(),
+            pedido.getIva(),
             pedido.getTotal(),
             pedido.getEstado().name(),
             pedido.getDireccionEnvio(),

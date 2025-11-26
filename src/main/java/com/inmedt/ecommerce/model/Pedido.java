@@ -27,6 +27,9 @@ public class Pedido {
     @Column(name = "costo_envio", nullable = false, precision = 10, scale = 2)
     private BigDecimal costoEnvio = BigDecimal.ZERO;
     
+    @Column(name = "iva", nullable = false, precision = 10, scale = 2)
+    private BigDecimal iva = BigDecimal.ZERO;
+    
     @Column(name = "total", nullable = false, precision = 10, scale = 2)
     private BigDecimal total;
     
@@ -71,10 +74,11 @@ public class Pedido {
     // Constructores
     public Pedido() {}
     
-    public Pedido(String numeroPedido, BigDecimal subtotal, BigDecimal costoEnvio, BigDecimal total, String direccionEnvio, User user) {
+    public Pedido(String numeroPedido, BigDecimal subtotal, BigDecimal costoEnvio, BigDecimal iva, BigDecimal total, String direccionEnvio, User user) {
         this.numeroPedido = numeroPedido;
         this.subtotal = subtotal;
         this.costoEnvio = costoEnvio;
+        this.iva = iva;
         this.total = total;
         this.direccionEnvio = direccionEnvio;
         this.user = user;
@@ -92,6 +96,9 @@ public class Pedido {
     
     public BigDecimal getCostoEnvio() { return costoEnvio; }
     public void setCostoEnvio(BigDecimal costoEnvio) { this.costoEnvio = costoEnvio; }
+    
+    public BigDecimal getIva() { return iva; }
+    public void setIva(BigDecimal iva) { this.iva = iva; }
     
     public BigDecimal getTotal() { return total; }
     public void setTotal(BigDecimal total) { this.total = total; }

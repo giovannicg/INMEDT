@@ -146,8 +146,14 @@ const Checkout = () => {
     return esQuito ? 2.99 : 3.99;
   };
   
+  // Calcular IVA (15% solo sobre el subtotal de productos)
+  const calcularIVA = () => {
+    const subtotal = getCartTotal();
+    return subtotal * 0.15;
+  };
+  
   const calcularTotal = () => {
-    return getCartTotal() + calcularCostoEnvio();
+    return getCartTotal() + calcularIVA() + calcularCostoEnvio();
   };
 
   useEffect(() => {
@@ -541,6 +547,13 @@ const Checkout = () => {
                     ${calcularCostoEnvio().toFixed(2)}
                   </Typography>
                 )}
+              </Box>
+              
+              <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
+                <Typography>IVA (15%)</Typography>
+                <Typography>
+                  ${calcularIVA().toFixed(2)}
+                </Typography>
               </Box>
               
               {calcularCostoEnvio() === 0 && getCartTotal() >= 40 && (

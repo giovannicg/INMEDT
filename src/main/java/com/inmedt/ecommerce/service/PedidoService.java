@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
@@ -45,6 +46,7 @@ public class PedidoService {
     private static final BigDecimal ENVIO_GRATIS_MINIMO = new BigDecimal("40.00");
     private static final BigDecimal COSTO_ENVIO_QUITO = new BigDecimal("2.99");
     private static final BigDecimal COSTO_ENVIO_FUERA_QUITO = new BigDecimal("3.99");
+    private static final BigDecimal IVA_ECUADOR = new BigDecimal("0.15"); // 15% IVA en Ecuador
     
     @Autowired
     private PedidoRepository pedidoRepository;
@@ -85,11 +87,16 @@ public class PedidoService {
         // Calcular costo de envío
         BigDecimal subtotal = carrito.getTotal();
         BigDecimal costoEnvio = calcularCostoEnvio(subtotal, request.getSector());
-        BigDecimal total = subtotal.add(costoEnvio);
+        
+        // Calcular IVA (15% solo sobre el subtotal de productos)
+        BigDecimal iva = subtotal.multiply(IVA_ECUADOR).setScale(2, RoundingMode.HALF_UP);
+        
+        // Calcular total (subtotal + IVA + envío)
+        BigDecimal total = subtotal.add(iva).add(costoEnvio);
         
         // Crear pedido
         String numeroPedido = generateNumeroPedido();
-        Pedido pedido = new Pedido(numeroPedido, subtotal, costoEnvio, total, request.getDireccionEnvio(), user);
+        Pedido pedido = new Pedido(numeroPedido, subtotal, costoEnvio, iva, total, request.getDireccionEnvio(), user);
         pedido.setTelefonoContacto(request.getTelefonoContacto());
         pedido.setCiudad(request.getCiudad());
         pedido.setSector(request.getSector());
@@ -202,6 +209,7 @@ public class PedidoService {
             pedido.getNumeroPedido(),
             pedido.getSubtotal(),
             pedido.getCostoEnvio(),
+            pedido.getIva(),
             pedido.getTotal(),
             pedido.getEstado().name(),
             pedido.getDireccionEnvio(),
