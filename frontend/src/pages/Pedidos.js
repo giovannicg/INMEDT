@@ -355,9 +355,10 @@ const Pedidos = () => {
                                       <TableRow key={idx}>
                                         <TableCell>
                                           <Typography variant="body2" fontWeight={500}>
-                                            {item.unidadVenta?.variante?.producto?.nombre || 'Producto'}
+                                            {item.unidadVenta?.productoNombre || 'Producto'}
                                           </Typography>
                                           <Typography variant="caption" color="text.secondary">
+                                            {item.unidadVenta?.varianteNombre && `${item.unidadVenta.varianteNombre} - `}
                                             {item.unidadVenta?.descripcion}
                                           </Typography>
                                         </TableCell>
